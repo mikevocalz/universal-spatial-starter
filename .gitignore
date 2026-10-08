@@ -33,3 +33,4 @@ scripts/out/
 
 # Rive CLI build output; tooling/build-rive.mjs copies the .riv out
 packages/assets/rive-src/*/build/
+apps/web/public/rive/rive.wasm

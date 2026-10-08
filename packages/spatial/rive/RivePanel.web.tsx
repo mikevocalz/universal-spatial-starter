@@ -5,6 +5,7 @@ import {
   Alignment,
   Fit,
   Layout,
+  RuntimeLoader,
   useRive,
   useViewModel,
   useViewModelInstance,
@@ -12,6 +13,11 @@ import {
 } from '@rive-app/react-webgl2';
 import type { RivePanelContract, RivePanelProps, RivePanelStatus, RivePropertyKind } from './RivePanel.types';
 import { RivePanelFrame } from './RivePanelFrame';
+
+// The runtime wasm is served from apps/web/public/rive (copied at install by
+// tooling/copy-rive-web-runtime.mjs), so the Rive panes work offline.
+RuntimeLoader.setWasmUrl('/rive/rive.wasm');
+RuntimeLoader.setWasmFallbackUrl(null);
 
 type Writable = number | boolean | string;
 
