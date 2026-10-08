@@ -62,7 +62,7 @@ export function ForkSpatialLayout({
       {children}
       {panel ? (
         <SpatialWindow
-          label="spatial-solotio-tools"
+          label="spatial-tools"
           windowWidth={420}
           windowHeight={560}
           fallback="inline"

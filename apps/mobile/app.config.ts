@@ -11,19 +11,19 @@ loadProjectEnv(join(appDir, '../..'), { silent: true, force: true });
 // ExpoConfig, but @expo-pico/core's plugin still reads the key (and warns
 // without it), so it stays, typed as an extension.
 const config: ExpoConfig & { newArchEnabled: true } = {
-  name: 'NYC-MON',
-  slug: 'nyc-mon',
-  scheme: 'nycmon',
+  name: 'Spatial Starter',
+  slug: 'universal-spatial-starter',
+  scheme: 'spatialstarter',
   version: '0.1.0',
   orientation: 'default',
   icon: './assets/images/icon.png',
   userInterfaceStyle: 'automatic',
   ios: {
-    bundleIdentifier: 'com.nycmon.app',
+    bundleIdentifier: 'dev.spatialstarter.app',
     supportsTablet: true,
   },
   android: {
-    package: 'com.nycmon.app',
+    package: 'dev.spatialstarter.app',
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: palette.ink[50],
@@ -59,14 +59,6 @@ const config: ExpoConfig & { newArchEnabled: true } = {
       },
     ],
     'expo-image',
-    [
-      'expo-calendar',
-      {
-        calendarPermission:
-          'Allow NYC-MON to sync Mon care reminders, play dates, and battles to your calendar.',
-      },
-    ],
-    'expo-notifications',
     'react-native-webgpu',
     // Adds the device flavors (mobile, quest) and the Quest manifest: VR
     // intent category, headtracking, hand tracking and supported devices.
@@ -103,7 +95,7 @@ const config: ExpoConfig & { newArchEnabled: true } = {
       },
     ],
     // Adds the pico flavor: PICO OS 5 OpenXR runtime, VR launcher category on
-    // VRActivity, manifest and SDK levels. The 2D panel enters the district
+    // VRActivity, manifest and SDK levels. The 2D panel enters Orbit Lab
     // through enterImmersiveScene() (root registered in index.js).
     // Build with `pnpm --filter mobile android:pico` (picoDebug).
     [
@@ -132,7 +124,7 @@ const config: ExpoConfig & { newArchEnabled: true } = {
         ndkAbiFilters: true,
         // Declares the system OpenXR runtime library Viro loads.
         openXrLoaderDeclaration: true,
-        // Public Viro 3.0.2 puts PICO's origin at eye level, so the street
+        // Public Viro 3.0.2 puts PICO's origin at eye level, so the floor
         // would sit at waist height. The overlay renderer moves it to the
         // floor and maps controller B to back.
         viroRendererOverlay: true,

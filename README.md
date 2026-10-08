@@ -1,105 +1,118 @@
-<p align="center">
-  <img src="packages/assets/brand/nyc-mon-logo-640.png" width="220" alt="NYC-MON seal">
-</p>
+<div align="center">
 
-<h3 align="center">Every block has a legend.</h3>
+# ◈ UNIVERSAL SPATIAL STARTER
 
-<p align="center">
-  <img alt="Expo SDK 58" src="https://img.shields.io/badge/Expo_SDK-58-000020?logo=expo&logoColor=white">
-  <img alt="React Native 0.88 RC" src="https://img.shields.io/badge/React_Native-0.88_RC-20232a?logo=react&logoColor=61dafb">
-  <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white">
-  <img alt="Payload 4 canary" src="https://img.shields.io/badge/Payload-4_canary-000000?logo=payloadcms&logoColor=white">
-  <img alt="three.js WebGPU" src="https://img.shields.io/badge/three.js-WebGPU-049ef4?logo=threedotjs&logoColor=white">
-  <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white">
-  <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-ff7a1a"></a>
-</p>
+### Five thoughtful screens. Two layout families. Any supported surface.
 
-NYC-MON is a near-future New York where intelligent Mons live alongside people. Phase 1 builds the H-Lynk companion loop on iOS and Android (meet three starters, pick an egg, hatch it, care for the Baby Mon in real time) plus the product site on Next.js.
+**Expo Universal UI · Rive · Kinetrell · Viro / Eskiu · Next.js 16.4 · VisionCamera 5**
 
-## Monorepo
+[Explore the five screens](#the-experience-at-a-glance) · [Read the docs](docs/README.md) · [Understand the architecture](docs/ARCHITECTURE.md) · [Camera Lab](docs/CAMERA_AND_XR.md)
 
-| Path | Package | What it is |
-|---|---|---|
-| `apps/mobile` | `mobile` | Expo Router app for iOS and Android. Also carries the Meta Horizon and PICO build variants. |
-| `apps/web` | `web` | Next.js product site. Holds no database or auth secrets. |
-| `apps/admin-vite` | `admin-vite` | TanStack Start on Vite. Payload admin at `/admin`, Payload REST and Better Auth at `/payload-api` ([ADR 0003](docs/adr/0003-admin-app-split.md)). |
-| `apps/storybook` | `storybook` | Storybook 10 on Vite with react-native-web. Stories live next to their components in `packages/ui`. |
-| `packages/ui` | `@acme/ui` | NYC-Tron, the UI kit: universal semantic components, neon controls, Skia and three.js/WebGPU backgrounds. See [its README](packages/ui/README.md). |
-| `packages/theme` | `@acme/theme` | Design tokens. `tokens.ts` is the only file with hex values, and `build-css.mjs` turns it into the Tailwind 4 and Uniwind CSS. |
-| `packages/core` | `@acme/core` | Game types, Zod schemas, the care simulation and save format. |
-| `packages/content` | `@acme/content` | Starter Mons and egg data. |
-| `packages/payload` | `@acme/payload` | Payload CMS config, collections and a typed REST reader. |
-| `packages/auth` | `@acme/auth` | The auth client apps import: Better Auth with passkeys, returning typed results instead of throwing. |
-| `packages/assets` | `@acme/assets` | Brand marks, fonts, district photos. |
-| `packages/spatial` | `@acme/spatial` | Viro and Rive XR scenes. Out of Phase 1 scope apart from the site copy it exports. |
-| `packages/app` | `@acme/app` | Shared Solito screens and providers. |
-| `packages/config` | `@acme/config` | Shared lint, format and TypeScript presets plus the import-boundary rules. |
+---
 
-[docs/REPO_MAP.md](docs/REPO_MAP.md) has every route, entry point and pinned version.
+**Phone** · **iPad** · **Foldables / Duo** · **Web** · **Quest** · **PICO** · **visionOS** · **Android XR**
 
-## Getting started
+*Target platforms, not a claim that every backend or device has passed hardware verification.*
 
-You need Node `>=24.15.0 <26` and pnpm 12 (the root `package.json` pins `pnpm@12.8.1`).
+</div>
 
-```sh
-pnpm install
-cp .env.example .env
+> [!IMPORTANT]
+> This is a **five-screen reference application**, not a showcase full of unfinished features. Native controls and spatial rendering are composable; **Game Layout is a distinct layout family**. Camera Lab is a **modal experience opened by the raised central scan button**, not a sixth route. XR scanning requires real authorized device sensing: camera frames where available, or native reference-object tracking (including Apple Vision Pro ARKit). No simulated XR camera, prerecorded video, or substitute phone stream.
+
+## The experience at a glance
+
+| Route | Showcase concept | Surface composition | Mobile affordance |
+| --- | --- | --- | --- |
+| `/` | **01 · Showcase** — discover the system | Motion-led index of demos | Raised **Scan** action in central dock |
+| `/native` | **02 · Native Workspace** — productive multitasking | Native rail/list + content + inspector | List/detail transition and inspector sheet |
+| `/hybrid` | **03 · Hybrid Rive** — native + interactive art | Native controls + Rive center + native inspector | Immersive Rive stage within adaptive pane |
+| `/game` | **04 · Game Workspace** — a small playable loop | Controls + Rive game stage + HUD | Thumb-friendly game controls and session timer |
+| `/immersive` | **05 · Immersive Workspace** — engine-hosted space | Native utility panel + Viro/Three.js stage + Rive HUD | Safe 2D stage when not in XR; immersive renderer only when real |
+
+### Two layouts, unlimited combinations
+
+```mermaid
+flowchart TB
+  App[Five-screen starter]
+  Standard[StandardWorkspace: navigation / content / inspector]
+  Game[GameWorkspace: controls / stage / HUD]
+  App --> Standard
+  App --> Game
+  Standard --> UI[Expo UI native / web]
+  Standard --> Rive[Rive runtime]
+  Game --> UI
+  Game --> Rive
+  Game --> XR[Viro / Three.js]
+  UI --> Host[Adaptive / OS spatial / engine surface host]
+  Rive --> Host
+  XR --> Host
 ```
 
-`.env.example` lists every variable with no values. Only `apps/admin-vite` reads the database and auth secrets (`DATABASE_URL`, `PAYLOAD_SECRET`, `BETTER_AUTH_*`). The web site and Storybook run without them. Keep real values in `.env.local`, which git ignores.
+The **layout** defines meaning and behavior. The **renderer** chooses pixels and input. The **host** decides whether that content occupies an adaptive pane, a Meta spatial window, a native Apple window, or a Viro engine surface. One does not impersonate another.
 
-```sh
-pnpm dev                            # every app through Turborepo
-pnpm --filter mobile ios            # or: android, android:quest, android:pico
-pnpm --filter web dev               # product site
-pnpm --filter admin-vite dev        # Payload admin on http://localhost:5174/admin
-pnpm --filter storybook dev         # NYC-Tron on http://localhost:6006
+## Design principles
 
-pnpm test                           # Vitest in core, content, Storybook; node:test in mobile
-pnpm typecheck
-pnpm lint
+**Art-directed, not overdecorated.** Responsive typography; warm near-black and mineral-white surfaces; deliberate ultramarine/cobalt accents; generous whitespace; strong hover/focus states; meaningful depth. Use custom original vector/3D artwork where needed. No copied game branding, stock-photo placeholder grids, UI kits for decoration, Tamagui or Bento dependency.
+
+**Motion you can understand.** [Kinetrell](docs/KINETRELL_MOTION.md) owns cross-platform entrances, reflow, navigation and scroll choreography. [Rive](docs/RIVE.md) owns authored artboard interactions and state machines. Viro/Eskiu own world-space transforms. Only one system owns any animated property at a time.
+
+**Native-first mobile.** Bottom navigation on compact phones, a **raised 72dp camera action** visually centered over the dock, trailing Inspector as a bottom sheet, RTL-safe navigation, hinge-aware Duo/foldable placement, tablet rail, reduced-motion-aware transitions. The camera opens a polished *Camera Lab* overlay powered by real device sensing: an on-device image detector or a native 3D reference-object tracker. [Mobile design](docs/MOBILE_AND_FOLDABLES.md).
+
+**Real XR, no pretend camera.** On headsets, the scanner requires an actual camera-frame or native object-tracking capability and an authorization path. Vision Pro ARKit recognizes trained real-world objects without exposing raw camera frames to the app. If the required sensing capability is unavailable, show an explicit `sensing-unavailable` or `permission-denied` state; do **not** replace it with simulated frames or captured passthrough compositor pixels. [XR camera requirements](docs/CAMERA_AND_XR.md).
+
+## Package architecture
+
+```text
+apps/
+  mobile/                    Expo Router 58, mobile + native XR variants
+  web/                       Next.js 16.4, React Server Components + Cache Components
+  storybook/                 Component stories and interaction coverage
+packages/
+  app/                       Five routes + demo state only
+  ui/                        Universal controls, AdaptivePanes, inspector, camera dock
+  spatial/                   Shared contracts, capability negotiation, Rive/Viro hosts
+  motion/                    App-level Kinetrell recipes and tokens
+  camera/                    VisionCamera source, model pipeline, XR camera adapters
+  theme/                     Design tokens, type scale, illustration guidance
+  assets/                    Authorized sample assets + model manifest
 ```
 
-`postinstall` copies the Viro WASM sidecars and CanvasKit into the apps' public folders. The build expects those pinned local copies, so keep the scripts pointed at them instead of a CDN.
+> Repository structure above is the **target of the fork implementation**, not a claim that these folders already exist in NYC-Mon. Existing packages may be reorganized incrementally with compatibility exports. Preserve upstream attribution and third-party notices.
 
-New code starts from the generators: `pnpm gen domain <name>`, `pnpm gen feature <name>`, `pnpm gen component <Name>`.
+## Quick start (after the fork is built)
 
-## How it renders
+```bash
+corepack enable
+pnpm install --frozen-lockfile
+pnpm --filter mobile dev
+pnpm --filter web dev
+pnpm --filter storybook dev
+```
 
-- **Product UI.** Tailwind 4 everywhere: Uniwind on native, `react-native-css` on web.
-- **The Mon.** A live three.js creature on the WebGPU renderer with TSL materials, landing in Milestone 2.
-- **HUD and meters.** React Native Skia, which also draws the Grid Floor and Glyph City. Web runs the same code through CanvasKit.
-- **Animated surfaces.** Rive: Nitro on native, WebGL2 on web.
-- **XR (later phases).** Shared Viro scenes on a forked OpenXR path for Meta Horizon and PICO. [docs/SPATIAL.md](docs/SPATIAL.md) and [docs/XR-PLATFORM-MATRIX.md](docs/XR-PLATFORM-MATRIX.md) cover the details.
+Use **Expo development builds** for VisionCamera, native Rive, native XR SDKs and bridge testing—not Expo Go. Android Quest/PICO flavors and device-only permission requirements are explained in [Platforms](docs/PLATFORMS.md). The five demo routes should boot without login, keys or a production backend. Camera Lab uses a bundled on-device detector for raw-frame hosts, and a bundled Create ML reference-object model for visionOS; it asks permission only upon entering the experience.
 
-## Conventions
+## Documentation
 
-- Each dependency version lives once, in the `catalog:` block of `pnpm-workspace.yaml`.
-- Screens and routes stay thin. Reusable UI goes in `packages/ui`, with a story, before a screen uses it.
-- Raw DOM and native styling stay behind the `@acme/ui` boundary, and ESLint enforces it.
-- Skia handles procedural 2D graphics, not layout. Viro owns XR world geometry.
+| Start here | You will learn |
+| --- | --- |
+| [Docs index](docs/README.md) | The learning path and decision map |
+| [Architecture](docs/ARCHITECTURE.md) | Ownership of the scene, native resources and platform hosts |
+| [Layout System](docs/LAYOUT_SYSTEM.md) | Standard vs Game, panel roles, capability negotiation |
+| [Components & API](docs/COMPONENTS.md) | Component contracts, examples, events, errors |
+| [Kinetrell Motion](docs/KINETRELL_MOTION.md) | Shared motion language, screen recipes, timing, accessibility |
+| [Rive Integration](docs/RIVE.md) | Native/web artboards, state machines, lifecycle, typed bindings |
+| [Camera & XR](docs/CAMERA_AND_XR.md) | VisionCamera 5, native ARKit object tracking, Lite0, permissions and real XR requirements |
+| [Mobile & Foldables](docs/MOBILE_AND_FOLDABLES.md) | Raised scan action, Duo, rail, inspector and hinge rules |
+| [Platforms](docs/PLATFORMS.md) | Platform-specific adapter contract and verification status |
+| [Testing & Release](docs/TESTING.md) | Device matrix, performance, a11y and CI gates |
+| [Contribution Guide](CONTRIBUTING.md) | Changes, API-design discipline, review and attribution |
 
-## Docs
+## Where this came from
 
-| Doc | What's in it |
-|---|---|
-| [CONTRIBUTING.md](CONTRIBUTING.md) | The repo laws every change follows. |
-| [docs/REPO_MAP.md](docs/REPO_MAP.md) | Real paths, routes and versions. |
-| [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) | The proposed daylit token set and how NYC-Tron applies it. |
-| [docs/design/](docs/design/) | Screen designs, research, H-Lynk direction, contrast checks. |
-| [docs/adr/](docs/adr/) | Architecture decision records. |
-| [docs/canon/](docs/canon/) | The creator's canon. Decisions recorded here outrank everything else in the repo. The Bible files are in [docs/canon/source/](docs/canon/source/). |
+The reference fork is derived from [NYC-Mon](https://github.com/mikevocalz/nyc-mon), with shared XR architecture from [viro-external](https://github.com/mikevocalz/viro-external), Expo adaptive patterns adapted from [Moyo Learn](https://github.com/mikevocalz/moyolearn), and motion from [Kinetrell](https://github.com/mikevocalz/Kinetrell). No NYC-Mon story, characters, game assets, or private data belong in this starter.
 
-## Status
+**Key references:** [Expo UI](https://docs.expo.dev/versions/latest/sdk/ui/universal/) · [Expo Server Components](https://docs.expo.dev/guides/server-components/) · [Next.js Cache Components](https://nextjs.org/docs/app/getting-started/cache-components) · [Meta Layout](https://developers.meta.com/vr/documentation/android-apps/meta-vr-layout-sdk/) · [VisionCamera](https://visioncamera.margelo.com/docs/frame-output) · [Rive](https://rive.app/docs/llms.txt) · [Margelo API design](https://github.com/margelo/react-native-skills/tree/main/skills/api-design)
 
-Milestone 0 (canon and foundations) is done. Milestone 1 (mobile and web shells and the first seven mobile screens) is in design. Device verification is still pending. [docs/DEVICE_CHECKS.md](docs/DEVICE_CHECKS.md) tracks what has run on hardware.
+---
 
-## Credits
-
-NYC-Tron is inspired by [NeonBlade UI](https://neonbladeui.neuronrush.com) by [vprix21](https://github.com/vprix21/neonblade-ui), released under MIT. All 41 NeonBlade components have an NYC-Tron counterpart, rebuilt for React Native and web and redrawn around New York: circuit traces became subway lines, and the Grid Floor became the street grid behind most screens. NYC-Tron does not depend on the NeonBlade package. Thanks to vprix21 for building it and releasing it openly.
-
-[packages/ui/THIRD-PARTY-NOTICES.md](packages/ui/THIRD-PARTY-NOTICES.md) lists each port and carries NeonBlade's licence.
-
-## Licence
-
-[MIT](LICENSE).
+<div align="center"><strong>Designed to be read, explored, tested, and forked.</strong><br/>A small reference app with serious engineering boundaries.</div>

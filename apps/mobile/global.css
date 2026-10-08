@@ -3,8 +3,7 @@
 @import '@acme/theme/theme-native.css';
 
 @source './app/**/*.{ts,tsx}';
-@source './components';
 @source './src';
 @source '../../packages/ui';
-@source '../../packages/app/features';
+@source '../../packages/app/screens';
 @source '../../packages/spatial';

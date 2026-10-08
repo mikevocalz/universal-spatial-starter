@@ -6,15 +6,9 @@
   "types": "./index.ts",
   "exports": {
     ".": "./index.ts",
-    "./copy": "./homeCopy.ts",
-    "./district": "./districtStore.ts",
     "./rive": {
       "react-native": "./rive/RiveStage.native.tsx",
       "default": "./rive/RiveStage.web.tsx"
-    },
-    "./audio": {
-      "react-native": "./audio/index.native.ts",
-      "default": "./audio/index.web.ts"
     }
   },
   "scripts": {
@@ -29,8 +23,7 @@
     "@rive-app/react-native": "catalog:",
     "@rive-app/react-webgl2": "catalog:",
     "react-native-nitro-modules": "catalog:",
-    "zustand": "catalog:",
-    "react-native-audio-api": "catalog:"
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "@acme/config": "workspace:*",

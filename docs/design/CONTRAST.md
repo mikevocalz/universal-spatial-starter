@@ -18,7 +18,7 @@ The registry lives in `packages/theme/contrast.ts`; `packages/theme/contrast.tes
 
 <!-- contrast:summary:start -->
 
-- 404 measured rows: 376 pass, 0 fail, 28 exempt (decorative or disabled).
+- 402 measured rows: 376 pass, 0 fail, 26 exempt (decorative or disabled).
 
 <!-- contrast:summary:end -->
 - Semantic tokens are measured in light and dark. Palette steps (`orange-500`, `ink-950`) do not change with the theme and get one `both` row.
@@ -81,71 +81,69 @@ The test keeps these honest: each forbidden pair below must still measure under 
 
 | Pair | Mode | Foreground | Background | Ratio | Role (min) | Result | Where used |
 |---|---|---|---|---:|---|---|---|
-| text on surface | light | `text` #000000 | `surface` #F3F4F4 | 19.06 | text (4.5) | pass | `packages/ui/Text.tsx:39`, `packages/ui/Heading.tsx:25`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| text on surface | dark | `text` #F8F8F8 | `surface` #00041C | 19.12 | text (4.5) | pass | `packages/ui/Text.tsx:39`, `packages/ui/Heading.tsx:25`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| muted text on surface | light | `text-muted` #61656A | `surface` #F3F4F4 | 5.33 | text (4.5) | pass | `packages/ui/Text.tsx:40`, `apps/mobile/components/AppTabBar.tsx:112`, `packages/app/features/schedule/BookingSurface.tsx:63` |
-| muted text on surface | dark | `text-muted` #BEC0C2 | `surface` #00041C | 11.13 | text (4.5) | pass | `packages/ui/Text.tsx:40`, `apps/mobile/components/AppTabBar.tsx:112`, `packages/app/features/schedule/BookingSurface.tsx:63` |
-| muted text on raised | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | `apps/mobile/components/EventActionsSheet.tsx:50`, `packages/app/features/home/home-content.tsx:76`, `packages/ui/Text.tsx:40` |
-| muted text on raised | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | `apps/mobile/components/EventActionsSheet.tsx:50`, `packages/app/features/home/home-content.tsx:76`, `packages/ui/Text.tsx:40` |
-| primary text on surface | light | `primary` #A35100 | `surface` #F3F4F4 | 5.10 | large-text (3) | pass | `packages/app/features/error/screen.shared.tsx:19`; font-display text-display-xl (60px) |
-| primary text on surface | dark | `primary` #FC7C00 | `surface` #00041C | 7.76 | large-text (3) | pass | `packages/app/features/error/screen.shared.tsx:19`; font-display text-display-xl (60px) |
+| text on surface | light | `text` #000000 | `surface` #F3F4F4 | 19.06 | text (4.5) | pass | `packages/ui/Text.tsx:39`, `packages/ui/Heading.tsx:25` |
+| text on surface | dark | `text` #F8F8F8 | `surface` #00041C | 19.12 | text (4.5) | pass | `packages/ui/Text.tsx:39`, `packages/ui/Heading.tsx:25` |
+| muted text on surface | light | `text-muted` #61656A | `surface` #F3F4F4 | 5.33 | text (4.5) | pass | `packages/ui/Text.tsx:40` |
+| muted text on surface | dark | `text-muted` #BEC0C2 | `surface` #00041C | 11.13 | text (4.5) | pass | `packages/ui/Text.tsx:40` |
+| muted text on raised | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | `packages/ui/Text.tsx:40` |
+| muted text on raised | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | `packages/ui/Text.tsx:40` |
+| primary text on surface | light | `primary` #A35100 | `surface` #F3F4F4 | 5.10 | large-text (3) | pass | token contract; font-display text-display-xl (60px) |
+| primary text on surface | dark | `primary` #FC7C00 | `surface` #00041C | 7.76 | large-text (3) | pass | token contract; font-display text-display-xl (60px) |
 | primary text on raised | light | `primary` #A35100 | `surface-raised` #FFFFFF | 5.62 | text (4.5) | pass | `packages/ui/Text.tsx:42`, `packages/ui/Heading.tsx:27` |
 | primary text on raised | dark | `primary` #FC7C00 | `surface-raised` #0A1230 | 7.02 | text (4.5) | pass | `packages/ui/Text.tsx:42`, `packages/ui/Heading.tsx:27` |
-| primary icon in primary/10 well | light | `primary` #A35100 | `surface-raised + primary/10` #F6EEE6 | 4.88 | ui (3) | pass | `packages/app/features/home/home.data.ts:28`, `packages/app/features/home/home.data.ts:33` |
-| primary icon in primary/10 well | dark | `primary` #FC7C00 | `surface-raised + primary/10` #221D2B | 6.29 | ui (3) | pass | `packages/app/features/home/home.data.ts:28`, `packages/app/features/home/home.data.ts:33` |
-| accent text on raised | light | `accent` #0058F8 | `surface-raised` #FFFFFF | 5.60 | text (4.5) | pass | `packages/ui/Text.tsx:41`, `packages/app/features/home/home-content.tsx:77`, `packages/app/features/editor/AttachSheet.tsx:88` |
-| accent text on raised | dark | `accent` #4BA8F0 | `surface-raised` #0A1230 | 7.14 | text (4.5) | pass | `packages/ui/Text.tsx:41`, `packages/app/features/home/home-content.tsx:77`, `packages/app/features/editor/AttachSheet.tsx:88` |
-| accent icon in accent/10 well | light | `accent` #0058F8 | `surface-raised + accent/10` #E6EEFE | 4.81 | ui (3) | pass | `packages/app/features/home/home.data.ts:29`, `packages/app/features/home/home.data.ts:34` |
-| accent icon in accent/10 well | dark | `accent` #4BA8F0 | `surface-raised + accent/10` #112143 | 6.17 | ui (3) | pass | `packages/app/features/home/home.data.ts:29`, `packages/app/features/home/home.data.ts:34` |
-| accent bell icon on raised | light | `accent` #0058F8 | `surface-raised` #FFFFFF | 5.60 | ui (3) | pass | `apps/mobile/components/AppHeader.tsx:70` |
-| accent bell icon on raised | dark | `accent` #4BA8F0 | `surface-raised` #0A1230 | 7.14 | ui (3) | pass | `apps/mobile/components/AppHeader.tsx:70` |
-| danger text on raised | light | `danger` #D50000 | `surface-raised` #FFFFFF | 5.48 | text (4.5) | pass | `packages/ui/Text.tsx:44`, `packages/app/features/editor/AttachSheet.tsx:168`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| danger text on raised | dark | `danger` #FA4040 | `surface-raised` #0A1230 | 5.14 | text (4.5) | pass | `packages/ui/Text.tsx:44`, `packages/app/features/editor/AttachSheet.tsx:168`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| danger text on danger/10 hover | light | `danger` #D50000 | `surface-raised + danger/10` #FBE6E6 | 4.57 | text (4.5) | pass | `apps/mobile/components/EventActionsSheet.tsx:44`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| danger text on danger/10 hover | dark | `danger` #FA4040 | `surface-raised + danger/10` #221732 | 4.76 | text (4.5) | pass | `apps/mobile/components/EventActionsSheet.tsx:44`, `apps/mobile/components/EventActionsSheet.tsx:54` |
-| on-primary on primary | light | `on-primary` #FFFFFF | `primary` #A35100 | 5.62 | text (4.5) | pass | `packages/app/features/home/home-content.tsx:48`, `packages/app/features/explore/explore.store.ts:17`, `apps/mobile/components/AppTabBar.tsx:111` |
-| on-primary on primary | dark | `on-primary` #00041C | `primary` #FC7C00 | 7.76 | text (4.5) | pass | `packages/app/features/home/home-content.tsx:48`, `packages/app/features/explore/explore.store.ts:17`, `apps/mobile/components/AppTabBar.tsx:111` |
-| on-primary/90 on primary | light | `on-primary/90` #F6EEE6 | `primary` #A35100 | 4.88 | text (4.5) | pass | `packages/app/features/home/home-content.tsx:53`, `packages/app/features/home/home-content.tsx:54` |
-| on-primary/90 on primary | dark | `on-primary/90` #191019 | `primary` #FC7C00 | 7.10 | text (4.5) | pass | `packages/app/features/home/home-content.tsx:53`, `packages/app/features/home/home-content.tsx:54` |
-| on-primary on primary-pressed | light | `on-primary` #FFFFFF | `primary-pressed` #884300 | 7.37 | text (4.5) | pass | `packages/app/features/explore/explore.store.ts:18`, `apps/mobile/components/AppTabBar.tsx:85` |
-| on-primary on primary-pressed | dark | `on-primary` #00041C | `primary-pressed` #FD9D40 | 9.74 | text (4.5) | pass | `packages/app/features/explore/explore.store.ts:18`, `apps/mobile/components/AppTabBar.tsx:85` |
-| on-accent on accent | light | `on-accent` #FFFFFF | `accent` #0058F8 | 5.60 | text (4.5) | pass | `packages/app/features/explore/explore.store.ts:19`, `apps/mobile/app/(drawer)/split/_layout.tsx:300` |
-| on-accent on accent | dark | `on-accent` #00041C | `accent` #4BA8F0 | 7.89 | text (4.5) | pass | `packages/app/features/explore/explore.store.ts:19`, `apps/mobile/app/(drawer)/split/_layout.tsx:300` |
+| primary icon in primary/10 well | light | `primary` #A35100 | `surface-raised + primary/10` #F6EEE6 | 4.88 | ui (3) | pass | token contract |
+| primary icon in primary/10 well | dark | `primary` #FC7C00 | `surface-raised + primary/10` #221D2B | 6.29 | ui (3) | pass | token contract |
+| accent text on raised | light | `accent` #0058F8 | `surface-raised` #FFFFFF | 5.60 | text (4.5) | pass | `packages/ui/Text.tsx:41` |
+| accent text on raised | dark | `accent` #4BA8F0 | `surface-raised` #0A1230 | 7.14 | text (4.5) | pass | `packages/ui/Text.tsx:41` |
+| accent icon in accent/10 well | light | `accent` #0058F8 | `surface-raised + accent/10` #E6EEFE | 4.81 | ui (3) | pass | token contract |
+| accent icon in accent/10 well | dark | `accent` #4BA8F0 | `surface-raised + accent/10` #112143 | 6.17 | ui (3) | pass | token contract |
+| accent bell icon on raised | light | `accent` #0058F8 | `surface-raised` #FFFFFF | 5.60 | ui (3) | pass | token contract |
+| accent bell icon on raised | dark | `accent` #4BA8F0 | `surface-raised` #0A1230 | 7.14 | ui (3) | pass | token contract |
+| danger text on raised | light | `danger` #D50000 | `surface-raised` #FFFFFF | 5.48 | text (4.5) | pass | `packages/ui/Text.tsx:44` |
+| danger text on raised | dark | `danger` #FA4040 | `surface-raised` #0A1230 | 5.14 | text (4.5) | pass | `packages/ui/Text.tsx:44` |
+| danger text on danger/10 hover | light | `danger` #D50000 | `surface-raised + danger/10` #FBE6E6 | 4.57 | text (4.5) | pass | token contract |
+| danger text on danger/10 hover | dark | `danger` #FA4040 | `surface-raised + danger/10` #221732 | 4.76 | text (4.5) | pass | token contract |
+| on-primary on primary | light | `on-primary` #FFFFFF | `primary` #A35100 | 5.62 | text (4.5) | pass | token contract |
+| on-primary on primary | dark | `on-primary` #00041C | `primary` #FC7C00 | 7.76 | text (4.5) | pass | token contract |
+| on-primary/90 on primary | light | `on-primary/90` #F6EEE6 | `primary` #A35100 | 4.88 | text (4.5) | pass | token contract |
+| on-primary/90 on primary | dark | `on-primary/90` #191019 | `primary` #FC7C00 | 7.10 | text (4.5) | pass | token contract |
+| on-primary on primary-pressed | light | `on-primary` #FFFFFF | `primary-pressed` #884300 | 7.37 | text (4.5) | pass | token contract |
+| on-primary on primary-pressed | dark | `on-primary` #00041C | `primary-pressed` #FD9D40 | 9.74 | text (4.5) | pass | token contract |
+| on-accent on accent | light | `on-accent` #FFFFFF | `accent` #0058F8 | 5.60 | text (4.5) | pass | token contract |
+| on-accent on accent | dark | `on-accent` #00041C | `accent` #4BA8F0 | 7.89 | text (4.5) | pass | token contract |
 | inverse text on text | light | `text-inverse` #F8F8F8 | `text` #000000 | 19.77 | text (4.5) | pass | `packages/ui/Text.tsx:43`, `packages/ui/Heading.tsx:29` |
 | inverse text on text | dark | `text-inverse` #00041C | `text` #F8F8F8 | 19.12 | text (4.5) | pass | `packages/ui/Text.tsx:43`, `packages/ui/Heading.tsx:29` |
-| out-of-month day | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | `packages/app/features/schedule/MiniCalendar.tsx:111`; days stay readable and pressable (onSelect); muted colour, not opacity, marks them as outside the month |
-| out-of-month day | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | `packages/app/features/schedule/MiniCalendar.tsx:111`; days stay readable and pressable (onSelect); muted colour, not opacity, marks them as outside the month |
-| past day | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | `packages/app/features/schedule/BookingSurface.tsx:74`; past days still call selectDate (BookingSurface.tsx:58); the day strip sits in the bg-surface-raised panel (BookingSurface.tsx:48) |
-| past day | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | `packages/app/features/schedule/BookingSurface.tsx:74`; past days still call selectDate (BookingSurface.tsx:58); the day strip sits in the bg-surface-raised panel (BookingSurface.tsx:48) |
-| unavailable slot (muted/60) | light | `text-muted/60` #989B9E | `surface-sunken` #EBECED | 2.36 | disabled (0) | exempt | `packages/app/features/schedule/BookingSurface.tsx:107`; accessibilityState disabled (BookingSurface.tsx:96) |
-| unavailable slot (muted/60) | dark | `text-muted/60` #72747C | `surface-sunken` #000212 | 4.43 | disabled (0) | exempt | `packages/app/features/schedule/BookingSurface.tsx:107`; accessibilityState disabled (BookingSurface.tsx:96) |
-| grid tab label idle | both | `silver-300` #DFE0E1 | `concrete-50 + ink-950/95` #0C1027 | 14.20 | text (4.5) | pass | `apps/mobile/components/AppTabBar.tsx:97`, `apps/mobile/components/AppTabBar.tsx:109`, `apps/mobile/components/AppTabBar.tsx:128`; bar is bg-ink-950/95 in both themes; measured over a light page |
-| grid tab label active | both | `orange-400` #FD9D40 | `concrete-50 + ink-950/95 + orange-500/15` #302021 | 7.42 | text (4.5) | pass | `apps/mobile/components/AppTabBar.tsx:84`, `apps/mobile/components/AppTabBar.tsx:96`, `apps/mobile/components/AppTabBar.tsx:108` |
-| grid tab selected edge | both | `orange-500/60` #AA570D | `concrete-50 + ink-950/95 + orange-500/15` #302021 | 3.02 | ui (3) | pass | `apps/mobile/components/AppTabBar.tsx:84` |
-| grid rail label idle | both | `silver-300` #DFE0E1 | `ink-950` #00041C | 15.36 | text (4.5) | pass | `apps/mobile/components/AppTabBar.tsx:109`, `apps/mobile/components/AppTabBar.tsx:145` |
+| out-of-month day | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | token contract; days stay readable and pressable (onSelect); muted colour, not opacity, marks them as outside the month |
+| out-of-month day | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | token contract; days stay readable and pressable (onSelect); muted colour, not opacity, marks them as outside the month |
+| past day | light | `text-muted` #61656A | `surface-raised` #FFFFFF | 5.87 | text (4.5) | pass | token contract; past days still call selectDate (BookingSurface.tsx:58); the day strip sits in the bg-surface-raised panel (BookingSurface.tsx:48) |
+| past day | dark | `text-muted` #BEC0C2 | `surface-raised` #0A1230 | 10.08 | text (4.5) | pass | token contract; past days still call selectDate (BookingSurface.tsx:58); the day strip sits in the bg-surface-raised panel (BookingSurface.tsx:48) |
+| grid tab label idle | both | `silver-300` #DFE0E1 | `concrete-50 + ink-950/95` #0C1027 | 14.20 | text (4.5) | pass | token contract; bar is bg-ink-950/95 in both themes; measured over a light page |
+| grid tab label active | both | `orange-400` #FD9D40 | `concrete-50 + ink-950/95 + orange-500/15` #302021 | 7.42 | text (4.5) | pass | token contract |
+| grid tab selected edge | both | `orange-500/60` #AA570D | `concrete-50 + ink-950/95 + orange-500/15` #302021 | 3.02 | ui (3) | pass | token contract |
+| grid rail label idle | both | `silver-300` #DFE0E1 | `ink-950` #00041C | 15.36 | text (4.5) | pass | token contract |
 | focus ring on offset band | light | `focus` #0058F8 | `bg` #F3F4F4 | 5.08 | ui (3) | pass | `packages/ui/Button.tsx:23`, `packages/ui/IconButton.tsx:20`, `packages/ui/cards/NeonSwitch.tsx:19`, `packages/ui/cards/NeonCheckbox.tsx:13`, `packages/ui/cards/CardSlider.web.tsx:144`; ring-offset-2 ring-offset-bg paints the page colour between the control and the ring |
 | focus ring on offset band | dark | `focus` #4BA8F0 | `bg` #00041C | 7.89 | ui (3) | pass | `packages/ui/Button.tsx:23`, `packages/ui/IconButton.tsx:20`, `packages/ui/cards/NeonSwitch.tsx:19`, `packages/ui/cards/NeonCheckbox.tsx:13`, `packages/ui/cards/CardSlider.web.tsx:144`; ring-offset-2 ring-offset-bg paints the page colour between the control and the ring |
 | focus ring on night control | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/SearchBar.tsx:26`, `packages/ui/SegmentedControl.web.tsx:16`; no offset: the ring touches the night control face |
 | focus ring on night control | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/SearchBar.tsx:26`, `packages/ui/SegmentedControl.web.tsx:16`; no offset: the ring touches the night control face |
-| focus ring on site header | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94`, `apps/web/components/site/SiteChrome.tsx:46` |
-| focus ring on site header | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94`, `apps/web/components/site/SiteChrome.tsx:46` |
+| focus ring on site header | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94` |
+| focus ring on site header | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94` |
 | focus ring on site footer | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/nav/SiteFooter.tsx:83` |
 | focus ring on site footer | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/nav/SiteFooter.tsx:83` |
 | focus ring on page | light | `focus` #0058F8 | `bg` #F3F4F4 | 5.08 | ui (3) | pass | `packages/ui/dropdown.ts:15` |
 | focus ring on page | dark | `focus` #4BA8F0 | `bg` #00041C | 7.89 | ui (3) | pass | `packages/ui/dropdown.ts:15` |
 | nav action edge | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:99` |
-| profile ring active | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | `apps/web/components/site/SiteChrome.tsx:47`; ring-offset-ink-950 puts the night bar between the avatar and the ring |
-| profile ring hover | both | `silver-400` #CED0D1 | `ink-950` #00041C | 13.12 | ui (3) | pass | `apps/web/components/site/SiteChrome.tsx:47` |
-| unread dot | light | `danger` #D50000 | `surface-raised` #FFFFFF | 5.48 | ui (3) | pass | `apps/mobile/components/AppHeader.tsx:71` |
-| unread dot | dark | `danger` #FA4040 | `surface-raised` #0A1230 | 5.14 | ui (3) | pass | `apps/mobile/components/AppHeader.tsx:71` |
-| theme border | light | `border` #D2D4D6 | `surface-raised` #FFFFFF | 1.49 | decorative (0) | exempt | `apps/mobile/components/EventActionsSheet.tsx:42`, `apps/mobile/components/AppHeader.tsx:68`; frame on controls whose text label or icon identifies them; separators |
-| theme border | dark | `border` #1A2E6E | `surface-raised` #0A1230 | 1.45 | decorative (0) | exempt | `apps/mobile/components/EventActionsSheet.tsx:42`, `apps/mobile/components/AppHeader.tsx:68`; frame on controls whose text label or icon identifies them; separators |
+| profile ring active | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | token contract; ring-offset-ink-950 puts the night bar between the avatar and the ring |
+| profile ring hover | both | `silver-400` #CED0D1 | `ink-950` #00041C | 13.12 | ui (3) | pass | token contract |
+| unread dot | light | `danger` #D50000 | `surface-raised` #FFFFFF | 5.48 | ui (3) | pass | token contract |
+| unread dot | dark | `danger` #FA4040 | `surface-raised` #0A1230 | 5.14 | ui (3) | pass | token contract |
+| theme border | light | `border` #D2D4D6 | `surface-raised` #FFFFFF | 1.49 | decorative (0) | exempt | `packages/ui/Card.tsx:159`; frame on controls whose text label or icon identifies them; separators |
+| theme border | dark | `border` #1A2E6E | `surface-raised` #0A1230 | 1.45 | decorative (0) | exempt | `packages/ui/Card.tsx:159`; frame on controls whose text label or icon identifies them; separators |
 | neon glow | light | `glow` #F3F4F4 | `bg` #F3F4F4 | 1.00 | decorative (0) | exempt | `packages/theme/tokens.ts:340`, `packages/ui/district/tones.ts:132`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
 | neon glow | dark | `glow` #003BAB | `bg` #00041C | 2.14 | decorative (0) | exempt | `packages/theme/tokens.ts:340`, `packages/ui/district/tones.ts:132`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
-| hot glow | light | `glow-hot` #F3F4F4 | `bg` #F3F4F4 | 1.00 | decorative (0) | exempt | `packages/theme/tokens.ts:343`, `apps/mobile/components/AppTabBar.tsx:84`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
-| hot glow | dark | `glow-hot` #7E400E | `bg` #00041C | 2.55 | decorative (0) | exempt | `packages/theme/tokens.ts:343`, `apps/mobile/components/AppTabBar.tsx:84`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
-| structure rule /40 | light | `structure/40` #92B6F6 | `bg` #F3F4F4 | 1.87 | decorative (0) | exempt | `apps/mobile/components/AppTabBar.tsx:128`; section rule; no information |
-| structure rule /40 | dark | `structure/40` #002674 | `bg` #00041C | 1.47 | decorative (0) | exempt | `apps/mobile/components/AppTabBar.tsx:128`; section rule; no information |
+| hot glow | light | `glow-hot` #F3F4F4 | `bg` #F3F4F4 | 1.00 | decorative (0) | exempt | `packages/theme/tokens.ts:343`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
+| hot glow | dark | `glow-hot` #7E400E | `bg` #00041C | 2.55 | decorative (0) | exempt | `packages/theme/tokens.ts:343`; box-shadow halo behind a surface that already has its own edge; fully transparent on daylit (no glow in daylight) |
+| structure rule /40 | light | `structure/40` #92B6F6 | `bg` #F3F4F4 | 1.87 | decorative (0) | exempt | `packages/spatial/rive/RiveStage.native.tsx:19`; frame around the Rive stage; no information |
+| structure rule /40 | dark | `structure/40` #002674 | `bg` #00041C | 1.47 | decorative (0) | exempt | `packages/spatial/rive/RiveStage.native.tsx:19`; frame around the Rive stage; no information |
 | orange ghost label on page | light | `tone-orange-text` #884300 | `bg` #F3F4F4 | 6.69 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/Button.tsx:73`, `packages/ui/IconButton.tsx:79`, `packages/ui/cards/CardSlider.shared.tsx:33` |
 | orange ghost label on page | dark | `tone-orange-text` #FD9D40 | `bg` #00041C | 9.74 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/Button.tsx:73`, `packages/ui/IconButton.tsx:79`, `packages/ui/cards/CardSlider.shared.tsx:33` |
 | orange ghost label on hover tint | light | `tone-orange-text` #884300 | `surface-sunken + orange-500/15` #EEDBC9 | 5.48 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/Button.tsx:73`, `packages/ui/IconButton.tsx:79`, `packages/ui/Button.tsx:132`; tint layer fades in on group-hover; measured on the sunken page surface |
@@ -224,8 +222,8 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | sort glyph carolina-300 | both | `carolina-300` #A5D4F8 | `ink-900` #14182E | 11.15 | ui (3) | pass | `packages/ui/DataTable.tsx:59` |
 | sort glyph leaf-300 | both | `leaf-300` #9FD79D | `ink-900` #14182E | 10.57 | ui (3) | pass | `packages/ui/DataTable.tsx:60` |
 | sort glyph apple-300 | both | `apple-300` #FC8080 | `ink-900` #14182E | 7.12 | ui (3) | pass | `packages/ui/DataTable.tsx:62` |
-| card themed heading on night face | both | `ink-50` #F8F8F8 | `ink-950` #00041C | 19.12 | text (4.5) | pass | `packages/theme/theme.css:328`, `packages/app/features/profile/profile-content.tsx:100`; text-text inside a cornerCut or beam Card resolves to ink-50 on the face |
-| card themed muted on night face | both | `silver-500` #BEC0C2 | `ink-950` #00041C | 11.13 | text (4.5) | pass | `packages/theme/theme.css:329`, `packages/theme/theme.css:330`, `packages/app/features/profile/profile-content.tsx:101`; text-muted and text-secondary inside the Card face resolve to silver-500 |
+| card themed heading on night face | both | `ink-50` #F8F8F8 | `ink-950` #00041C | 19.12 | text (4.5) | pass | `packages/theme/theme.css:328`; text-text inside a cornerCut or beam Card resolves to ink-50 on the face |
+| card themed muted on night face | both | `silver-500` #BEC0C2 | `ink-950` #00041C | 11.13 | text (4.5) | pass | `packages/theme/theme.css:329`, `packages/theme/theme.css:330`; text-muted and text-secondary inside the Card face resolve to silver-500 |
 | card themed primary on night face | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | text (4.5) | pass | `packages/theme/theme.css:332` |
 | card themed accent on night face | both | `carolina-500` #4BA8F0 | `ink-950` #00041C | 7.89 | text (4.5) | pass | `packages/theme/theme.css:338`, `packages/theme/theme.css:349`; accent and info share carolina-500 on the face |
 | card themed success on night face | both | `leaf-500` #3FAE3A | `ink-950` #00041C | 7.09 | text (4.5) | pass | `packages/theme/theme.css:345` |
@@ -237,11 +235,11 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | card themed text on white notch | both | `ink-950` #00041C | `ink-50` #F8F8F8 | 19.12 | text (4.5) | pass | `packages/ui/Card.tsx:34` |
 | card themed text on royal notch | both | `white` #FFFFFF | `royal-500` #0058F8 | 5.60 | text (4.5) | pass | `packages/ui/Card.tsx:36` |
 | card themed text on brick notch | both | `white` #FFFFFF | `orange-800` #884300 | 7.37 | text (4.5) | pass | `packages/ui/Card.tsx:36` |
-| home headline on ink panel | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | `packages/spatial/SpatialScreen.tsx:106`, `packages/ui/neon/SolidPanel.tsx:42`; Heading display-sm (30px web, 26px native at rem 14) on the SolidPanel tone="ink" face, which is night in both themes |
+| home headline on ink panel | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | `packages/ui/neon/SolidPanel.tsx:42`; Heading display-sm (30px web, 26px native at rem 14) on the SolidPanel tone="ink" face, which is night in both themes |
 | orange eyebrow on glass card | both | `orange-500` #FC7C00 | `concrete-50 + ink-950/85` #24283C | 5.55 | text (4.5) | pass | `packages/ui/future/GridCard.tsx:29`, `packages/ui/future/CircuitButton.tsx:49`; measured over a light page, the worst case for the 85% night glass |
 | carolina eyebrow on glass card | both | `carolina-500` #4BA8F0 | `concrete-50 + ink-950/85` #24283C | 5.64 | text (4.5) | pass | `packages/ui/future/GridCard.tsx:30`, `packages/ui/future/CircuitButton.tsx:50`; measured over a light page, the worst case for the 85% night glass |
 | night on orange face | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/dropdown.ts:19`, `packages/ui/nav/NavBar.tsx:85`, `packages/ui/nav/NavBar.tsx:185` |
-| white on royal face | both | `white` #FFFFFF | `royal-500` #0058F8 | 5.60 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/dropdown.ts:25`, `packages/ui/DataTable.tsx:58`, `packages/app/features/schedule/accent-classes.ts:43` |
+| white on royal face | both | `white` #FFFFFF | `royal-500` #0058F8 | 5.60 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/dropdown.ts:25`, `packages/ui/DataTable.tsx:58` |
 | banner white on royal face | both | `ink-50` #F8F8F8 | `royal-500` #0058F8 | 5.27 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/future/CircuitButton.tsx:48` |
 | night on carolina face | both | `ink-950` #00041C | `carolina-500` #4BA8F0 | 7.89 | text (4.5) | pass | `packages/ui/district/tones.ts:138`, `packages/ui/future/CircuitButton.tsx:47` |
 | night on leaf face | both | `ink-950` #00041C | `leaf-500` #3FAE3A | 7.09 | text (4.5) | pass | `packages/ui/district/tones.ts:145` |
@@ -249,10 +247,10 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | white on brick face | both | `white` #FFFFFF | `orange-800` #884300 | 7.37 | text (4.5) | pass | `packages/ui/district/tones.ts:160`, `packages/ui/dropdown.ts:30` |
 | banner white on brick face | both | `ink-50` #F8F8F8 | `orange-800` #884300 | 6.94 | text (4.5) | pass | `packages/ui/district/tones.ts:160` |
 | night on white face | both | `ink-950` #00041C | `ink-50` #F8F8F8 | 19.12 | text (4.5) | pass | `packages/ui/district/tones.ts:167`, `packages/ui/Badge.tsx:113` |
-| selected event: white on gold-700 | both | `white` #FFFFFF | `gold-700` #A35100 | 5.62 | text (4.5) | pass | `packages/app/features/schedule/accent-classes.ts:50`, `packages/app/features/schedule/accent-classes.ts:51` |
-| selected event: white on forest-700 | both | `white` #FFFFFF | `forest-700` #2C7A29 | 5.35 | text (4.5) | pass | `packages/app/features/schedule/accent-classes.ts:58`, `packages/app/features/schedule/accent-classes.ts:59` |
-| selected event: white on sky-700 | both | `white` #FFFFFF | `sky-700` #3577B0 | 4.75 | text (4.5) | pass | `packages/app/features/schedule/accent-classes.ts:66`, `packages/app/features/schedule/accent-classes.ts:67` |
-| selected event: white on rose-700 | both | `white` #FFFFFF | `rose-700` #AE0000 | 7.50 | text (4.5) | pass | `packages/app/features/schedule/accent-classes.ts:74`, `packages/app/features/schedule/accent-classes.ts:75` |
+| selected event: white on gold-700 | both | `white` #FFFFFF | `gold-700` #A35100 | 5.62 | text (4.5) | pass | token contract |
+| selected event: white on forest-700 | both | `white` #FFFFFF | `forest-700` #2C7A29 | 5.35 | text (4.5) | pass | token contract |
+| selected event: white on sky-700 | both | `white` #FFFFFF | `sky-700` #3577B0 | 4.75 | text (4.5) | pass | token contract |
+| selected event: white on rose-700 | both | `white` #FFFFFF | `rose-700` #AE0000 | 7.50 | text (4.5) | pass | token contract |
 | orange field edge | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | `packages/ui/district/tones.ts:124`, `packages/ui/cards/neon-field.ts:38` |
 | royal field edge | both | `royal-500` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/district/tones.ts:132`, `packages/ui/cards/neon-field.ts:38` |
 | carolina field edge | both | `carolina-500` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/district/tones.ts:139`, `packages/ui/cards/neon-field.ts:38` |
@@ -316,14 +314,14 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | hlynk: key and trackpad focus outline on body | both | `hlynk-core-ink` #FFFFFF | `hlynk-core-body` #D50000 | 5.48 | ui (3) | pass | `packages/ui/hlynk/HLynkKey.tsx:69`, `packages/ui/hlynk/Trackpad.web.tsx:48` |
 | hlynk: trackpad ring, booting or disabled | both | `led-off` #5E0000 | `hlynk-core-black` #000000 | 1.48 | disabled (0) | exempt | `packages/ui/hlynk/TrackpadFace.tsx:41`; inactive trackpad during boot (WCAG 1.4.11 inactive components) |
 | hlynk: reduced-motion LED cue in the black head | both | `led-on` #F80000 | `hlynk-core-black` #000000 | 4.99 | ui (3) | pass | `packages/ui/hlynk/ScannerLed.tsx:96`, `packages/ui/hlynk/ScannerLed.tsx:104`, `packages/ui/hlynk/ScannerLed.tsx:107`; tick row, filled dot and exclamation dot that stand in for the LED rhythm |
-| scene plate headline | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | `packages/app/features/explore/explore-content.tsx:22`, `packages/app/features/profile/profile-content.tsx:46`, `packages/app/features/error/screen.shared.tsx:25`; display-sm heading and the display-xl 404 on the plate |
-| scene plate title | both | `ink-50` #F8F8F8 | `ink-800` #25293D | 13.51 | large-text (3) | pass | `packages/app/features/error/screen.shared.tsx:29` |
-| scene plate body | both | `silver-200` #ECECED | `ink-800` #25293D | 12.16 | text (4.5) | pass | `packages/app/features/profile/profile-content.tsx:47`, `packages/app/features/error/screen.shared.tsx:32` |
-| scene plate line | both | `silver-300` #DFE0E1 | `ink-800` #25293D | 10.86 | text (4.5) | pass | `packages/app/features/explore/explore-content.tsx:43`, `packages/app/features/profile/profile-content.tsx:45` |
-| scene plate tab label | both | `silver-200` #ECECED | `ink-900` #14182E | 14.82 | text (4.5) | pass | `packages/app/features/explore/explore-content.tsx:25` |
-| scene plate tab edge | both | `ink-400` #90929C | `ink-800` #25293D | 4.63 | ui (3) | pass | `packages/app/features/explore/explore-content.tsx:23` |
-| scene plate selected tab label | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | `packages/app/features/explore/explore-content.tsx:26` |
-| scene plate selected tab face | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | ui (3) | pass | `packages/app/features/explore/explore-content.tsx:24` |
+| scene plate headline | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | token contract; display-sm heading and the display-xl 404 on the plate |
+| scene plate title | both | `ink-50` #F8F8F8 | `ink-800` #25293D | 13.51 | large-text (3) | pass | token contract |
+| scene plate body | both | `silver-200` #ECECED | `ink-800` #25293D | 12.16 | text (4.5) | pass | token contract |
+| scene plate line | both | `silver-300` #DFE0E1 | `ink-800` #25293D | 10.86 | text (4.5) | pass | token contract |
+| scene plate tab label | both | `silver-200` #ECECED | `ink-900` #14182E | 14.82 | text (4.5) | pass | token contract |
+| scene plate tab edge | both | `ink-400` #90929C | `ink-800` #25293D | 4.63 | ui (3) | pass | token contract |
+| scene plate selected tab label | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | token contract |
+| scene plate selected tab face | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | ui (3) | pass | token contract |
 | skyline divider keyline | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | decorative (0) | exempt | `packages/ui/backgrounds/SkylineDivider.tsx:35`; aria-hidden band between sections; the section headings carry the structure |
 | console: signage band headline | both | `signage-white` #FFFFFF | `signage-black` #000000 | 21.00 | text (4.5) | pass | token contract |
 | console: signage band detail | both | `signage-white/85` #D9D9D9 | `signage-black` #000000 | 14.84 | text (4.5) | pass | token contract |

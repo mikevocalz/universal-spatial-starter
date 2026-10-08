@@ -12,13 +12,13 @@
  * late and the activity sits on a blank loading screen. Same pattern as
  * mikevocalz/expo-pico's example/index.js.
  *
- * Quest keeps Viro's XR navigator (SpatialViroExperience), which sets its own
+ * Quest keeps Viro's XR navigator (Orbit Lab), which sets its own
  * intent before launching VRActivity; stock Viro takes that path only on Quest
  * branding, so this root is what PICO mounts.
  */
 import 'expo-router/entry';
 import { registerImmersiveScene } from '@expo-pico/core';
 
-import { DistrictImmersiveRoot } from './src/xr/DistrictImmersiveRoot';
+import { OrbitImmersiveRoot } from './src/xr/OrbitImmersiveRoot';
 
-registerImmersiveScene(DistrictImmersiveRoot);
+registerImmersiveScene(OrbitImmersiveRoot);
