@@ -11,7 +11,12 @@ import { fileURLToPath } from 'node:url';
  */
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const android = join(root, 'apps/mobile/android');
-const pkgDir = 'app/src/main/java/com/nycmon/app';
+// App identity comes from app.config.ts so a rename never drifts from this check.
+const appConfig = readFileSync(join(root, 'apps/mobile/app.config.ts'), 'utf8');
+const configValue = (key) => appConfig.match(new RegExp(`${key}: '([^']+)'`))?.[1];
+const appName = configValue('name');
+const scheme = configValue('scheme');
+const pkgDir = `app/src/main/java/${configValue('package').replaceAll('.', '/')}`;
 
 if (!existsSync(join(android, 'settings.gradle'))) {
   console.error(
@@ -66,7 +71,7 @@ const checks = [
     'getMainComponentName(): String = "VRQuestScene"',
   ]],
   ['app/src/main/AndroidManifest.xml', [
-    'android:scheme="nycmon"',
+    `android:scheme="${scheme}"`,
     'android:name=".VRActivity"',
     'com.oculus.intent.category.VR',
     'com.oculus.supportedDevices',
@@ -89,7 +94,7 @@ const checks = [
     'android:defaultHeight="800dp"',
   ]],
   ['app/src/main/res/values/strings.xml', [
-    '<string name="app_name">NYC-MON</string>',
+    `<string name="app_name">${appName}</string>`,
   ]],
 ];
 
