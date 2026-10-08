@@ -1,0 +1,237 @@
+<Rive version="1" kind="fragment">
+  <!--
+    pulse-catch: the /game stage.
+    View model PulseCatch { phase 0-1, bandFrom 0-1, bandTo 0-1, status ready|running|paused|over, score }.
+    The art renders the values the app hands it and keeps no game state of its own:
+    ring diameter = phase * 340 (clamped 0-1), band centre diameter = (bandFrom + bandTo) * 170,
+    band thickness = (bandTo - bandFrom) * 170, matching a 340px stage.
+    status picks which label shows; over prints "<score> caught".
+  -->
+  <Artboard defaultStateMachineId="0:7" viewModelId="0:40" viewModelInstanceId="0:47" styleId="0:5" clip="true" width="400" height="400" name="PulseCatch" id="0:2">
+    <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+    <Fill name="Background">
+      <SolidColor colorValue="FF16130F" name="Ink"/>
+    </Fill>
+
+    <Node x="200" y="200" name="Stage">
+      <Shape name="Edge">
+        <Ellipse width="340" height="340" name="Edge Path"/>
+        <Stroke thickness="1" name="Edge Stroke">
+          <SolidColor colorValue="24F4F1EA" name="Mineral 14%"/>
+        </Stroke>
+      </Shape>
+
+      <Shape name="Band" id="0:20">
+        <Ellipse width="263.5" height="263.5" name="Band Path" id="0:21">
+          <DataBindContext sourcePathIds="0:40-0:42" propertyKey="20" converterId="0:60"/>
+          <DataBindContext sourcePathIds="0:40-0:42" propertyKey="21" converterId="0:60"/>
+        </Ellipse>
+        <Stroke thickness="30.6" name="Band Stroke">
+          <SolidColor colorValue="660047FF" name="Cobalt 40%"/>
+          <DataBindContext sourcePathIds="0:40-0:42" propertyKey="47" converterId="0:61"/>
+        </Stroke>
+      </Shape>
+
+      <Shape name="Ring" id="0:22">
+        <Ellipse width="0" height="0" name="Ring Path" id="0:23">
+          <DataBindContext sourcePathIds="0:40-0:41" propertyKey="20" converterId="0:62"/>
+          <DataBindContext sourcePathIds="0:40-0:41" propertyKey="21" converterId="0:62"/>
+        </Ellipse>
+        <Stroke thickness="3" name="Ring Stroke">
+          <SolidColor colorValue="FFF4F1EA" name="Mineral"/>
+        </Stroke>
+      </Shape>
+
+      <Text y="0" sizingValue="autoWidth" originX="0.5" originY="0.5" opacity="1" name="Ready Label" id="0:30">
+        <TextStylePaint fontSize="30" fontAssetId="0:90" familyName="Space Grotesk" styleName="Bold" name="Label Style" id="0:31">
+          <TextStyleAxis tag="2003265652" axisValue="700" name="Weight"/>
+          <Fill name="Fill"><SolidColor colorValue="FFF4F1EA" name="Mineral"/></Fill>
+        </TextStylePaint>
+        <TextValueRun styleId="0:31" text="Ready" name="Ready Run"/>
+      </Text>
+
+      <Text y="0" sizingValue="autoWidth" originX="0.5" originY="0.5" opacity="0" name="Paused Label" id="0:32">
+        <TextStylePaint fontSize="30" fontAssetId="0:90" familyName="Space Grotesk" styleName="Bold" name="Paused Style" id="0:33">
+          <TextStyleAxis tag="2003265652" axisValue="700" name="Weight"/>
+          <Fill name="Fill"><SolidColor colorValue="FFF4F1EA" name="Mineral"/></Fill>
+        </TextStylePaint>
+        <TextValueRun styleId="0:33" text="Paused" name="Paused Run"/>
+      </Text>
+
+      <Text y="0" sizingValue="autoWidth" originX="0.5" originY="0.5" opacity="0" name="Over Label" id="0:34">
+        <TextStylePaint fontSize="30" fontAssetId="0:90" familyName="Space Grotesk" styleName="Bold" name="Over Style" id="0:35">
+          <TextStyleAxis tag="2003265652" axisValue="700" name="Weight"/>
+          <Fill name="Fill"><SolidColor colorValue="FFF4F1EA" name="Mineral"/></Fill>
+        </TextStylePaint>
+        <TextValueRun styleId="0:35" text="0" name="Score Run">
+          <DataBindContext sourcePathIds="0:40-0:45" propertyKey="268" converterId="0:63"/>
+        </TextValueRun>
+        <TextValueRun styleId="0:35" text=" caught" name="Caught Run"/>
+      </Text>
+    </Node>
+
+    <StateMachine name="Pulse" id="0:7">
+      <StateMachineLayer name="Status" id="0:8">
+        <AnyState x="200" y="-160"/>
+        <ExitState x="400" y="-160"/>
+        <EntryState x="0" y="0">
+          <StateTransition stateToId="0:10"/>
+        </EntryState>
+        <!-- One state per status; the AnyState-free layout keeps each transition explicit. -->
+        <AnimationState x="200" y="0" animationId="0:80" id="0:10">
+          <StateTransition stateToId="0:11" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:51"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:12" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:52"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:13" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:53"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+        <AnimationState x="400" y="0" animationId="0:81" id="0:11">
+          <StateTransition stateToId="0:10" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:50"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:12" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:52"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:13" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:53"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+        <AnimationState x="600" y="0" animationId="0:82" id="0:12">
+          <StateTransition stateToId="0:10" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:50"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:11" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:51"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:13" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:53"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+        <AnimationState x="400" y="200" animationId="0:83" id="0:13">
+          <StateTransition stateToId="0:10" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:50"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:11" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:51"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+          <StateTransition stateToId="0:12" duration="150">
+            <TransitionViewModelCondition>
+              <TransitionPropertyViewModelComparator><BindablePropertyEnum><DataBindContext sourcePathIds="0:40-0:44" propertyKey="637"/></BindablePropertyEnum></TransitionPropertyViewModelComparator>
+              <TransitionValueEnumComparator value="0:52"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+      </StateMachineLayer>
+    </StateMachine>
+
+    <!-- Hold poses: which label shows, and how bright the ring reads. -->
+    <LinearAnimation fps="60" duration="1" name="Ready" id="0:80">
+      <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0.35"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="1" name="Running" id="0:81">
+      <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="1" name="Paused" id="0:82">
+      <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0.45"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="1" name="Over" id="0:83">
+      <KeyedObject objectId="0:30"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:32"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="18"><KeyFrameDouble value="1"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty propertyKey="18"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+  </Artboard>
+
+  <!-- (bandFrom + bandTo) * 170: band centre diameter. -->
+  <DataConverterFormula name="BandDiameter" id="0:60">
+    <FormulaTokenParenthesisOpen/>
+    <FormulaTokenValue><DataBindContext sourcePathIds="0:40-0:42" propertyKey="777"/></FormulaTokenValue>
+    <FormulaTokenOperation operationType="0"/>
+    <FormulaTokenValue><DataBindContext sourcePathIds="0:40-0:43" propertyKey="777"/></FormulaTokenValue>
+    <FormulaTokenParenthesisClose/>
+    <FormulaTokenOperation operationType="2"/>
+    <FormulaTokenValue operationValue="170"/>
+  </DataConverterFormula>
+  <!-- (bandTo - bandFrom) * 170: band stroke thickness. -->
+  <DataConverterFormula name="BandThickness" id="0:61">
+    <FormulaTokenParenthesisOpen/>
+    <FormulaTokenValue><DataBindContext sourcePathIds="0:40-0:43" propertyKey="777"/></FormulaTokenValue>
+    <FormulaTokenOperation operationType="1"/>
+    <FormulaTokenValue><DataBindContext sourcePathIds="0:40-0:42" propertyKey="777"/></FormulaTokenValue>
+    <FormulaTokenParenthesisClose/>
+    <FormulaTokenOperation operationType="2"/>
+    <FormulaTokenValue operationValue="170"/>
+  </DataConverterFormula>
+  <DataConverterRangeMapper minInput="0" maxInput="1" minOutput="0" maxOutput="340" clampLower="true" clampUpper="true" name="PhaseToDiameter" id="0:62"/>
+  <DataConverterToString decimals="0" round="true" name="ScoreText" id="0:63"/>
+
+  <DataEnumCustom name="PulseStatus" id="0:49">
+    <DataEnumValue key="ready" value="Ready" id="0:50"/>
+    <DataEnumValue key="running" value="Running" id="0:51"/>
+    <DataEnumValue key="paused" value="Paused" id="0:52"/>
+    <DataEnumValue key="over" value="Over" id="0:53"/>
+  </DataEnumCustom>
+
+  <ViewModel defaultInstanceId="0:47" name="PulseCatch" id="0:40">
+    <ViewModelPropertyNumber name="phase" id="0:41"/>
+    <ViewModelPropertyNumber name="bandFrom" id="0:42"/>
+    <ViewModelPropertyNumber name="bandTo" id="0:43"/>
+    <ViewModelPropertyEnumCustom enumId="0:49" name="status" id="0:44"/>
+    <ViewModelPropertyNumber name="score" id="0:45"/>
+    <ViewModelInstance exports="true" name="Default" id="0:47">
+      <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:41"/>
+      <ViewModelInstanceNumber propertyValue="0.68" viewModelPropertyId="0:42"/>
+      <ViewModelInstanceNumber propertyValue="0.86" viewModelPropertyId="0:43"/>
+      <ViewModelInstanceEnum propertyValue="0:50" viewModelPropertyId="0:44"/>
+      <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:45"/>
+    </ViewModelInstance>
+  </ViewModel>
+
+  <FontAsset file="../../fonts/SpaceGrotesk-Variable.ttf" name="SpaceGrotesk" id="0:90"/>
+</Rive>

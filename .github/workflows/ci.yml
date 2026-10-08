@@ -30,4 +30,6 @@ jobs:
       - run: pnpm spatial:verify-android
       - run: pnpm spatial:verify-typegpu
       - run: pnpm verify:routes
+      # Committed .riv bytes and manifest against packages/assets/rive/contract.ts; needs no Rive CLI.
+      - run: pnpm verify:rive
       - run: pnpm turbo build typecheck lint

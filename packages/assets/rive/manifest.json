@@ -1,0 +1,126 @@
+{
+  "generatedBy": "rive 1.5.0",
+  "files": {
+    "game-controls": {
+      "sha256": "2d123a336ae1393ab9ed9beb041371cf9974cdd0e0d5d5f68b8d9254c33608ea",
+      "byteSize": 138632,
+      "defaultArtboard": "GameControls",
+      "artboards": [
+        {
+          "name": "GameControls",
+          "stateMachines": [
+            "Controls"
+          ],
+          "defaultStateMachine": "Controls",
+          "viewModel": "GameControls"
+        }
+      ],
+      "viewModels": {
+        "GameControls": {
+          "properties": {
+            "status": "enum",
+            "press": "trigger"
+          },
+          "enums": {
+            "status": [
+              "ready",
+              "running",
+              "paused",
+              "over"
+            ]
+          }
+        }
+      }
+    },
+    "game-hud": {
+      "sha256": "8fbe5dd820bd59d5b18306f98b4b16876a2aedd504f2c0cc276bbfeb94a6f34d",
+      "byteSize": 137879,
+      "defaultArtboard": "GameHud",
+      "artboards": [
+        {
+          "name": "GameHud",
+          "stateMachines": [
+            "Hud"
+          ],
+          "defaultStateMachine": "Hud",
+          "viewModel": "GameHud"
+        }
+      ],
+      "viewModels": {
+        "GameHud": {
+          "properties": {
+            "score": "number",
+            "misses": "number",
+            "secondsLeft": "number"
+          },
+          "enums": {}
+        }
+      }
+    },
+    "pulse-catch": {
+      "sha256": "498b50576866d6d4ac2a8f626b16eae02942760255b562abb0d8e2e4e586023f",
+      "byteSize": 138904,
+      "defaultArtboard": "PulseCatch",
+      "artboards": [
+        {
+          "name": "PulseCatch",
+          "stateMachines": [
+            "Pulse"
+          ],
+          "defaultStateMachine": "Pulse",
+          "viewModel": "PulseCatch"
+        }
+      ],
+      "viewModels": {
+        "PulseCatch": {
+          "properties": {
+            "phase": "number",
+            "bandFrom": "number",
+            "bandTo": "number",
+            "status": "enum",
+            "score": "number"
+          },
+          "enums": {
+            "status": [
+              "ready",
+              "running",
+              "paused",
+              "over"
+            ]
+          }
+        }
+      }
+    },
+    "signal-studio": {
+      "sha256": "11fdf3eab7922619a976d8f120d88d3113fb3962dcf4dcad930fc88744600491",
+      "byteSize": 3429,
+      "defaultArtboard": "SignalStudio",
+      "artboards": [
+        {
+          "name": "SignalStudio",
+          "stateMachines": [
+            "Signal"
+          ],
+          "defaultStateMachine": "Signal",
+          "viewModel": "SignalStudio"
+        }
+      ],
+      "viewModels": {
+        "SignalStudio": {
+          "properties": {
+            "mode": "enum",
+            "intensity": "number",
+            "playing": "boolean"
+          },
+          "enums": {
+            "mode": [
+              "calm",
+              "pulse",
+              "burst"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

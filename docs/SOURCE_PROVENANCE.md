@@ -45,3 +45,16 @@ The NYC-MON logo, creature art, NYC photos, H-Lynk chrome, nav header and footer
 - The `District` type (`downtown | midtown | harlem | megacity`) still drives tone presets across about 170 files in `packages/ui`, so the district names remain as prop values, defaults and story controls. Renaming them is a separate PR.
 - `packages/theme` still exports `hlynk`, `led`, `signage` and `concrete` tokens, and `docs/design/CONTRAST.md` and `docs/DESIGN_SYSTEM.md` still describe the NYC-MON palette.
 - The `@acme/*` package scope stays as it is for now (pack §11 puts the rename in a separate PR).
+
+## Rive artwork
+
+The four `.riv` files in `packages/assets/rive/` are new work authored in this repo with the Rive CLI 1.5.0, not taken from NYC-MON or any other file. Sources are plain RML in `packages/assets/rive-src/<name>/`; `pnpm rive:build` rebuilds them, and `packages/assets/rive-src/README.md` covers the details.
+
+| File | Built from | Embedded assets |
+| --- | --- | --- |
+| `signal-studio.riv` | `rive-src/signal-studio/scene.rml` | none |
+| `pulse-catch.riv` | `rive-src/pulse-catch/scene.rml` | Space Grotesk variable font (SIL OFL 1.1), from `packages/assets/fonts/` |
+| `game-hud.riv` | `rive-src/game-hud/scene.rml` | Space Grotesk, as above |
+| `game-controls.riv` | `rive-src/game-controls/scene.rml` | Space Grotesk, as above |
+
+The OFL allows embedding the font in a document. None of the files carry scripts, so they are unsigned builds that the web runtime accepts as they are.
