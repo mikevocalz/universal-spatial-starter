@@ -35,7 +35,7 @@ export interface MouseCursorProps extends CursorBase {
   fillOpacity?: number;
 }
 
-/** The NYC-MON arrow pointer, a separate cursor from the mouse face. */
+/** The kit's arrow pointer, a separate cursor from the mouse face. */
 export interface PointerCursorProps extends CursorBase {
   /** Fill. Default orange. */
   color?: NeonColorInput;

@@ -2,6 +2,7 @@
   "name": "mobile",
   "main": "index.js",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "node scripts/assert-viro-fork.mjs && expo start",
     "android": "node scripts/assert-viro-fork.mjs && expo run:android",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "@acme/app": "workspace:*",
+    "@acme/camera": "workspace:*",
     "@acme/spatial": "workspace:*",
     "@acme/theme": "workspace:*",
     "@acme/ui": "workspace:*",
@@ -32,19 +34,16 @@
     "@reactvision/react-viro": "catalog:",
     "@rive-app/react-native": "catalog:",
     "@tanstack/react-pacer": "catalog:",
-    "@tanstack/react-query": "catalog:",
     "canvaskit-wasm": "catalog:",
     "expo": "catalog:",
     "expo-asset": "catalog:",
     "expo-build-properties": "catalog:",
-    "expo-calendar": "catalog:",
     "expo-constants": "catalog:",
     "expo-drag-drop-content-view": "catalog:",
     "expo-font": "catalog:",
     "expo-horizon-core": "github:mikevocalz/expo-pico#release/horizon-core",
     "expo-image": "catalog:",
     "expo-linking": "catalog:",
-    "expo-notifications": "catalog:",
     "expo-paste-input": "catalog:",
     "expo-router": "catalog:",
     "expo-splash-screen": "catalog:",
@@ -55,9 +54,10 @@
     "react-dom": "catalog:",
     "react-native": "catalog:",
     "react-native-audio-api": "catalog:",
+    "react-native-fast-tflite": "catalog:",
     "react-native-gesture-handler": "catalog:",
     "react-native-keyboard-controller": "catalog:",
-    "react-native-mmkv": "catalog:",
+    "react-native-nitro-image": "catalog:",
     "react-native-nitro-modules": "catalog:",
     "react-native-pulsar": "catalog:",
     "react-native-reanimated": "catalog:",
@@ -65,6 +65,9 @@
     "react-native-screens": "catalog:",
     "react-native-skia": "catalog:",
     "react-native-svg": "catalog:",
+    "react-native-vision-camera": "catalog:",
+    "react-native-vision-camera-resizer": "catalog:",
+    "react-native-vision-camera-worklets": "catalog:",
     "react-native-web": "catalog:",
     "react-native-webgpu": "catalog:",
     "react-native-worklets": "catalog:",
@@ -76,6 +79,7 @@
     "@acme/config": "workspace:*",
     "@react-native/metro-config": "catalog:",
     "@tailwindcss/postcss": "catalog:",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "babel-preset-expo": "catalog:",
     "eslint": "catalog:",
@@ -92,7 +96,6 @@
       ]
     },
     "autolinking": {
-      "nativeModulesDir": "../../packages/ui/modules",
       "searchPaths": [
         "./modules"
       ]

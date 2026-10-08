@@ -1,0 +1,85 @@
+<Rive version="1" kind="fragment">
+  <!--
+    game-hud: the /game score panel in Full Rive mode.
+    View model GameHud { score, misses, secondsLeft } (numbers the app writes; the art keeps nothing).
+    The bar under the timer is secondsLeft / 30 of a 200px track.
+  -->
+  <Artboard defaultStateMachineId="0:7" viewModelId="0:40" viewModelInstanceId="0:44" styleId="0:5" clip="true" width="240" height="200" name="GameHud" id="0:2">
+    <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+    <Fill name="Background">
+      <SolidColor colorValue="FF16130F" name="Ink"/>
+    </Fill>
+
+    <Text x="20" y="14" sizingValue="autoWidth" name="Score" id="0:20">
+      <TextStylePaint fontSize="56" fontAssetId="0:90" familyName="Space Grotesk" styleName="Bold" name="Score Style" id="0:21">
+        <TextStyleAxis tag="2003265652" axisValue="700" name="Weight"/>
+        <Fill name="Fill"><SolidColor colorValue="FFF4F1EA" name="Mineral"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:21" text="0" name="Score Run">
+        <DataBindContext sourcePathIds="0:40-0:41" propertyKey="268" converterId="0:60"/>
+      </TextValueRun>
+    </Text>
+
+    <Text x="20" y="84" sizingValue="autoWidth" name="Caught Caption" id="0:22">
+      <TextStylePaint fontSize="14" fontAssetId="0:90" familyName="Space Grotesk" styleName="Regular" name="Caption Style" id="0:23">
+        <Fill name="Fill"><SolidColor colorValue="B3F4F1EA" name="Mineral 70%"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:23" text="caught" name="Caption Run"/>
+    </Text>
+
+    <Text x="20" y="114" sizingValue="autoWidth" name="Misses" id="0:24">
+      <TextStylePaint fontSize="17" fontAssetId="0:90" familyName="Space Grotesk" styleName="Regular" name="Line Style" id="0:25">
+        <Fill name="Fill"><SolidColor colorValue="E6F4F1EA" name="Mineral 90%"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:25" text="0" name="Misses Run">
+        <DataBindContext sourcePathIds="0:40-0:42" propertyKey="268" converterId="0:60"/>
+      </TextValueRun>
+      <TextValueRun styleId="0:25" text=" missed" name="Misses Unit"/>
+    </Text>
+
+    <Text x="20" y="142" sizingValue="autoWidth" name="Seconds" id="0:26">
+      <TextStylePaint fontSize="17" fontAssetId="0:90" familyName="Space Grotesk" styleName="Regular" name="Seconds Style" id="0:27">
+        <Fill name="Fill"><SolidColor colorValue="E6F4F1EA" name="Mineral 90%"/></Fill>
+      </TextStylePaint>
+      <TextValueRun styleId="0:27" text="30" name="Seconds Run">
+        <DataBindContext sourcePathIds="0:40-0:43" propertyKey="268" converterId="0:60"/>
+      </TextValueRun>
+      <TextValueRun styleId="0:27" text="s left" name="Seconds Unit"/>
+    </Text>
+
+    <Shape x="20" y="180" name="Timer Track">
+      <Rectangle width="200" height="4" originX="0" originY="0.5" cornerRadiusTL="2" name="Track Path"/>
+      <Fill name="Fill"><SolidColor colorValue="2EF4F1EA" name="Mineral 18%"/></Fill>
+    </Shape>
+    <Shape x="20" y="180" name="Timer Fill">
+      <Rectangle width="200" height="4" originX="0" originY="0.5" cornerRadiusTL="2" name="Fill Path" id="0:28">
+        <DataBindContext sourcePathIds="0:40-0:43" propertyKey="20" converterId="0:61"/>
+      </Rectangle>
+      <Fill name="Fill"><SolidColor colorValue="FF0047FF" name="Cobalt"/></Fill>
+    </Shape>
+
+    <StateMachine name="Hud" id="0:7">
+      <StateMachineLayer name="Layer 1" id="0:8">
+        <AnyState x="200" y="-160"/>
+        <ExitState x="400" y="-160"/>
+        <EntryState x="0" y="0"/>
+      </StateMachineLayer>
+    </StateMachine>
+  </Artboard>
+
+  <DataConverterToString decimals="0" round="true" name="Whole" id="0:60"/>
+  <DataConverterRangeMapper minInput="0" maxInput="30" minOutput="0" maxOutput="200" clampLower="true" clampUpper="true" name="SecondsToWidth" id="0:61"/>
+
+  <ViewModel defaultInstanceId="0:44" name="GameHud" id="0:40">
+    <ViewModelPropertyNumber name="score" id="0:41"/>
+    <ViewModelPropertyNumber name="misses" id="0:42"/>
+    <ViewModelPropertyNumber name="secondsLeft" id="0:43"/>
+    <ViewModelInstance exports="true" name="Default" id="0:44">
+      <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:41"/>
+      <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:42"/>
+      <ViewModelInstanceNumber propertyValue="30" viewModelPropertyId="0:43"/>
+    </ViewModelInstance>
+  </ViewModel>
+
+  <FontAsset file="../../fonts/SpaceGrotesk-Variable.ttf" name="SpaceGrotesk" id="0:90"/>
+</Rive>

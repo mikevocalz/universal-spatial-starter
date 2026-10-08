@@ -1,7 +1,7 @@
 import { CONTROL_TONES, TONE_CLASSES } from '../district/index.ts';
 
 /**
- * The NYC-MON look for the kit's fields (TextField, Textarea, Select,
+ * The look for the kit's fields (TextField, Textarea, Select,
  * SearchBar, FormField): a solid tone nameplate for the label, a night well
  * with a heavy tone border, and a lighter border plus an accent glow on
  * focus. Errors switch the border to apple and keep the label in its tone,

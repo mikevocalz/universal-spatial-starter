@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight, X } from './icons';
 import { TONE_CLASSES, resolveControlTone, type ControlTone, type District } from './district';
 
 /**
- * NYC-MON lightbox chrome: square night tiles with a heavy keyline for close
+ * Lightbox chrome: square night tiles with a heavy keyline for close
  * and the arrows (the keyline brightens on hover and takes the tone on
  * keyboard focus), square
  * pips for the position, and a counter in the display face. The photo

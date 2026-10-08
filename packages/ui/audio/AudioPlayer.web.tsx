@@ -18,7 +18,7 @@ const OPEN_ERROR = 'This recording could not be opened.';
 /**
  * Web: an HTMLMediaElement drives playback (created in a ref, never rendered,
  * so the page carries no unstyled <audio> chrome), and the shared
- * PlayerShell draws the NYC-MON player. Keyboard and screen-reader access
+ * PlayerShell draws the kit's player. Keyboard and screen-reader access
  * come from the kit pieces: the play tile is a real button and the seek
  * control is the kit Slider, a real range input.
  *

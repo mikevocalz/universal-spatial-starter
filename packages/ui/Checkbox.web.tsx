@@ -2,7 +2,7 @@
 import { NeonCheckbox, type NeonCheckboxProps } from './cards/NeonCheckbox';
 
 export interface CheckboxProps extends NeonCheckboxProps {
-  /** The NYC-MON checkbox is the only look; `neon` and `default` are both accepted for older callers. */
+  /** The kit's checkbox is the only look; `neon` and `default` are both accepted for older callers. */
   variant?: 'default' | 'neon';
 }
 

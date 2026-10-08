@@ -87,7 +87,7 @@ const chart = tv({
 });
 
 /**
- * NeonBlade's NeonLineChart, NYC-MON style: thick solid lines on a royal
+ * NeonBlade's NeonLineChart, in the kit style: thick solid lines on a royal
  * keyline (the wordmark's orange-on-royal), a gradient fill, a scrub readout
  * in the jersey face, and district palettes. Native draws with
  * react-native-graph; web with a Skia path (see LinePlot.web.tsx).

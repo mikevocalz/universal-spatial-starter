@@ -4,30 +4,22 @@ import { View } from '../tw';
 import { useInstanceStore, useStore } from '../use-instance-store';
 import { useLayoutSize } from '../use-layout-size';
 import { useReducedMotion } from '../backgrounds/use-reduced-motion';
-import { NycCarousel, isNycCarouselAvailable } from '../modules/nyc-carousel/src';
 import { stepIndex } from './card-slider-model';
-import { nativeSliderLayout, slideLabels } from './card-slider-native-model';
+import { nativeSliderLayout } from './card-slider-native-model';
 import type { CardSliderNativeProps } from './card-slider-native.types';
 import { CardSliderListTrack } from './CardSliderListTrack';
 import {
   CornerAccents, EdgeFades, ScanLines, SideButtons, SliderControls, sliderStatus, slidesOf, sliderTone, useAutoplay,
 } from './CardSlider.shared';
-import { toneHex } from './tones';
 
 export type { CardSliderNativeProps } from './card-slider-native.types';
 
 /**
- * Native: the track is a native carousel.
- * - iOS: a SwiftUI paging ScrollView (modules/nyc-carousel/ios).
- * - Android: Material 3's centred-hero, multi-browse and uncontained
- *   carousels (modules/nyc-carousel/android).
- * Each card is the React Native slide, hosted natively, so photo slides
- * (CardSliderImageItem) render exactly as on web: the kit Image fills the
- * card and the carousel's mask squeezes it, Material's photo-card pattern.
- * Slides bring their own frame; `itemCut` adds a cut mask for plain ones.
- * Binaries without the module
- * (Expo Go, older builds, iOS below 17) get the React Native LegendList track
- * instead, with the same controls.
+ * Native: the track is a React Native LegendList (CardSliderListTrack) with
+ * the uncontained layout. Each card is the React Native slide, so photo
+ * slides (CardSliderImageItem) render exactly as on web. The `variant`,
+ * `snap` and `itemCut` props are accepted for parity with the types and
+ * ignored here.
  *
  * Everything around the track is the web fork's: SliderControls with the
  * autoplay slot, SideButtons in gutters, EdgeFades, CornerAccents, ScanLines
@@ -46,12 +38,12 @@ export function CardSlider({
   buttonPosition = 'sides', prevButtonCorner = 'bottom-left', nextButtonCorner = 'bottom-right',
   autoPlay = false, autoPlayInterval = 3000, showEdgeFades = false, edgeFadeColor,
   showCornerAccents = false, cornerAccentStyle = 'frame', scanLines = false, viewportClassName,
-  variant = 'uncontained', snap = true, itemCut = 0, index: indexProp, onIndexChange,
+  index: indexProp, onIndexChange,
 }: CardSliderNativeProps) {
   const slides = slidesOf(children);
   const { size, onLayout } = useLayoutSize({ width: 0, height: 0 });
-  // The list fallback only has the uncontained layout.
-  const layout = nativeSliderLayout(isNycCarouselAvailable ? variant : 'uncontained', size.width, slides.length, visibleCount, gap);
+  // The list track only has the uncontained layout.
+  const layout = nativeSliderLayout('uncontained', size.width, slides.length, visibleCount, gap);
   const reduced = useReducedMotion();
   // playing: autoplay not paused by the user. Starts paused under reduced motion.
   const store = useInstanceStore(() => ({ index: 0, playing: !reduced }));
@@ -124,31 +116,14 @@ export function CardSlider({
       <View className={`relative w-full ${sides ? 'px-14' : ''}`}>
         <View onLayout={onLayout} className={`relative w-full ${viewportClassName ?? ''}`}>
           {size.width > 0 ? (
-            isNycCarouselAvailable ? (
-              <NycCarousel
-                slides={nativeSlides}
-                variant={variant}
-                index={index}
-                onIndexChange={(i) => go(Math.min(i, layout.maxIndex))}
-                animated={!reduced}
-                visibleCount={layout.visible}
-                itemWidth={layout.itemWidth}
-                itemSpacing={gap}
-                snap={snap}
-                cut={itemCut}
-                keylineColor={itemCut > 0 ? toneHex(resolved).face : undefined}
-                itemLabels={slideLabels(slides.length)}
-              />
-            ) : (
-              <CardSliderListTrack
-                slides={nativeSlides}
-                layout={layout}
-                gap={gap}
-                index={index}
-                animated={!reduced}
-                onSettle={go}
-              />
-            )
+            <CardSliderListTrack
+              slides={nativeSlides}
+              layout={layout}
+              gap={gap}
+              index={index}
+              animated={!reduced}
+              onSettle={go}
+            />
           ) : null}
           {scanLines ? <ScanLines height={size.height} /> : null}
           {showEdgeFades ? <EdgeFades color={edgeFadeColor} /> : null}

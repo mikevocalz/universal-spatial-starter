@@ -20,7 +20,7 @@ export const Info: Story = {
 export const Danger: Story = {
   render: () => (
     <View className="max-w-2xl p-4">
-      <Banner tone="danger" title="Couldn't load Callers" description="The read failed before any data left the server." />
+      <Banner tone="danger" title="Couldn't load members" description="The read failed before any data left the server." />
     </View>
   ),
 };
@@ -31,7 +31,7 @@ export const WithAction: Story = {
     <View className="max-w-2xl p-4">
       <Banner
         tone="danger"
-        title="Couldn't load Callers"
+        title="Couldn't load members"
         action={<Button title="Try again" variant="outline" size="sm" onPress={() => {}} />}
       />
     </View>

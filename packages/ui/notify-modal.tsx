@@ -6,7 +6,7 @@ import { Dialog, type DialogCardProps } from './Dialog';
 import { useStore } from './use-instance-store';
 
 /** The sonner toaster that hosts modals, apart from the toast stack. */
-export const MODAL_TOASTER_ID = 'nyc-modal';
+export const MODAL_TOASTER_ID = 'kit-modal';
 
 /** How long the fade-out runs before sonner drops the entry, ms. */
 export const MODAL_EXIT_MS = 220;

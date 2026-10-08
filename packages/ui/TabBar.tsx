@@ -7,7 +7,7 @@ import { View, Text, Pressable } from './tw';
 import { CornerCutFrame } from './neon/CornerCutFrame';
 import { TONE_CLASSES, resolveControlTone, toneInput, toneVariants, type ControlTone, type District } from './district';
 
-// NYC-MON bottom tab bar. A night bar under a heavy tone keyline; the active
+// Kit bottom tab bar. A night bar under a heavy tone keyline; the active
 // tab is a solid tone chip on a depth plate; the emphasized center tab is a
 // raised corner-cut tile. Presentational: active state and handlers come in
 // via props (the nav shell owns routing).

@@ -11,6 +11,7 @@ export { ViroText } from '@reactvision/react-viro/dist/components/ViroText.web';
 export { ViroVirtualButton } from '@reactvision/react-viro/dist/components/ViroVirtualButton.web';
 export { ViroVirtualJoystick } from '@reactvision/react-viro/dist/components/ViroVirtualJoystick.web';
 export { ViroMaterials } from '@reactvision/react-viro/dist/components/Material/ViroMaterials.web';
+export { ViroAnimations } from '@reactvision/react-viro/dist/components/Animation/ViroAnimations.web';
 
 export const isQuest = false;
 export const isPico = false;

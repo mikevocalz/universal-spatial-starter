@@ -32,7 +32,6 @@ allowBuilds:
   # kinetrell ships source for git consumers; its `prepare` runs tsdown to
   # emit dist/ (the exports map only resolves against built files).
   "kinetrell@https://codeload.github.com/mikevocalz/Kinetrell/tar.gz/344de51531ce050c4311d3feb70e4d596bdc8041": true
-  sharp: true
   unrs-resolver: true
   esbuild: true
 
@@ -73,13 +72,7 @@ catalog:
   expo-constants: 58.0.9
   "@expo/dom-webview": 58.0.2
   expo-font: 58.0.6
-  expo-file-system: 58.0.5
-  expo-haptics: 58.0.4
   expo-image: 58.0.11
-  expo-document-picker: 58.0.4
-  expo-image-picker: 58.0.10
-  expo-calendar: 58.0.6
-  expo-notifications: 58.0.11
   expo-glass-effect: 58.0.3
   expo-symbols: 58.0.4
   "@expo/material-symbols": 0.1.1
@@ -93,11 +86,8 @@ catalog:
   # the Gradle JS bundle step resolves it from the app, not through expo.
   babel-preset-expo: 58.0.9
   react-native-audio-api: audio-api-nightly
-  react-native-youtube-bridge: 2.2.3
   react-native-keyboard-controller: 1.22.4
-  react-native-mmkv: 4.3.2
   react-native-nitro-modules: 0.37.1
-  react-native-enriched-html: 1.1.1
   react-native-gesture-handler: ~3.2.1
   react-native-reanimated: 4.7.0
   react-native-safe-area-context: ~5.9.1
@@ -141,6 +131,17 @@ catalog:
   "@rive-app/react-native": 0.5.2
   "@rive-app/react-webgl2": 4.36.0
 
+  # Camera Lab (packages/camera). VisionCamera v5 is the Nitro rewrite; its
+  # 5.2.3 family is built against nitrogen/nitro-modules 0.37.0, matching the
+  # 0.37.1 pin above. The worklets add-on peers on react-native-worklets (0.13.0
+  # above, RN 0.86-0.88). fast-tflite 3.x is Margelo's Nitro rewrite; it runs
+  # inference from a VisionCamera v5 worklet via its sync `runSync`.
+  react-native-vision-camera: 5.2.3
+  react-native-vision-camera-worklets: 5.2.3
+  react-native-vision-camera-resizer: 5.2.3
+  react-native-nitro-image: 0.15.2
+  react-native-fast-tflite: 3.0.1
+
   # web
   "@next/env": 16.3.8
   next: 16.3.8
@@ -164,52 +165,14 @@ catalog:
   tailwind-variants: 3.3.1
 
   # state / data
-  "@tanstack/react-query": 5.104.1
   "@tanstack/react-virtual": 3.14.13
   "@tanstack/react-form": 1.33.5
   "@tanstack/react-pacer": 0.24.0
   "@tanstack/react-table": 9.2.4
   "@legendapp/list": 3.6.0
   "@legendapp/motion": 2.5.3
-  date-fns: 4.4.0
   zustand: 5.0.15
-  zod: 4.6.5
 
-  # auth (ADR 0001; DECISIONS #2, #3)
-  # @delmaredigital/payload-better-auth comes from the mikevocalz fork until
-  # upstream ships Payload 4 support (PR delmaredigital/payload-better-auth#43).
-  # The pin is the fork's payload-4-dist branch: the PR commit plus its built
-  # dist/, because pnpm does not build git dependencies that only declare
-  # prepublishOnly. Bump this together with the PR branch.
-  "@delmaredigital/payload-better-auth": github:mikevocalz/payload-better-auth#5134d0b3b14f4dd5f59acbd0a0c09b2326c48f80
-  better-auth: 1.7.7
-  "@better-auth/passkey": 1.7.7
-  resend: 6.32.0
-  "@aws-sdk/client-sns": 3.1146.0
-
-  # backend / cms
-  payload: 4.0.0-canary.37
-  "@payloadcms/db-postgres": 4.0.0-canary.37
-  "@payloadcms/next": 4.0.0-canary.37
-  "@payloadcms/ui": 4.0.0-canary.37
-  # The admin runs on TanStack Start in apps/admin-vite (docs/adr/0003).
-  # The adapter peers vite >=8, @vitejs/plugin-react ^6, @vitejs/plugin-rsc
-  # ^0.5.21, @tanstack/react-start ^1.168.26 and the exact payload version.
-  "@payloadcms/tanstack-start": 4.0.0-canary.37
-  "@tanstack/react-start": 1.168.60
-  # Exact match for @tanstack/react-start 1.168.60's own dependency.
-  "@tanstack/react-router": 1.170.41
-  "@vitejs/plugin-rsc": 0.5.35
-  # Emits Vercel Build Output API v3 for apps/admin-vite (preset: 'vercel').
-  nitro: 3.0.260903-beta
-  # waitUntil() for Better Auth's background tasks (mail) outside Next.
-  "@vercel/functions": 3.9.11
-  graphql: 16.14.2
-  pg: 8.23.1
-  sharp: 0.35.5
-  "@types/pg": 8.23.1
-
-  # storybook / vite
   storybook: 10.6.1
   "@storybook/react-vite": 10.6.1
   "@storybook/addon-a11y": 10.6.1
@@ -233,7 +196,6 @@ catalog:
   "@eslint/eslintrc": ^3.3.7
   babel-plugin-react-compiler: 1.0.0
   turbo: 2.11.7
-  vitest: 5.0.3
 
 patchedDependencies:
   react-native-graph@1.4.0: patches/react-native-graph@1.4.0.patch

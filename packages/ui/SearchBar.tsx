@@ -9,7 +9,7 @@ import { Input } from './primitives';
 import { NEON_FIELD } from './cards/neon-field';
 import { TONE_CLASSES, resolveControlTone, toneVariants, type ControlTone, type District } from './district';
 
-// The NYC-MON search field: a solid tone tile carrying the magnifier, butted
+// The kit's search field: a solid tone tile carrying the magnifier, butted
 // against a night well with a heavy tone border (the same well as
 // NEON_FIELD). Focus lightens the border and adds the tone's accent glow.
 const searchBar = tv({

@@ -1,5 +1,3 @@
-import { View } from './tw';
-import { Text } from './Text';
 import { SlideUp } from './motion';
 import { ToastCard, type ToastCardProps } from './ToastCard';
 import type { District, Tone } from './elements/tones';

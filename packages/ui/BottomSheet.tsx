@@ -13,7 +13,7 @@ import { TONE_CLASSES, resolveControlTone, type ControlTone, type District } fro
 const SNAP_POINTS = [{ fraction: 0.55 }, { fraction: 0.85 }];
 
 /**
- * The NYC-MON sheet surface: a night facade rising from the bottom. A solid
+ * The kit's sheet surface: a night facade rising from the bottom. A solid
  * tone cornice caps it with the grab handle set into it, a dentil row hangs
  * under the cornice, the title is in the display face and close is a square
  * night tile. The sheet chrome around it (drag, snap, scrim) stays the

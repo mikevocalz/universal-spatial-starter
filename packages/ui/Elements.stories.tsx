@@ -11,10 +11,10 @@ import { ToastCard } from './ToastCard';
 import { View } from './tw';
 
 const STOPS = [
-  { date: 'Mon', title: 'Bowling Green', description: 'Crew formed.' },
-  { date: 'Tue', title: 'Union Square', description: 'First block claimed.', badge: 'New' },
-  { date: 'Wed', title: 'Times Sq-42 St', description: 'Holding three blocks.', active: true },
-  { date: 'Thu', title: '125 St', description: 'Harlem opens next.' },
+  { date: 'Mon', title: 'Kickoff', description: 'Team formed.' },
+  { date: 'Tue', title: 'First draft', description: 'First milestone reached.', badge: 'New' },
+  { date: 'Wed', title: 'Review', description: 'Three items in review.', active: true },
+  { date: 'Thu', title: 'Beta', description: 'Opens next.' },
 ];
 
 function AllElements({ district }: { district: District }) {

@@ -56,7 +56,7 @@ export const All: StoryObj = {
         <Arena title="Mouse" note="NeonBlade's fox cursor with a mouse face, centred on the pointer.">
           {(ref) => <MouseCursor containerRef={ref} />}
         </Arena>
-        <Arena title="Pointer" note="The NYC-MON arrow, orange on a royal outline.">
+        <Arena title="Pointer" note="The kit's arrow, orange on a royal outline.">
           {(ref) => <PointerCursor containerRef={ref} />}
         </Arena>
         <Arena title="Reticle" note="NeonBlade's crosshair as a rounded-square reticle. It turns carolina over things you can press.">

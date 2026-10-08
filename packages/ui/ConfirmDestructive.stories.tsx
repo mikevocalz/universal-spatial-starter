@@ -23,12 +23,12 @@ const REASONS = [
   { value: 'account-idle', label: 'Account idle' },
 ];
 
-/** Schedule caller deletion: reason select plus type-to-confirm. */
+/** Schedule member deletion: reason select plus type-to-confirm. */
 export const ScheduleDeletion: Story = {
   render: () => (
     <Opener
       title="Schedule deletion"
-      consequences={['The Caller is signed out everywhere.', 'The record is deleted after a 7-day grace period.', 'This is audited under your staff role.']}
+      consequences={['The member is signed out everywhere.', 'The record is deleted after a 7-day grace period.', 'This is audited under your staff role.']}
       confirmText="JX4K2"
       confirmLabel="Schedule deletion"
       reasonOptions={REASONS}

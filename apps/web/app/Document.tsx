@@ -13,11 +13,11 @@ export function Document({ children }: Props) {
   // suppressHydrationWarning: THEME_SCRIPT sets data-theme from the cookie
   // before hydration — an intentional server/client attribute difference.
   return (
-    <html lang="en" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex h-dvh flex-col overflow-hidden font-sans">
         <NextTopLoader color="var(--color-accent)" height={3} showSpinner={false} />
         {children}
       </body>

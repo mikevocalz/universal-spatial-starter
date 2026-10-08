@@ -63,7 +63,7 @@ export interface TextFieldProps extends React.ComponentProps<typeof Input> {
   error?: string;
   disabled?: boolean;
   containerClassName?: string;
-  /** The NYC-MON field is the only look; `neon` and `default` are both accepted for older callers. */
+  /** The kit's field is the only look; `neon` and `default` are both accepted for older callers. */
   variant?: 'default' | 'neon';
   /** Default `well`. `daylit` for screens on the daylit page (sign-in, onboarding forms). */
   surface?: TextFieldSurface;

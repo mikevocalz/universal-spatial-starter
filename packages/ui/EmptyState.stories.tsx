@@ -4,8 +4,6 @@ import { Button } from './Button';
 import { View } from './tw';
 import { Calendar, Users } from './icons';
 import { DISTRICTS, DISTRICT_NAME } from './district';
-import { Image, type ImageProps } from './Image';
-import { NYC_PHOTOS } from '../assets/photos';
 
 const meta = {
   title: 'UI/EmptyState',
@@ -48,20 +46,20 @@ export const Districts: Story = {
   ),
 };
 
-const STOOPS = NYC_PHOTOS.find((p) => p.id === 'harlem-brownstone-stoops') ?? NYC_PHOTOS[0]!;
-
 /**
  * `illustration` replaces the icon tile and skyline. The caller owns the
- * art's accessible name: here a bundled photo with its alt text.
+ * art's accessible name: here a drawn ring and dot labelled as an image.
  */
 export const WithIllustration: Story = {
   args: {
     icon: undefined,
-    // The bundler's static import (URL, StaticImageData or asset id), as CardSliderImageItem passes it.
-    illustration: <Image src={STOOPS.source as ImageProps['src']} alt={STOOPS.alt} width={320} height={213} unoptimized district="harlem" />,
-    title: 'No crew on this block yet',
+    illustration: (
+      <View role="img" aria-label="An empty orbit" className="size-40 items-center justify-center rounded-full border-8 border-royal-500">
+        <View className="size-8 rounded-full bg-white" />
+      </View>
+    ),
+    title: 'No one here yet',
     description: 'Invite a friend to start one.',
-    district: 'harlem',
   },
 };
 

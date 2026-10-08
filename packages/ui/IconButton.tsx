@@ -9,7 +9,7 @@ import type { CutCorner } from './neon/corner-cut';
 import { TONE_CLASSES, type ControlTone, type District } from './district';
 import { DISABLED_FRAME_TONE, controlLook, frameTone, type IconButtonVariant } from './control-look';
 
-// The NYC-MON icon button. Solid and outline looks draw a square
+// The kit's icon button. Solid and outline looks draw a square
 // CornerCutFrame; ghost stays a compact, frameless hit area for nav bars,
 // with a soft tone tint on hover. The caller's icon keeps its own colour.
 // motion-reduce kills the transitions.

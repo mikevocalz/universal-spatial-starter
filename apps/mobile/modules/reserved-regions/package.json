@@ -1,7 +1,11 @@
 {
   "name": "reserved-regions",
   "version": "0.2.0",
+  "license": "MIT",
   "description": "Native fold and occlusion geometry: UIKit reserved regions on iOS and Jetpack WindowManager FoldingFeature on Android.",
   "private": true,
-  "platforms": ["ios", "android"]
+  "platforms": [
+    "ios",
+    "android"
+  ]
 }

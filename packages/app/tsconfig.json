@@ -1,8 +1,8 @@
 {
   "extends": "@acme/config/typescript/react-library.json",
-  "compilerOptions": {},
+  "compilerOptions": { "types": ["node"] },
   "include": [
-    "features/**/*",
+    "game/**/*", "screens/**/*", "providers/**/*", "state.ts",
     "index.ts"
   ]
 }

@@ -328,7 +328,7 @@ function AdaptivePanesNavigator({
     first frame.
 
     MoyoLearn also floors its leading column at 40% of the row (a product call
-    for a conversation pane). nyc-mon's leading pane is a list, so it keeps its
+    for a conversation pane). the source app's leading pane is a list, so it keeps its
     token width; a host that needs more states `primaryWidthDp`.
   */
   // The trailing pane's floor is its ROW SHARE, not its token: the token is

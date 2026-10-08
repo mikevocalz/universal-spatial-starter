@@ -1,13 +1,13 @@
 {
   "name": "@acme/assets",
   "version": "0.0.0",
+  "license": "MIT",
   "private": true,
   "main": "./index.ts",
   "types": "./index.ts",
   "exports": {
     ".": "./index.ts",
-    "./photos": "./photos/index.ts",
-    "./creatures": "./creatures/index.ts"
+    "./rive": "./rive/index.ts"
   },
   "scripts": {
     "lint": "eslint",

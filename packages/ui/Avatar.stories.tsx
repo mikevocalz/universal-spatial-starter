@@ -63,10 +63,10 @@ export const WithImage: Story = {
 };
 
 const USERS = [
-  { name: 'Kira Nakamura', email: 'kira@nyc-mon.dev' },
-  { name: 'Zane Holloway', email: 'zane@nyc-mon.dev' },
-  { name: 'Lyra Chen', email: 'lyra@nyc-mon.dev' },
-  { name: 'Axel Reeves', email: 'axel@nyc-mon.dev' },
+  { name: 'Kira Nakamura', email: 'kira@example.com' },
+  { name: 'Zane Holloway', email: 'zane@example.com' },
+  { name: 'Lyra Chen', email: 'lyra@example.com' },
+  { name: 'Axel Reeves', email: 'axel@example.com' },
 ] as const;
 
 /** NeonBlade's data-table user column: tile, then name over email. */

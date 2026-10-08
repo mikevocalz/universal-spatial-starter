@@ -16,7 +16,7 @@ export type {
   CardSliderCornerAccentStyle, ButtonCorner, CardSliderImageItemData, CardSliderImageSource,
   CardSliderImageFrame, CardSliderImageAspect,
 } from './card-slider.types';
-export { CardSliderImageItem, CITY_PHOTO_ITEMS, photoItem, type CardSliderImageItemProps } from './slider-items';
+export { CardSliderImageItem, type CardSliderImageItemProps } from './slider-items';
 
 const controls = tv({
   slots: {

@@ -6,7 +6,7 @@ import { BracketAvatar, avatarTile } from './Avatar.shared';
 import type { AvatarProps } from './Avatar.types';
 
 /**
- * The NYC-MON avatar. Default look is NeonBlade's data-table user tile: a
+ * The kit's avatar. Default look is NeonBlade's data-table user tile: a
  * square filled corner to corner with the gradient, the bottom-right corner
  * cut at 45 degrees, initials in night ink in the display face. A photo takes
  * the same cut. No border and no rounding unless `rounded` asks for it, which

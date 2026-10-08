@@ -7,7 +7,7 @@ import { ROW_BAR } from './surface-look';
 import type { MenuProps } from './Menu.types';
 
 /**
- * Web menu in the NYC-MON look: a night panel with a heavy keyline over a
+ * Web menu in the kit look: a night panel with a heavy keyline over a
  * solid depth plate, the title on a tone cornice band, and items that take a
  * tone accent bar and tint on hover or keyboard focus. Destructive items are
  * apple red.

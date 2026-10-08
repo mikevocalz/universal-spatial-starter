@@ -3,7 +3,7 @@ import { NeonCheckbox, type NeonCheckboxProps } from './cards/NeonCheckbox';
 
 export interface CheckboxProps extends NeonCheckboxProps {
   /**
-   * The NYC-MON checkbox is the only look: a night well that fills with the
+   * The kit's checkbox is the only look: a night well that fills with the
    * tone over its depth plate. `neon` and `default` are both accepted so
    * older callers and stories keep compiling.
    */

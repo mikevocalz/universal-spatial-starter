@@ -9,7 +9,7 @@ import { ROW_BAR } from './surface-look';
 import type { CollapsibleProps } from './Collapsible.types';
 
 /**
- * Web disclosure in the NYC-MON look: a night row with a heavy keyline and a
+ * Web disclosure in the kit look: a night row with a heavy keyline and a
  * label in the display face. Open, the row takes a tone accent bar on its
  * left edge and the kit chevron turns down; the content hangs under it
  * on a tone rule, like floors under a cornice.

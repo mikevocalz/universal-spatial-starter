@@ -21,7 +21,7 @@ function AllProgress({ district, value }: AllArgs) {
         ['Skyline bar', <ProgressBar key="v" district={district} value={value} showLabel label="Building the block" />, <ProgressBar key="i" district={district} indeterminate showLabel label="Loading" />],
         ['Window loader', <RainLoader key="v" district={district} value={value} size="lg" />, <RainLoader key="i" district={district} size="lg" />],
         ['Subway arrows', <ArrowLoader key="v" district={district} value={value} />, <ArrowLoader key="i" district={district} />],
-        ['Token ring', <CircularProgress key="v" district={district} value={value} size="md" subLabel="done" />, <CircularProgress key="i" district={district} indeterminate size="md" centerLabel="NYC" />],
+        ['Token ring', <CircularProgress key="v" district={district} value={value} size="md" subLabel="done" />, <CircularProgress key="i" district={district} indeterminate size="md" centerLabel="GO" />],
         ['Rooftop fan', <TurbineLoader key="v" district={district} value={value} size="md" />, <TurbineLoader key="i" district={district} size="md" />],
       ].map(([name, determinate, busy]) => (
         <Section key={name as string} className="gap-3 border-t-2 border-ink-800 pt-4">

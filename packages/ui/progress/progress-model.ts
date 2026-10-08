@@ -1,4 +1,4 @@
-import type { District } from '../backgrounds/city-blocks-model.ts';
+import type { District } from '../district/districts.ts';
 
 /** Shared pure logic for the progress family. No React, so node:test can run it. */
 

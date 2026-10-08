@@ -5,10 +5,10 @@
 @import '@acme/theme/theme.css';
 @import 'lenis/dist/lenis.css';
 
-@source '../components';
 @source '../../../packages/ui';
-@source '../../../packages/app/features';
+@source '../../../packages/app/screens';
 @source '../../../packages/spatial';
+@source '../../../packages/camera';
 
 /* `short:` — a phone held sideways (844×390): the first view is ~300px
    under the header, so the hero switches to its short composition. */

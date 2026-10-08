@@ -5,7 +5,7 @@
 @import '@acme/theme/theme.css';
 
 @source '../../packages/ui';
-@source '../../packages/app/features';
+@source '../../packages/app/screens';
 @source '../../packages/spatial';
 
 /* Retro brand fonts — the web app loads these via next/font; storybook (vite)

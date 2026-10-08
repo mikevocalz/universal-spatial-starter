@@ -1,14 +1,14 @@
 import { addons } from 'storybook/manager-api';
 import { create } from 'storybook/theming/create';
 
-// NYC-Tron is the UI kit in packages/ui; the app built on it stays NYC-MON.
-// Colours copy the brand tokens in packages/theme/tokens.ts (night, orange,
+// Storybook chrome for the @acme/ui kit in packages/ui. Colours copy the
+// brand tokens in packages/theme/tokens.ts (night, orange,
 // royal, carolina, white, silver) and the dark surface/border values in
 // theme.css. The manager bundle is built apart from the preview, so they are
 // literals here rather than imports.
-const nycTron = create({
+const kitTheme = create({
   base: 'dark',
-  brandTitle: 'NYC-Tron',
+  brandTitle: 'Universal Spatial Starter',
 
   colorPrimary: '#FC7C00',
   colorSecondary: '#4BA8F0',
@@ -41,4 +41,4 @@ const nycTron = create({
   inputBorderRadius: 0,
 });
 
-addons.setConfig({ theme: nycTron });
+addons.setConfig({ theme: kitTheme });

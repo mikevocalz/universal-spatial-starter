@@ -9,7 +9,7 @@ import type { CursorGlow, PointerCursorProps } from './types';
 const GLOW: Record<CursorGlow, number> = { none: 0, low: 6, medium: 10, high: 16 };
 
 /**
- * The NYC-MON mouse pointer (in place of NeonBlade's FoxCursor): the solid
+ * The kit's mouse pointer (in place of NeonBlade's FoxCursor): the solid
  * orange arrow on a royal outline follows the mouse, grows a little over
  * links and buttons and dips when pressed. Mouse and pen only; touch screens
  * keep their native behaviour. Reduced motion drops the springs.

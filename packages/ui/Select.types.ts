@@ -18,7 +18,7 @@ export interface SelectProps extends ComponentProps<typeof PrimitiveSelect> {
   options?: SelectOption[];
   /** `<option>` elements; read for value, label and disabled. */
   children?: ReactNode;
-  /** The NYC-MON field is the only look; `neon` and `default` are both accepted for older callers. */
+  /** The kit's field is the only look; `neon` and `default` are both accepted for older callers. */
   variant?: 'default' | 'neon';
   /** Colour family for the nameplate and well border. Overrides `district`. */
   tone?: ControlTone;

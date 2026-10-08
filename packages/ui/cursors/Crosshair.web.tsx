@@ -10,7 +10,7 @@ import type { CrosshairProps, CursorGlow } from './types';
 const GLOW: Record<CursorGlow, number> = { none: 0, low: 6, medium: 10, high: 16 };
 
 /**
- * NeonBlade's Crosshair as the NYC-MON reticle: a rounded square of corner
+ * NeonBlade's Crosshair as the kit's reticle: a rounded square of corner
  * brackets with a counter-rotating diamond and a centre dot, centred on the
  * pointer. Over links and buttons it takes `hotColor` and grows; pressed, it
  * tightens. Mouse and pen only. Reduced motion stops the spin.

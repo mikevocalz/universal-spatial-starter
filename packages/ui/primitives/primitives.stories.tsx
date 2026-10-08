@@ -10,7 +10,7 @@ import { TONE_CLASSES } from '../district';
 
 // §7: every primitive rendered semantically; the a11y addon audits each story.
 // The primitives are unstyled semantic hosts. These stories dress them in the
-// NYC-MON grammar the kit components use: night surfaces, heavy ink keylines,
+// The grammar the kit components use: night surfaces, heavy ink keylines,
 // square corners, solid orange faces on a depth plate, the display face for
 // titles, and glow only on keyboard focus.
 
@@ -77,7 +77,7 @@ export const ContentAndLists: Story = {
   ),
 };
 
-// NYC-MON form grammar: each field is a label-over-control group in a night
+// Form grammar: each field is a label-over-control group in a night
 // well with a heavy ink keyline that turns orange (and glows) on focus; the
 // fieldset is a night panel whose legend is a solid orange nameplate; the
 // action is a solid face that drops into its depth plate when pressed.

@@ -9,7 +9,7 @@ import { TONE_CLASSES, resolveControlTone, toneInput, toneVariants, type Control
 import { Waveform } from './Waveform.tsx';
 
 /**
- * The NYC-MON voice-note player, shared by the web and native forks; each
+ * The kit's voice-note player, shared by the web and native forks; each
  * fork owns its audio engine and hands this the state.
  *
  * A night panel under a tone keyline, the waveform as a skyline of solid

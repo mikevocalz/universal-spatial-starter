@@ -1,6 +1,7 @@
 {
   "name": "@acme/ui",
   "version": "0.0.0",
+  "license": "MIT",
   "private": true,
   "main": "./index.ts",
   "types": "./index.ts",
@@ -9,7 +10,6 @@
     "./tw": "./tw.tsx",
     "./primitives": "./primitives/index.tsx",
     "./html": "./html/index.tsx",
-    "./backgrounds/CityBlocks": "./backgrounds/CityBlocks.tsx",
     "./gpu": "./gpu/index.ts",
     "./three": "./three/index.ts",
     "./neon": "./neon/index.ts",

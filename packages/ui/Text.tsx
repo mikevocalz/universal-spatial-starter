@@ -19,7 +19,7 @@ import { TYPE_SCALE_TV } from './type-scale';
  * `md` is 768dp — the kit's REGULAR_MIN_WIDTH, where a layout stops being
  * phone-shaped.
  *
- * NYC-MON type: display, title and heading set in the Archivo Black display
+ * Kit type: display, title and heading set in the Archivo Black display
  * face (one weight, so no font-semibold on it); body, caption and label stay
  * in Space Grotesk, because running text in a poster face is hard to read.
  */

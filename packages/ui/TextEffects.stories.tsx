@@ -34,10 +34,10 @@ export const All: Story = {
       </Row>
       <Row name='variant="neonGlow"' note="Solid letters on a drop stack, glow as the accent. The second pulses its glow.">
         <Text variant="neonGlow" colors={['orange', 'royal', '#00041C']} glowIntensity="none">Harlem</Text>
-        <Text variant="neonGlow" colors="carolina" glowIntensity="strong" animate>Mega City</Text>
+        <Text variant="neonGlow" colors="carolina" glowIntensity="strong" animate>Neon Glow</Text>
       </Row>
       <Row name='variant="outline"' note="Badge lettering: orange on a royal outline, like the wordmark. Hover to light it; the second is outline only.">
-        <Text variant="outline" hoverFillColor="white" glowColor="carolina">NYC-MON</Text>
+        <Text variant="outline" hoverFillColor="white" glowColor="carolina">STARTER</Text>
         <Text variant="outline" fillColor="transparent" strokeColor="orange" strokeWidth={2}>Midtown</Text>
       </Row>
       <Row name='variant="blur"' note="Soft until the pointer reaches it on web. Touch screens get it sharp; native plays a short focus-in.">
@@ -65,7 +65,7 @@ export const Glitch: Story = {
 };
 
 export const NeonGlow: Story = {
-  args: { variant: 'neonGlow', children: 'Mega City', colors: ['orange', 'royal'], glowIntensity: 'normal', animate: false },
+  args: { variant: 'neonGlow', children: 'Neon Glow', colors: ['orange', 'royal'], glowIntensity: 'normal', animate: false },
   argTypes: { glowIntensity: glowControl, glowColor: colorControl },
   render: (args) => (
     <View className="min-h-screen bg-ink-950 p-4 md:p-10">
@@ -75,7 +75,7 @@ export const NeonGlow: Story = {
 };
 
 export const Outline: Story = {
-  args: { variant: 'outline', children: 'NYC-MON', fillColor: 'orange', strokeColor: 'royal', strokeWidth: 3, hoverFillColor: 'white', glowIntensity: 'normal' },
+  args: { variant: 'outline', children: 'STARTER', fillColor: 'orange', strokeColor: 'royal', strokeWidth: 3, hoverFillColor: 'white', glowIntensity: 'normal' },
   argTypes: {
     fillColor: { control: 'inline-radio', options: ['orange', 'white', 'carolina', 'transparent'] },
     strokeColor: colorControl,

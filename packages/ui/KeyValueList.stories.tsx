@@ -15,7 +15,7 @@ export const Default: Story = {
       <KeyValueList
         columns={1}
         items={[
-          { key: 'id', label: 'Caller id', value: 'usr_01JX4K2' },
+          { key: 'id', label: 'Member id', value: 'usr_01JX4K2' },
           { key: 'joined', label: 'Joined', value: <Timestamp at={Date.now() - 90 * 24 * 3600_000} format="absolute" /> },
           { key: 'consent', label: 'Consent status', value: 'Pending' },
         ]}
@@ -31,8 +31,8 @@ export const WithActions: Story = {
       <KeyValueList
         columns={1}
         items={[
-          { key: 'id', label: 'Caller id', value: 'usr_01JX4K2', action: <CopyButton value="usr_01JX4K2" label="Copy Caller id" /> },
-          { key: 'egg', label: 'Egg id', value: 'egg_99ZZ1', action: <CopyButton value="egg_99ZZ1" label="Copy Egg id" /> },
+          { key: 'id', label: 'Member id', value: 'usr_01JX4K2', action: <CopyButton value="usr_01JX4K2" label="Copy Member id" /> },
+          { key: 'order', label: 'Order id', value: 'ord_99ZZ1', action: <CopyButton value="ord_99ZZ1" label="Copy Order id" /> },
         ]}
       />
     </View>
@@ -46,10 +46,10 @@ export const TwoColumns: Story = {
       <KeyValueList
         columns={2}
         items={[
-          { key: 'id', label: 'Caller id', value: 'usr_01JX4K2' },
+          { key: 'id', label: 'Member id', value: 'usr_01JX4K2' },
           { key: 'joined', label: 'Joined', value: '12 Mar 2026' },
           { key: 'consent', label: 'Consent status', value: 'Pending' },
-          { key: 'mons', label: 'Mons', value: '3' },
+          { key: 'items', label: 'Items', value: '3' },
         ]}
       />
     </View>

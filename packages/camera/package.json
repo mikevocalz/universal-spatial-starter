@@ -1,0 +1,42 @@
+{
+  "name": "@acme/camera",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test '**/*.test.ts'"
+  },
+  "dependencies": {
+    "@acme/ui": "workspace:*",
+    "expo-asset": "catalog:",
+    "react-native-fast-tflite": "catalog:",
+    "react-native-nitro-image": "catalog:",
+    "react-native-nitro-modules": "catalog:",
+    "react-native-vision-camera": "catalog:",
+    "react-native-vision-camera-resizer": "catalog:",
+    "react-native-vision-camera-worklets": "catalog:",
+    "react-native-worklets": "catalog:",
+    "zustand": "catalog:"
+  },
+  "devDependencies": {
+    "@acme/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-expo": "catalog:",
+    "react": "catalog:",
+    "react-native": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}

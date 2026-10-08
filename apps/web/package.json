@@ -1,29 +1,28 @@
 {
   "name": "web",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "node scripts/next.mjs dev",
     "build": "node scripts/next.mjs build",
     "start": "node scripts/next.mjs start",
     "lint": "eslint",
-    "test": "node --test 'components/**/*.test.ts' 'lib/**/*.test.ts'",
+    "test": "node --test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@acme/app": "workspace:*",
-    "@acme/assets": "workspace:*",
-    "@acme/content": "workspace:*",
+    "@acme/camera": "workspace:*",
     "@acme/spatial": "workspace:*",
     "@acme/theme": "workspace:*",
     "@acme/ui": "workspace:*",
+    "@gsap/react": "catalog:",
     "@next/env": "catalog:",
     "@reactvision/react-viro": "catalog:",
     "@reactvision/viro-web-renderer": "catalog:",
     "@rive-app/react-webgl2": "catalog:",
-    "@tanstack/react-query": "catalog:",
     "canvaskit-wasm": "catalog:",
-    "@gsap/react": "catalog:",
     "gsap": "catalog:",
     "kinetrell": "catalog:",
     "lenis": "catalog:",
@@ -37,7 +36,6 @@
     "react-native-skia": "catalog:",
     "react-native-web": "catalog:",
     "solito": "catalog:",
-    "zod": "catalog:",
     "zustand": "catalog:"
   },
   "devDependencies": {

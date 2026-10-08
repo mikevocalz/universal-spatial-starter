@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <View className="flex-row items-center gap-3 p-4">
-      <CopyButton value="usr_01JX4K2" label="Copy Caller id" />
+      <CopyButton value="usr_01JX4K2" label="Copy Member id" />
       <Toaster />
     </View>
   ),
@@ -24,7 +24,7 @@ export const InKeyValueList: Story = {
     <View className="w-96 p-4">
       <KeyValueList
         columns={1}
-        items={[{ key: 'id', label: 'Caller id', value: <Text>usr_01JX4K2</Text>, action: <CopyButton value="usr_01JX4K2" label="Copy Caller id" /> }]}
+        items={[{ key: 'id', label: 'Member id', value: <Text>usr_01JX4K2</Text>, action: <CopyButton value="usr_01JX4K2" label="Copy Member id" /> }]}
       />
       <Toaster />
     </View>

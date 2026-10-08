@@ -1,5 +1,5 @@
 /**
- * Chart geometry for the NYC-MON charts: pure TypeScript, shared by the
+ * Chart geometry for the kit's charts: pure TypeScript, shared by the
  * react-native-graph line plot, the Skia fallbacks and the bar and donut
  * canvases, so every platform draws the same numbers the same way.
  * Everything is in layout px with the origin at the top left.

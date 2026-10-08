@@ -6,16 +6,16 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Fail on committed .env files
         run: |
           if git ls-files | grep -E '(^|/)\.env(\..*)?$' | grep -v '\.env\.example$'; then
             echo '::error::.env files must never be committed'; exit 1
           fi
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
           # Single source of truth for the Node floor (RN 0.87 requires >= 22.13.0).
           # Bump .nvmrc and the root package.json "engines" together.
@@ -29,4 +29,7 @@ jobs:
       - run: pnpm --filter mobile exec expo prebuild --platform android --no-install
       - run: pnpm spatial:verify-android
       - run: pnpm spatial:verify-typegpu
+      - run: pnpm verify:routes
+      # Committed .riv bytes and manifest against packages/assets/rive/contract.ts; needs no Rive CLI.
+      - run: pnpm verify:rive
       - run: pnpm turbo build typecheck lint

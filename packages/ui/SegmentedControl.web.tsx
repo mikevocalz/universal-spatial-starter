@@ -10,7 +10,7 @@ import type { SegmentedControlProps } from './SegmentedControl.types';
 
 const isWeb = Platform.OS === 'web';
 
-// The NYC-MON segmented control: a night well behind a heavy ink keyline;
+// The kit's segmented control: a night well behind a heavy ink keyline;
 // the active segment is a solid tone face with its own keyline, labels in
 // the display face. Inactive segments tint on hover. Shared by both forks.
 //
