@@ -57,6 +57,7 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     '@acme/ui',
     '@acme/app',
+    '@acme/camera',
     '@expo/html-elements',
     'expo-paste-input',
     'expo-drag-drop-content-view',

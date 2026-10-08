@@ -131,6 +131,19 @@ catalog:
   "@rive-app/react-native": 0.5.2
   "@rive-app/react-webgl2": 4.36.0
 
+  # Camera Lab (packages/camera). VisionCamera v5 is the Nitro rewrite; its
+  # 5.2.3 family is built against nitrogen/nitro-modules 0.37.0, matching the
+  # 0.37.1 pin above. The worklets add-on peers on react-native-worklets (0.13.0
+  # above, RN 0.86-0.88). fast-tflite 3.x is Margelo's Nitro rewrite; it runs
+  # inference from a VisionCamera v5 worklet via its sync `runSync`.
+  # MediaPipe Tasks Vision is the web detector (EfficientDet-Lite0, Apache-2.0).
+  react-native-vision-camera: 5.2.3
+  react-native-vision-camera-worklets: 5.2.3
+  react-native-vision-camera-resizer: 5.2.3
+  react-native-nitro-image: 0.15.2
+  react-native-fast-tflite: 3.0.1
+  "@mediapipe/tasks-vision": 1.1.0
+
   # web
   "@next/env": 16.3.8
   next: 16.3.8
