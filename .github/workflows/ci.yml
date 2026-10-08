@@ -29,4 +29,5 @@ jobs:
       - run: pnpm --filter mobile exec expo prebuild --platform android --no-install
       - run: pnpm spatial:verify-android
       - run: pnpm spatial:verify-typegpu
+      - run: pnpm verify:routes
       - run: pnpm turbo build typecheck lint

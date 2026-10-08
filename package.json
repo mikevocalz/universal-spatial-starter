@@ -19,7 +19,8 @@
     "skia:prepare-web": "node tooling/copy-skia-web-assets.mjs",
     "postinstall": "node tooling/copy-viro-web-assets.mjs && node tooling/copy-skia-web-assets.mjs",
     "spatial:verify-android": "node tooling/verify-spatial-android.mjs",
-    "spatial:verify-typegpu": "node tooling/verify-typegpu-toolchain.mjs"
+    "spatial:verify-typegpu": "node tooling/verify-typegpu-toolchain.mjs",
+    "verify:routes": "node tooling/verify-five-routes.mjs"
   },
   "devDependencies": {
     "playwright": "1.63.0",

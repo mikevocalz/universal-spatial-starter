@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { withUniwind } from "uniwind";
-import { SafeAreaProvider } from "@acme/app";
+import { AppShell, SafeAreaProvider } from "@acme/app";
 import { setThemePreference } from "@acme/theme/switch";
 import "../global.css";
 
@@ -20,7 +20,9 @@ export default function RootLayout() {
       <StatusBar style="light" />
       <KeyboardProvider>
         <SafeAreaProvider>
-          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "#000" } }} />
+          <AppShell>
+            <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "#000" } }} />
+          </AppShell>
         </SafeAreaProvider>
       </KeyboardProvider>
     </GestureRoot>

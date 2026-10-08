@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { Pressable, Text, View } from '@acme/ui/tw';
 import { BAND, pulsePhase, remainingMs } from '../game/pulse-catch';
 import { usePulseStore } from '../state';
@@ -22,6 +22,17 @@ function usePulseClock(running: boolean) {
     });
     return () => cancelAnimationFrame(frame);
   }, [running, dispatch]);
+}
+
+/** Leaving the app (or the browser tab) pauses a running session instead of letting the clock run. */
+function usePauseInBackground() {
+  const dispatch = usePulseStore((s) => s.dispatch);
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state !== 'active') dispatch({ type: 'pause' });
+    });
+    return () => sub.remove();
+  }, [dispatch]);
 }
 
 /** Space catches on a keyboard, P pauses and resumes. Web only; native uses the on-screen controls. */
@@ -48,6 +59,7 @@ export function GameScreen() {
   const dispatch = usePulseStore((s) => s.dispatch);
   usePulseClock(game.status === 'running');
   useKeyboardControls();
+  usePauseInBackground();
 
   // ponytail: the ring re-renders through React each frame; move it to a Reanimated shared value once the Rive stage replaces it.
   const ring = Math.max(8, pulsePhase(game.elapsedMs) * STAGE);

@@ -48,3 +48,9 @@ export const useOrbitStore = create<{ open: boolean; setOpen: (open: boolean) =>
   open: false,
   setOpen: (open) => set({ open }),
 }));
+
+/** Camera Lab overlay, opened by the raised Scan button. Not a route. */
+export const useCameraLabStore = create<{ open: boolean; setOpen: (open: boolean) => void }>((set) => ({
+  open: false,
+  setOpen: (open) => set({ open }),
+}));

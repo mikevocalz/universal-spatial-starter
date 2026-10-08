@@ -35,7 +35,9 @@
         "../../.env*",
         "../../packages/ui/**",
         "../../packages/app/**",
-        "../../packages/theme/**"
+        "../../packages/theme/**",
+        "../../packages/spatial/**",
+        "../../packages/camera/**"
       ],
       "outputs": [
         ".next/**",

@@ -1,5 +1,7 @@
 'use client';
 
+import { useWindowDimensions } from 'react-native';
+import { BottomSheet } from '@acme/ui';
 import { Pressable, Text, TextInput, View } from '@acme/ui/tw';
 import { useWorkspaceStore } from '../state';
 import { ActionButton, Panel, ScreenFrame } from './parts';
@@ -17,7 +19,11 @@ const SURFACES = [
   { id: 'visionos', name: 'Apple Vision Pro', placement: 'SwiftUI windows and immersive space', ui: 'Rive Apple runtime, visionOS' },
 ] as const;
 
+/** Width where list, detail and inspector sit side by side (Android's expanded width class). */
+const WIDE = 1024;
+
 export function NativeScreen() {
+  const wide = useWindowDimensions().width >= WIDE;
   const { query, selectedId, inspectorOpen, setQuery, select, toggleInspector } = useWorkspaceStore();
   const needle = query.trim().toLowerCase();
   const rows = needle ? SURFACES.filter((s) => `${s.name} ${s.placement} ${s.ui}`.toLowerCase().includes(needle)) : SURFACES;
@@ -67,15 +73,27 @@ export function NativeScreen() {
     </Panel>
   );
 
-  const inspector =
-    selected && inspectorOpen ? (
-      <Panel label="Inspector" className="lg:w-72">
+  const inspectorBody = selected ? (
+    <>
         <Text className="text-sm text-royal-300">Renderer</Text>
         <Text className="text-base text-silver-50">{selected.ui}</Text>
         <Text className="text-sm text-royal-300">Hardware status</Text>
         <Text className="text-base text-silver-50">Not verified on a device yet</Text>
-      </Panel>
-    ) : null;
+    </>
+  ) : null;
+
+  // Wide windows keep the inspector beside the detail; compact ones present it as a native drag sheet.
+  // Nothing renders until a surface is picked, so the server (width 0) and the first client render agree.
+  const showInspector = selected != null && inspectorOpen;
+  const inspector = !showInspector ? null : wide ? (
+    <Panel label="Inspector" className="w-72">
+      {inspectorBody}
+    </Panel>
+  ) : (
+    <BottomSheet open onClose={toggleInspector} closeLabel="Close inspector" title="Inspector" tone="royal">
+      <View className="gap-4 pb-4">{inspectorBody}</View>
+    </BottomSheet>
+  );
 
   return (
     <ScreenFrame title="Native Workspace" purpose="The standard layout: navigation, content and an inspector, laid out by window width.">

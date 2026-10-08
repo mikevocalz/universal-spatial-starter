@@ -2,6 +2,7 @@
 
 import { Link } from 'solito/link';
 import { ScrollView, Text, View } from '@acme/ui/tw';
+import { RevealTarget, ShowcaseReveal } from './ShowcaseReveal';
 
 const DEMOS = [
   { href: '/native', title: 'Native Workspace', layout: 'Standard layout', line: 'Search a list, open a detail, pull out an inspector. All native controls.' },
@@ -12,16 +13,22 @@ const DEMOS = [
 
 export function ShowcaseScreen() {
   return (
+    <ShowcaseReveal>
     <ScrollView className="flex-1 bg-ink-950" contentContainerClassName="mx-auto w-full max-w-screen-xl gap-12 px-4 py-12 md:px-8 md:py-20">
       <View className="max-w-3xl gap-5">
-        <Text role="heading" aria-level={1} className="font-display text-5xl leading-tight text-silver-50 md:text-7xl">
+        <RevealTarget target="headline">
+          <Text role="heading" aria-level={1} className="font-display text-5xl leading-tight text-silver-50 md:text-7xl">
           Five screens, two layouts, every surface.
         </Text>
-        <Text className="text-lg leading-8 text-silver-300">
+        </RevealTarget>
+        <RevealTarget target="intro">
+          <Text className="text-lg leading-8 text-silver-300">
           A reference app for Expo, Next.js, Rive and Viro. Each demo below runs offline and shows one way to compose native
           UI, authored animation and 3D space.
         </Text>
+        </RevealTarget>
       </View>
+      <RevealTarget target="demos">
       <View role="list" className="border-t border-ink-800">
         {DEMOS.map((demo) => (
           <View role="listitem" key={demo.href} className="border-b border-ink-800">
@@ -35,6 +42,8 @@ export function ShowcaseScreen() {
           </View>
         ))}
       </View>
+      </RevealTarget>
     </ScrollView>
+    </ShowcaseReveal>
   );
 }

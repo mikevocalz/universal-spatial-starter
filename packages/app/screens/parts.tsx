@@ -1,16 +1,12 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Link } from 'solito/link';
 import { Pressable, ScrollView, Text, View } from '@acme/ui/tw';
 
 /** Page frame shared by the four demo screens: back to Showcase, title, one-line purpose. */
 export function ScreenFrame({ title, purpose, children }: { title: string; purpose: string; children: ReactNode }) {
   return (
     <ScrollView className="flex-1 bg-ink-950" contentContainerClassName="mx-auto w-full max-w-screen-2xl gap-6 px-4 py-6 md:px-8 md:py-10">
-      <Link href="/">
-        <Text className="text-sm text-royal-300 underline">Showcase</Text>
-      </Link>
       <View className="gap-2">
         <Text role="heading" aria-level={1} className="font-display text-4xl text-silver-50 md:text-5xl">
           {title}

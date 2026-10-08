@@ -95,7 +95,6 @@
       ]
     },
     "autolinking": {
-      "nativeModulesDir": "../../packages/ui/modules",
       "searchPaths": [
         "./modules"
       ]

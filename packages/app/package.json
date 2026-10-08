@@ -20,7 +20,6 @@
     "@acme/spatial": "workspace:*",
     "@acme/theme": "workspace:*",
     "@acme/ui": "workspace:*",
-    "@expo/ui": "catalog:",
     "kinetrell": "catalog:",
     "react-native-safe-area-context": "catalog:",
     "solito": "catalog:",

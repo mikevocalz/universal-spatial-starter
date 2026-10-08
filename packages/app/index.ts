@@ -4,4 +4,5 @@ export { NativeScreen } from './screens/NativeScreen';
 export { HybridScreen } from './screens/HybridScreen';
 export { GameScreen } from './screens/GameScreen';
 export { ImmersiveScreen, type ImmersiveScreenProps } from './screens/ImmersiveScreen';
+export { AppShell } from './screens/AppShell';
 export { SafeAreaProvider } from './providers/safe-area';

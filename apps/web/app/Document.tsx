@@ -17,7 +17,7 @@ export function Document({ children }: Props) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex h-dvh flex-col overflow-hidden font-sans">
         <NextTopLoader color="var(--color-accent)" height={3} showSpinner={false} />
         {children}
       </body>
