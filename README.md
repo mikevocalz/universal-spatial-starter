@@ -113,6 +113,10 @@ The reference fork is derived from [NYC-Mon](https://github.com/mikevocalz/nyc-m
 
 **Key references:** [Expo UI](https://docs.expo.dev/versions/latest/sdk/ui/universal/) · [Expo Server Components](https://docs.expo.dev/guides/server-components/) · [Next.js Cache Components](https://nextjs.org/docs/app/getting-started/cache-components) · [Meta Layout](https://developers.meta.com/vr/documentation/android-apps/meta-vr-layout-sdk/) · [VisionCamera](https://visioncamera.margelo.com/docs/frame-output) · [Rive](https://rive.app/docs/llms.txt) · [Margelo API design](https://github.com/margelo/react-native-skills/tree/main/skills/api-design)
 
+## License
+
+MIT. See [LICENSE](LICENSE). Fonts, the detection model and vendored Viro files keep their own licenses, listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ---
 
 <div align="center"><strong>Designed to be read, explored, tested, and forked.</strong><br/>A small reference app with serious engineering boundaries.</div>

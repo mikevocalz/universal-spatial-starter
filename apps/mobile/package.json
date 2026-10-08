@@ -2,6 +2,7 @@
   "name": "mobile",
   "main": "index.js",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "node scripts/assert-viro-fork.mjs && expo start",
     "android": "node scripts/assert-viro-fork.mjs && expo run:android",
