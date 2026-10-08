@@ -9,44 +9,20 @@ export interface StatusCopy {
   action?: { kind: StatusAction; label: string };
 }
 
-/** Where the copy is shown; only the permission-denied guidance differs. */
-export type CopySurface = 'native' | 'web';
-
 /**
  * User-facing text for every Camera Lab state. Sentence case, plain
  * statements of what is happening and what the user can do next.
  */
-export function describeLabState(state: LabState, surface: CopySurface): StatusCopy | undefined {
+export function describeLabState(state: LabState): StatusCopy | undefined {
   switch (state.status) {
     case 'closed':
       return undefined;
-    case 'sensing-unavailable':
-      if (state.host === 'visionos') {
-        return {
-          title: 'Keyboard scanning is not set up for Vision Pro',
-          body: 'Vision Pro tracks a specific keyboard through a trained reference object. This build does not include one, so Camera Lab has no sensing source here.',
-        };
-      }
-      return {
-        title: 'Camera sensing is unavailable on this headset',
-        body:
-          state.host === 'pico'
-            ? 'PICO does not give this app camera frames for detection, so Camera Lab cannot scan here.'
-            : 'Meta Horizon OS does not give this app camera frames for detection, so Camera Lab cannot scan here.',
-      };
     case 'requesting-permission':
       return {
         title: 'Allow camera access',
         body: 'Camera Lab looks for a keyboard in the live camera view. Frames are analyzed on this device and never saved.',
       };
     case 'permission-denied':
-      if (surface === 'web') {
-        return {
-          title: 'Camera access is blocked',
-          body: "Allow camera access for this site in your browser's settings, then try again.",
-          action: { kind: 'retry', label: 'Try again' },
-        };
-      }
       return state.canAskAgain
         ? {
             title: 'Camera access is off',
@@ -62,14 +38,12 @@ export function describeLabState(state: LabState, surface: CopySurface): StatusC
       const body = {
         'no-camera': 'This device has no camera Camera Lab can use.',
         'in-use': 'Another app is using the camera. Close it, then try again.',
-        'insecure-context': 'The browser only allows camera access on a secure (https) connection.',
-        'unsupported-browser': 'This browser does not support camera access.',
         error: 'The camera could not start.',
       }[state.reason];
       return {
         title: 'No camera available',
         body: state.detail ? `${body} (${state.detail})` : body,
-        action: state.reason === 'no-camera' || state.reason === 'unsupported-browser' ? undefined : { kind: 'retry', label: 'Try again' },
+        action: state.reason === 'no-camera' ? undefined : { kind: 'retry', label: 'Try again' },
       };
     }
     case 'model-loading':

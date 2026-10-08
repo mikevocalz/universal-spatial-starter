@@ -29,16 +29,3 @@ The file is byte-identical to the upstream `.tflite`. It is stored with a `.bin`
 ### Label map
 
 `labelmap.txt` is the `labelmap.txt` embedded in the model (the `.tflite` is also a zip archive), 90 lines, sha256 `f8803ef7900160c629d570848dfda4175e21667bf7b71f73f8ece4938c9f2bf2`. Class index `n` is line `n + 1`; unused COCO ids are `???`. `keyboard` is index 75 (line 76). `detection.test.ts` asserts this.
-
-## Web: loaded from a pinned URL, not vendored
-
-| Field | Value |
-|---|---|
-| Model | MediaPipe Object Detector, EfficientDet-Lite0 int8, model version 1 |
-| URL | https://storage.googleapis.com/mediapipe-models/object_detector/efficientdet_lite0/int8/1/efficientdet_lite0.tflite |
-| License | Apache License 2.0 (MediaPipe model card) |
-| Size | 4,602,795 bytes |
-| sha256 | `0720bf247bd76e6594ea28fa9c6f7c5242be774818997dbbeffc4da460c723bb` (computed 2026-10-08) |
-| Runtime | `@mediapipe/tasks-vision` 1.1.0, wasm from `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.1.0/wasm` |
-
-This variant has no in-graph post-processing (outputs are raw anchors: boxes `[1, 19206, 4]`, scores `[1, 19206, 90]`); MediaPipe decodes and runs NMS itself, which is why the native path uses the TF Hub build above instead. Its embedded `labels.txt` is identical to `labelmap.txt`.

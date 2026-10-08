@@ -3,18 +3,10 @@
  * runs it directly and both platform sessions drive the same transitions.
  */
 
-/** Where Camera Lab is running, resolved once when the overlay opens. */
-export type SensingHost = 'phone' | 'web' | HeadsetHost;
-
-/** Headsets where Camera Lab reports `sensing-unavailable` instead of opening a camera. */
-export type HeadsetHost = 'meta-horizon' | 'pico' | 'visionos';
-
 /** Why no camera stream could be opened. */
 export type CameraUnavailableReason =
   | 'no-camera'
   | 'in-use'
-  | 'insecure-context'
-  | 'unsupported-browser'
   | 'error';
 
 /**
@@ -38,7 +30,6 @@ export interface KeyboardDetection {
 
 export type LabState =
   | { status: 'closed' }
-  | { status: 'sensing-unavailable'; host: HeadsetHost }
   | { status: 'requesting-permission' }
   | { status: 'permission-denied'; canAskAgain: boolean }
   | { status: 'camera-unavailable'; reason: CameraUnavailableReason; detail?: string }
@@ -50,7 +41,7 @@ export type LabState =
 export type LabStatus = LabState['status'];
 
 export type LabEvent =
-  | { type: 'open'; host: SensingHost }
+  | { type: 'open' }
   | { type: 'close' }
   | { type: 'permission-granted' }
   | { type: 'permission-denied'; canAskAgain: boolean }
@@ -96,9 +87,6 @@ export function reduceLab(snapshot: LabSnapshot, event: LabEvent): LabSnapshot {
   switch (event.type) {
     case 'open':
       if (state.status !== 'closed') return snapshot;
-      if (event.host === 'meta-horizon' || event.host === 'pico' || event.host === 'visionos') {
-        return to({ status: 'sensing-unavailable', host: event.host }, attempt + 1);
-      }
       return to({ status: 'requesting-permission' }, attempt + 1);
 
     case 'close':

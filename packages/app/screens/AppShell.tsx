@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import { Platform } from 'react-native';
 import { Link } from 'solito/link';
 import { usePathname } from 'solito/navigation';
 import { CameraLab } from '@acme/camera';
@@ -50,9 +51,12 @@ function ScanButton({ raised }: { raised: boolean }) {
   );
 }
 
+/** Camera Lab is native-only, so the web build shows no Scan action. */
+const HAS_CAMERA = Platform.OS !== 'web';
+
 /**
  * Navigation for the five screens plus the Camera Lab overlay. Compact widths
- * get a bottom dock with the raised Scan action in the middle; from 840 wide
+ * get a bottom dock with the raised Scan action in the middle; from 1024 wide
  * the destinations move to a leading rail with Scan at its foot.
  */
 export function AppShell({ children }: { children: ReactNode }) {
@@ -70,21 +74,23 @@ export function AppShell({ children }: { children: ReactNode }) {
         {DESTINATIONS.map((d) => (
           <Destination key={d.href} {...d} active={isActive(d.href)} />
         ))}
-        <View className="mt-auto">
-          <ScanButton raised={false} />
-        </View>
+        {HAS_CAMERA ? (
+          <View className="mt-auto">
+            <ScanButton raised={false} />
+          </View>
+        ) : null}
       </Nav>
       <View className="min-h-0 flex-1">{children}</View>
       <Nav aria-label="Demos" className="flex-row items-center border-t border-ink-800 bg-ink-950 px-1 pb-2 lg:hidden">
         {left.map((d) => (
           <Destination key={d.href} {...d} active={isActive(d.href)} compact />
         ))}
-        <ScanButton raised />
+        {HAS_CAMERA ? <ScanButton raised /> : null}
         {right.map((d) => (
           <Destination key={d.href} {...d} active={isActive(d.href)} compact />
         ))}
       </Nav>
-      <CameraLab open={open} onClose={() => setOpen(false)} />
+      {HAS_CAMERA ? <CameraLab open={open} onClose={() => setOpen(false)} /> : null}
     </SafeArea>
   );
 }

@@ -7,7 +7,6 @@ import {
   MIN_KEYBOARD_SCORE,
   boundsInView,
   boxCorners,
-  mapCoverBox,
   pickKeyboard,
   uprightToFrameNormalized,
   type FrameOrientation,
@@ -101,24 +100,4 @@ test('boundsInView clips to the view and rejects boxes fully outside', () => {
   assert.deepEqual(boundsInView([{ x: -10, y: 5 }, { x: 50, y: 500 }], 100, 200), { x: 0, y: 5, width: 50, height: 195 });
   assert.equal(boundsInView([{ x: 150, y: 10 }, { x: 180, y: 20 }], 100, 200), undefined);
   assert.equal(boundsInView([], 100, 100), undefined);
-});
-
-test('mapCoverBox matches object-fit: cover (scale to fill, centered crop)', () => {
-  // 1280x720 video in a 390x844 portrait view: scale = 844/720, crop sides.
-  const scale = 844 / 720;
-  const offsetX = (390 - 1280 * scale) / 2;
-  const box = mapCoverBox({ x: 600, y: 200, width: 100, height: 100 }, { width: 1280, height: 720 }, { width: 390, height: 844 });
-  assert.ok(box);
-  assert.ok(Math.abs(box.x - (600 * scale + offsetX)) < 1e-9);
-  assert.ok(Math.abs(box.y - 200 * scale) < 1e-9);
-  assert.ok(Math.abs(box.width - 100 * scale) < 1e-9);
-  // Same aspect: identity scale.
-  assert.deepEqual(mapCoverBox({ x: 10, y: 20, width: 30, height: 40 }, { width: 640, height: 480 }, { width: 640, height: 480 }), {
-    x: 10,
-    y: 20,
-    width: 30,
-    height: 40,
-  });
-  // Box entirely in the cropped margin.
-  assert.equal(mapCoverBox({ x: 0, y: 0, width: 50, height: 50 }, { width: 1280, height: 720 }, { width: 390, height: 844 }), undefined);
 });

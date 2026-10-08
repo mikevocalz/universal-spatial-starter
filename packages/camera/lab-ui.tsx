@@ -1,23 +1,20 @@
-'use client';
-
 import { useEffect, type ReactNode } from 'react';
 import { AccessibilityInfo } from 'react-native';
 import { Modal } from '@acme/ui';
 import { Pressable, Text, View } from '@acme/ui/tw';
-import { describeLabState, formatConfidence, type CopySurface, type StatusAction } from './copy';
+import { describeLabState, formatConfidence, type StatusAction } from './copy';
 import { dispatchLab, useCameraLabStore } from './lab-store';
-import type { SensingHost } from './lab-machine';
 
 /**
- * Mirrors the `open` prop into the store: open dispatches once per opening
- * with the resolved host, close (or unmount) returns the machine to `closed`.
+ * Mirrors the `open` prop into the store: opening dispatches `open` once,
+ * closing (or unmounting) returns the machine to `closed`.
  */
-export function useLabLifecycle(open: boolean, resolveHost: () => SensingHost): void {
+export function useLabLifecycle(open: boolean): void {
   useEffect(() => {
     if (!open) return;
-    dispatchLab({ type: 'open', host: resolveHost() });
+    dispatchLab({ type: 'open' });
     return () => dispatchLab({ type: 'close' });
-  }, [open, resolveHost]);
+  }, [open]);
 }
 
 function Button({ label, onPress, tone }: { label: string; onPress: () => void; tone: 'solid' | 'quiet' }) {
@@ -55,23 +52,21 @@ function DetectionBox() {
 }
 
 /**
- * Full-screen Camera Lab frame shared by native and web: the platform
- * session's preview fills the back, the real detection box sits over it, and
+ * Full-screen Camera Lab frame: the VisionCamera
+ * preview fills the back, the real detection box sits over it, and
  * the status panel (an aria-live region) reports the current state.
  */
 export function LabOverlay({
-  surface,
   onClose,
   onAction,
   preview,
 }: {
-  surface: CopySurface;
   onClose: () => void;
   onAction: (action: StatusAction) => void;
   preview: ReactNode;
 }) {
   const state = useCameraLabStore((s) => s.state);
-  const copy = describeLabState(state, surface);
+  const copy = describeLabState(state);
   const found = state.status === 'keyboard-found';
 
   // iOS ignores live regions; announce the found/lost transition explicitly.
@@ -81,15 +76,7 @@ export function LabOverlay({
 
   return (
     <Modal visible transparent animationType="none" presentationStyle="overFullScreen" onRequestClose={onClose} statusBarTranslucent>
-      {/* On web the react-native-web modal container computes to
-          position: relative with content height in this app, so the root pins
-          itself to the viewport there. */}
-      <View
-        role="dialog"
-        aria-modal
-        aria-label="Camera Lab"
-        className={`bg-ink-950 ${surface === 'web' ? 'fixed inset-0 z-50 flex' : 'flex-1'}`}
-      >
+      <View role="dialog" aria-modal aria-label="Camera Lab" className="flex-1 bg-ink-950">
         <View className="absolute inset-0 overflow-hidden">
           {preview}
           <DetectionBox />

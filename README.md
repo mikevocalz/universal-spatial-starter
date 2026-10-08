@@ -17,7 +17,7 @@
 </div>
 
 > [!IMPORTANT]
-> This is a **five-screen reference application**, not a showcase full of unfinished features. Native controls and spatial rendering are composable; **Game Layout is a distinct layout family**. Camera Lab is a **modal experience opened by the raised central scan button**, not a sixth route. XR scanning requires real authorized device sensing: camera frames where available, or native reference-object tracking (including Apple Vision Pro ARKit). No simulated XR camera, prerecorded video, or substitute phone stream.
+> This is a **five-screen reference application**, not a showcase full of unfinished features. Native controls and spatial rendering are composable; **Game Layout is a distinct layout family**. Camera Lab is a **native-only modal opened by the raised central scan button**, not a sixth route. VisionCamera supplies the camera on every native target, headsets included. The web build has no camera and no Scan action. No simulated camera, prerecorded video, or substitute phone stream.
 
 ## The experience at a glance
 
@@ -56,9 +56,9 @@ The **layout** defines meaning and behavior. The **renderer** chooses pixels and
 
 **Motion you can understand.** [Kinetrell](docs/KINETRELL_MOTION.md) owns cross-platform entrances, reflow, navigation and scroll choreography. [Rive](docs/RIVE.md) owns authored artboard interactions and state machines. Viro/Eskiu own world-space transforms. Only one system owns any animated property at a time.
 
-**Native-first mobile.** Bottom navigation on compact phones, a **raised 72dp camera action** visually centered over the dock, trailing Inspector as a bottom sheet, RTL-safe navigation, hinge-aware Duo/foldable placement, tablet rail, reduced-motion-aware transitions. The camera opens a polished *Camera Lab* overlay powered by real device sensing: an on-device image detector or a native 3D reference-object tracker. [Mobile design](docs/MOBILE_AND_FOLDABLES.md).
+**Native-first mobile.** Bottom navigation on compact phones, a **raised 72dp camera action** visually centered over the dock, trailing Inspector as a bottom sheet, RTL-safe navigation, hinge-aware Duo/foldable placement, tablet rail, reduced-motion-aware transitions. The camera opens the *Camera Lab* overlay: a VisionCamera preview with on-device keyboard detection. [Mobile design](docs/MOBILE_AND_FOLDABLES.md).
 
-**Real XR, no pretend camera.** On headsets, the scanner requires an actual camera-frame or native object-tracking capability and an authorization path. Vision Pro ARKit recognizes trained real-world objects without exposing raw camera frames to the app. If the required sensing capability is unavailable, show an explicit `sensing-unavailable` or `permission-denied` state; do **not** replace it with simulated frames or captured passthrough compositor pixels. [XR camera requirements](docs/CAMERA_AND_XR.md).
+**One camera path.** Phones, tablets, Quest, PICO and Vision Pro all run Camera Lab through VisionCamera with the same on-device detector. If VisionCamera reports no camera, the overlay says so; it never substitutes simulated frames. [XR camera requirements](docs/CAMERA_AND_XR.md).
 
 ## Package architecture
 
@@ -89,7 +89,7 @@ pnpm --filter web dev
 pnpm --filter storybook dev
 ```
 
-Use **Expo development builds** for VisionCamera, native Rive, native XR SDKs and bridge testing—not Expo Go. Android Quest/PICO flavors and device-only permission requirements are explained in [Platforms](docs/PLATFORMS.md). The five demo routes should boot without login, keys or a production backend. Camera Lab uses a bundled on-device detector for raw-frame hosts, and a bundled Create ML reference-object model for visionOS; it asks permission only upon entering the experience.
+Use **Expo development builds** for VisionCamera, native Rive, native XR SDKs and bridge testing—not Expo Go. Android Quest/PICO flavors and device-only permission requirements are explained in [Platforms](docs/PLATFORMS.md). The five demo routes should boot without login, keys or a production backend. Camera Lab runs a bundled on-device detector through VisionCamera on every native target and asks for camera permission only when the overlay opens.
 
 ## Documentation
 

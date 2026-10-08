@@ -130,27 +130,3 @@ export function boundsInView(points: { x: number; y: number }[], viewWidth: numb
   if (!(width > 0) || !(height > 0)) return undefined;
   return { x, y, width, height };
 }
-
-/**
- * Maps a box in source-video pixels into a view that shows the video with
- * `object-fit: cover` (scaled to fill, centered, overflow cropped). Returns
- * undefined when the box falls entirely in the cropped-away region.
- */
-export function mapCoverBox(
-  box: { x: number; y: number; width: number; height: number },
-  source: { width: number; height: number },
-  view: { width: number; height: number },
-): ViewRect | undefined {
-  if (source.width <= 0 || source.height <= 0 || view.width <= 0 || view.height <= 0) return undefined;
-  const scale = Math.max(view.width / source.width, view.height / source.height);
-  const offsetX = (view.width - source.width * scale) / 2;
-  const offsetY = (view.height - source.height * scale) / 2;
-  return boundsInView(
-    [
-      { x: box.x * scale + offsetX, y: box.y * scale + offsetY },
-      { x: (box.x + box.width) * scale + offsetX, y: (box.y + box.height) * scale + offsetY },
-    ],
-    view.width,
-    view.height,
-  );
-}

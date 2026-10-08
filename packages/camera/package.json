@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@acme/ui": "workspace:*",
-    "@mediapipe/tasks-vision": "catalog:",
     "expo-asset": "catalog:",
     "react-native-fast-tflite": "catalog:",
     "react-native-nitro-image": "catalog:",
