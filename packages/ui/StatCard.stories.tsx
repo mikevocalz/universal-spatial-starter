@@ -69,9 +69,9 @@ export const Districts: Story = {
 export const PageSurface: Story = {
   render: () => (
     <View className="max-w-xs gap-4 p-4">
-      <StatCard label="Callers" value="1,204" surface="page" trend="up" change="+3.1%" changeLabel="vs last week" />
+      <StatCard label="Members" value="1,204" surface="page" trend="up" change="+3.1%" changeLabel="vs last week" />
       <View className="scheme-dark">
-        <StatCard label="Callers" value="1,204" surface="page" trend="up" change="+3.1%" />
+        <StatCard label="Members" value="1,204" surface="page" trend="up" change="+3.1%" />
       </View>
     </View>
   ),

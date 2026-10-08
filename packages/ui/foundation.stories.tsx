@@ -1,16 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   brand, palette, semantic, typeScale, typeRamp, contentWidths, radius, motion,
-  motionTokens, space, layout, concrete, signage, hlynk, led, type MotionStep,
+  motionTokens, space, layout, concrete, signage, type MotionStep,
 } from '@acme/theme';
-import { BrandLogo } from './brand/BrandLogo';
 import { CONTROL_TONES, DISTRICTS, DISTRICT_NAME, DISTRICT_TONE, TONE_CLASSES } from './district';
 import { Heading } from './Heading';
 import { Text as KitText } from './Text';
 import { View, Text, H2 } from './tw';
 
 // PROMPT-2 foundation stories: Colors, Typography, Spacing, Content Widths.
-// Light is daylit and the default (canon Decision #4); dark is night and the hatch.
+// Light is daylit and the default (canon Decision #4); dark is night.
 // Light + dark rendered side by side (light-dark() resolves per color-scheme).
 
 const meta = { title: 'Foundation' } satisfies Meta;
@@ -43,25 +42,24 @@ const contrast = (a: string, b: string) => {
 };
 
 const BRAND_ROLES: { key: keyof typeof brand; role: string }[] = [
-  { key: 'orange', role: 'CTA face and the hatch; never text on daylit' },
+  { key: 'orange', role: 'CTA face; never text on daylit' },
   { key: 'royal', role: 'Structure: outlines, rules, grid glow' },
   { key: 'carolina', role: 'Secondary, info, focus on dark' },
   { key: 'leaf', role: 'Success' },
   { key: 'apple', role: 'Danger (text uses apple-400 on dark)' },
-  { key: 'night', role: 'Night and hatch background' },
+  { key: 'night', role: 'Night background' },
   { key: 'white', role: 'Text on dark' },
   { key: 'silver', role: 'Muted text on dark, sparingly' },
 ];
 
-/** The NYC Mon palette, sampled from the logo, with each colour's ratio on night and on white. */
+/** The brand palette, with each colour's ratio on night and on white. */
 export const BrandPalette: Story = {
   render: () => (
     <View className="gap-6 bg-bg p-6">
       <View className="flex-row items-center gap-4">
-        <BrandLogo size={120} />
         <View className="gap-1">
-          <H2 className="font-display text-2xl text-primary">NYC-MON palette</H2>
-          <Text className="text-sm text-text-muted">Every colour below was sampled from the logo. Ratios update from the tokens.</Text>
+          <H2 className="font-display text-2xl text-primary">Brand palette</H2>
+          <Text className="text-sm text-text-muted">Ratios update from the tokens.</Text>
         </View>
       </View>
       <View className="flex-row flex-wrap gap-4">
@@ -85,7 +83,7 @@ export const BrandPalette: Story = {
   ),
 };
 
-// Starter scale names kept as aliases of the NYC Mon families; not shown twice.
+// Starter scale names kept as aliases of the brand families; not shown twice.
 const LEGACY_ALIASES = new Set(['burgundy', 'ember', 'gold', 'forest', 'sky', 'rose', 'slate']);
 
 export const Colors: Story = {
@@ -146,7 +144,7 @@ export const DaylitAndNight: Story = {
           </View>
           <View className="self-start bg-cta px-4 py-3">
             <Text className="text-base font-semibold text-on-cta">
-              {`Call your Mon (${contrast(v('on-cta'), v('cta')).toFixed(2)}:1)`}
+              {`Get started (${contrast(v('on-cta'), v('cta')).toFixed(2)}:1)`}
             </Text>
           </View>
           <Text className="text-sm text-danger">Danger</Text>
@@ -164,7 +162,7 @@ export const DaylitAndNight: Story = {
   },
 };
 
-/** City neutrals and MTA signage ink, each with its ratio for signage-black type. */
+/** Neutrals and signage ink tokens, each with its ratio for signage-black type. */
 export const ConcreteAndSignage: Story = {
   render: () => (
     <View className="gap-4 bg-surface p-6">
@@ -184,46 +182,6 @@ export const ConcreteAndSignage: Story = {
       </View>
     </View>
   ),
-};
-
-/** H-Lynk Core chrome tokens (Decision #16). Scheme-invariant: the body is plastic. */
-export const HLynkCore: Story = {
-  name: 'H-Lynk Core',
-  render: () => {
-    const core = hlynk.core;
-    return (
-      <View className="gap-4 bg-surface p-6">
-        <View className="self-start gap-3 bg-hlynk-core-body p-4">
-          <View className="flex-row items-center gap-3 bg-hlynk-core-black px-3 py-2">
-            <View className="h-3 w-3 rounded-full bg-led-on" />
-            <View className="h-3 w-3 rounded-full bg-led-off" />
-          </View>
-          <Text className="text-sm font-semibold text-hlynk-core-ink">H-Lynk Core</Text>
-          <View className="flex-row gap-2">
-            <View className="h-12 w-12 items-center justify-center bg-hlynk-core-black">
-              <Text className="text-base text-hlynk-core-glyph">‹</Text>
-            </View>
-            <View className="h-12 w-12 items-center justify-center border-2 border-hlynk-core-ring bg-hlynk-core-black" />
-            <View className="h-12 w-12 items-center justify-center border-2 border-hlynk-core-hatch-rim bg-hlynk-core-black" />
-            <View className="h-12 w-12 items-center justify-center bg-hlynk-core-black">
-              <Text className="text-base text-hlynk-core-glyph-disabled">›</Text>
-            </View>
-          </View>
-        </View>
-        <View className="gap-1">
-          {Object.entries(core).map(([key, hex]) => (
-            <Text key={key} className="text-xs text-text-muted">{`hlynk.core.${key} ${hex}`}</Text>
-          ))}
-          {Object.entries(led).map(([key, hex]) => (
-            <Text key={key} className="text-xs text-text-muted">{`led.${key} ${hex}`}</Text>
-          ))}
-          <Text className="text-xs text-text-muted">
-            {`Black control on body ${contrast(core.black, core.body).toFixed(2)}:1. White ink on body ${contrast(core.ink, core.body).toFixed(2)}:1. LED in head ${contrast(led.on, core.black).toFixed(2)}:1.`}
-          </Text>
-        </View>
-      </View>
-    );
-  },
 };
 
 // Literal class names, so Tailwind's scanner emits each utility.

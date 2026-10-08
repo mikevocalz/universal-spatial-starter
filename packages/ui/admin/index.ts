@@ -14,8 +14,6 @@
 export { Badge, type BadgeProps } from '../Badge';
 export { Banner, type BannerProps } from '../Banner';
 export { BottomSheet, SheetSurface, type BottomSheetProps } from '../BottomSheet';
-export { BrandLogo, type BrandLogoProps } from '../brand/BrandLogo';
-export { BrandWordmark, type BrandWordmarkProps } from '../brand/BrandWordmark';
 export { Button, type ButtonProps } from '../Button';
 export { Card, type CardProps } from '../Card';
 export { Checkbox, type CheckboxProps } from '../Checkbox';
@@ -44,7 +42,6 @@ export { ResponsiveDialog, type ResponsiveDialogProps } from '../ResponsiveDialo
 export { SearchBar, type SearchBarProps } from '../SearchBar';
 export { SegmentedControl, type SegmentedControlProps, type SegmentedOption } from '../SegmentedControl';
 export { Select, type SelectOption, type SelectProps } from '../Select';
-export { SignageBand, type SignageBandProps } from '../SignageBand';
 export { Switch, type SwitchProps } from '../Switch';
 export { TabBar, type TabBarProps } from '../TabBar';
 export { Text, type TextProps } from '../Text';

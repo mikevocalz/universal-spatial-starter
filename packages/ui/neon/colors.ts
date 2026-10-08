@@ -1,11 +1,11 @@
 import { brand, palette } from '@acme/theme';
 
 /**
- * NYC-MON colour vocabulary for the NeonBlade ports.
+ * Kit colour vocabulary for the NeonBlade ports.
  *
  * NeonBlade components take `"cyan" | "pink" | "green" | (string & {})` and a
  * handful also accept orange, white, purple, red and yellow. Every preset maps
- * onto a NYC-MON family here, so a port can keep NeonBlade's prop values while
+ * onto a kit colour family here, so a port can keep NeonBlade's prop values while
  * rendering in the brand. Brand token names (orange, royal, carolina, leaf,
  * apple, white, silver, ink) are accepted too, and anything else is treated as
  * a CSS colour and passed through.
@@ -16,7 +16,7 @@ export type NeonPreset = 'cyan' | 'pink' | 'green' | 'white' | 'orange' | 'purpl
 /** A preset, a brand token, or any CSS colour string. */
 export type NeonColorInput = NeonPreset | NeonToken | (string & {});
 
-/** NeonBlade preset name to the NYC-MON family that plays its role. */
+/** NeonBlade preset name to the kit's family that plays its role. */
 export const NEON_PRESET_TOKENS: Record<NeonPreset, NeonToken> = {
   cyan: 'carolina',
   pink: 'apple',

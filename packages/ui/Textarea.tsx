@@ -31,7 +31,7 @@ export interface TextareaProps extends React.ComponentProps<typeof PrimitiveText
   error?: string;
   disabled?: boolean;
   containerClassName?: string;
-  /** The NYC-MON field is the only look; `neon` and `default` are both accepted for older callers. */
+  /** The kit's field is the only look; `neon` and `default` are both accepted for older callers. */
   variant?: 'default' | 'neon';
   /** Colour family for the nameplate and well border. Overrides `district`. */
   tone?: ControlTone;

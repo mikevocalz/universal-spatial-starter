@@ -18,7 +18,7 @@ The registry lives in `packages/theme/contrast.ts`; `packages/theme/contrast.tes
 
 <!-- contrast:summary:start -->
 
-- 402 measured rows: 376 pass, 0 fail, 26 exempt (decorative or disabled).
+- 393 measured rows: 369 pass, 0 fail, 24 exempt (decorative or disabled).
 
 <!-- contrast:summary:end -->
 - Semantic tokens are measured in light and dark. Palette steps (`orange-500`, `ink-950`) do not change with the theme and get one `both` row.
@@ -125,13 +125,8 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | focus ring on offset band | dark | `focus` #4BA8F0 | `bg` #00041C | 7.89 | ui (3) | pass | `packages/ui/Button.tsx:23`, `packages/ui/IconButton.tsx:20`, `packages/ui/cards/NeonSwitch.tsx:19`, `packages/ui/cards/NeonCheckbox.tsx:13`, `packages/ui/cards/CardSlider.web.tsx:144`; ring-offset-2 ring-offset-bg paints the page colour between the control and the ring |
 | focus ring on night control | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/SearchBar.tsx:26`, `packages/ui/SegmentedControl.web.tsx:16`; no offset: the ring touches the night control face |
 | focus ring on night control | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/SearchBar.tsx:26`, `packages/ui/SegmentedControl.web.tsx:16`; no offset: the ring touches the night control face |
-| focus ring on site header | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94` |
-| focus ring on site header | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:78`, `packages/ui/nav/NavBar.tsx:81`, `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:94` |
-| focus ring on site footer | light | `focus` #0058F8 | `ink-950` #00041C | 3.63 | ui (3) | pass | `packages/ui/nav/SiteFooter.tsx:83` |
-| focus ring on site footer | dark | `focus` #4BA8F0 | `ink-950` #00041C | 7.89 | ui (3) | pass | `packages/ui/nav/SiteFooter.tsx:83` |
 | focus ring on page | light | `focus` #0058F8 | `bg` #F3F4F4 | 5.08 | ui (3) | pass | `packages/ui/dropdown.ts:15` |
 | focus ring on page | dark | `focus` #4BA8F0 | `bg` #00041C | 7.89 | ui (3) | pass | `packages/ui/dropdown.ts:15` |
-| nav action edge | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | `packages/ui/nav/NavBar.tsx:92`, `packages/ui/nav/NavBar.tsx:99` |
 | profile ring active | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | ui (3) | pass | token contract; ring-offset-ink-950 puts the night bar between the avatar and the ring |
 | profile ring hover | both | `silver-400` #CED0D1 | `ink-950` #00041C | 13.12 | ui (3) | pass | token contract |
 | unread dot | light | `danger` #D50000 | `surface-raised` #FFFFFF | 5.48 | ui (3) | pass | token contract |
@@ -203,19 +198,19 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | neutral badge edge | light | `border` #D2D4D6 | `bg` #F3F4F4 | 1.35 | decorative (0) | exempt | `packages/ui/Badge.tsx:98`; status chip, not a control; its text identifies it |
 | neutral badge edge | dark | `border` #1A2E6E | `bg` #00041C | 1.61 | decorative (0) | exempt | `packages/ui/Badge.tsx:98`; status chip, not a control; its text identifies it |
 | title on night | both | `ink-50` #F8F8F8 | `ink-950` #00041C | 19.12 | text (4.5) | pass | `packages/ui/Card.tsx:48`, `packages/ui/cards/neon-field.ts:15`, `packages/ui/ToastCard.tsx:37` |
-| white on night | both | `white` #FFFFFF | `ink-950` #00041C | 20.31 | text (4.5) | pass | `packages/ui/charts/StatCard.tsx:54`, `packages/ui/nav/NavBar.tsx:88`, `packages/ui/nav/SiteFooter.tsx:79` |
+| white on night | both | `white` #FFFFFF | `ink-950` #00041C | 20.31 | text (4.5) | pass | `packages/ui/charts/StatCard.tsx:54` |
 | table cell on stripe | both | `silver-100` #F6F6F6 | `ink-900` #14182E | 16.20 | text (4.5) | pass | `packages/ui/DataTable.tsx:44`, `packages/ui/DataTable.tsx:53` |
-| nav link on night | both | `silver-200` #ECECED | `ink-950` #00041C | 17.20 | text (4.5) | pass | `packages/ui/nav/NavBar.tsx:82`, `packages/ui/dropdown.ts:16` |
-| nav link on hover | both | `silver-200` #ECECED | `ink-800` #25293D | 12.16 | text (4.5) | pass | `packages/ui/dropdown.ts:14`, `packages/ui/nav/NavBar.tsx:83` |
+| nav link on night | both | `silver-200` #ECECED | `ink-950` #00041C | 17.20 | text (4.5) | pass | `packages/ui/dropdown.ts:16` |
+| nav link on hover | both | `silver-200` #ECECED | `ink-800` #25293D | 12.16 | text (4.5) | pass | `packages/ui/dropdown.ts:14` |
 | body on night | both | `silver-300` #DFE0E1 | `ink-950` #00041C | 15.36 | text (4.5) | pass | `packages/ui/Card.tsx:48`, `packages/ui/Dialog.tsx:49`, `packages/ui/TabBar.tsx:36` |
 | table head on ink-900 | both | `silver-300` #DFE0E1 | `ink-900` #14182E | 13.24 | text (4.5) | pass | `packages/ui/DataTable.tsx:35`, `packages/ui/DataTable.tsx:38` |
-| caption on night | both | `silver-400` #CED0D1 | `ink-950` #00041C | 13.12 | text (4.5) | pass | `packages/ui/DataTable.tsx:47`, `packages/ui/charts/StatCard.tsx:57`, `packages/ui/nav/SiteFooter.tsx:80` |
+| caption on night | both | `silver-400` #CED0D1 | `ink-950` #00041C | 13.12 | text (4.5) | pass | `packages/ui/DataTable.tsx:47`, `packages/ui/charts/StatCard.tsx:57` |
 | pager text on ink-900 | both | `silver-400` #CED0D1 | `ink-900` #14182E | 11.31 | text (4.5) | pass | `packages/ui/DataTable.tsx:51` |
-| axis tick on night | both | `silver-500` #BEC0C2 | `ink-950` #00041C | 11.13 | text (4.5) | pass | `packages/ui/charts/NeonBarChart.tsx:64`, `packages/ui/charts/NeonLineChart.tsx:78`, `packages/ui/nav/SiteFooter.tsx:88` |
+| axis tick on night | both | `silver-500` #BEC0C2 | `ink-950` #00041C | 11.13 | text (4.5) | pass | `packages/ui/charts/NeonBarChart.tsx:64`, `packages/ui/charts/NeonLineChart.tsx:78` |
 | placeholder on field well | both | `silver-500` #BEC0C2 | `ink-950` #00041C | 11.13 | text (4.5) | pass | `packages/ui/cards/neon-field.ts:16` |
-| orange tone text on night | both | `orange-400` #FD9D40 | `ink-950` #00041C | 9.74 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/nav/SiteFooter.tsx:93`, `packages/ui/nav/NavBar.tsx:99` |
-| royal tone text on night | both | `royal-300` #80ACFC | `ink-950` #00041C | 8.92 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/nav/SiteFooter.tsx:94`, `packages/ui/nav/NavBar.tsx:100` |
-| carolina tone text on night | both | `carolina-400` #78BEF4 | `ink-950` #00041C | 10.12 | text (4.5) | pass | `packages/ui/district/tones.ts:138`, `packages/ui/nav/SiteFooter.tsx:95`, `packages/ui/nav/NavBar.tsx:101` |
+| orange tone text on night | both | `orange-400` #FD9D40 | `ink-950` #00041C | 9.74 | text (4.5) | pass | `packages/ui/district/tones.ts:123` |
+| royal tone text on night | both | `royal-300` #80ACFC | `ink-950` #00041C | 8.92 | text (4.5) | pass | `packages/ui/district/tones.ts:131` |
+| carolina tone text on night | both | `carolina-400` #78BEF4 | `ink-950` #00041C | 10.12 | text (4.5) | pass | `packages/ui/district/tones.ts:138` |
 | leaf tone text on night | both | `leaf-400` #6FC26B | `ink-950` #00041C | 9.29 | text (4.5) | pass | `packages/ui/district/tones.ts:145`, `packages/ui/charts/StatCard.tsx:72` |
 | apple tone text on night | both | `apple-400` #FA4040 | `ink-950` #00041C | 5.68 | text (4.5) | pass | `packages/ui/district/tones.ts:153`, `packages/ui/Menu.web.tsx:63`, `packages/ui/audio/PlayerShell.tsx:34` |
 | brick tone text on night | both | `orange-300` #FEBE80 | `ink-950` #00041C | 12.47 | text (4.5) | pass | `packages/ui/district/tones.ts:160` |
@@ -238,12 +233,12 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | home headline on ink panel | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | `packages/ui/neon/SolidPanel.tsx:42`; Heading display-sm (30px web, 26px native at rem 14) on the SolidPanel tone="ink" face, which is night in both themes |
 | orange eyebrow on glass card | both | `orange-500` #FC7C00 | `concrete-50 + ink-950/85` #24283C | 5.55 | text (4.5) | pass | `packages/ui/future/GridCard.tsx:29`, `packages/ui/future/CircuitButton.tsx:49`; measured over a light page, the worst case for the 85% night glass |
 | carolina eyebrow on glass card | both | `carolina-500` #4BA8F0 | `concrete-50 + ink-950/85` #24283C | 5.64 | text (4.5) | pass | `packages/ui/future/GridCard.tsx:30`, `packages/ui/future/CircuitButton.tsx:50`; measured over a light page, the worst case for the 85% night glass |
-| night on orange face | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/dropdown.ts:19`, `packages/ui/nav/NavBar.tsx:85`, `packages/ui/nav/NavBar.tsx:185` |
+| night on orange face | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | `packages/ui/district/tones.ts:123`, `packages/ui/dropdown.ts:19` |
 | white on royal face | both | `white` #FFFFFF | `royal-500` #0058F8 | 5.60 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/dropdown.ts:25`, `packages/ui/DataTable.tsx:58` |
 | banner white on royal face | both | `ink-50` #F8F8F8 | `royal-500` #0058F8 | 5.27 | text (4.5) | pass | `packages/ui/district/tones.ts:131`, `packages/ui/future/CircuitButton.tsx:48` |
 | night on carolina face | both | `ink-950` #00041C | `carolina-500` #4BA8F0 | 7.89 | text (4.5) | pass | `packages/ui/district/tones.ts:138`, `packages/ui/future/CircuitButton.tsx:47` |
 | night on leaf face | both | `ink-950` #00041C | `leaf-500` #3FAE3A | 7.09 | text (4.5) | pass | `packages/ui/district/tones.ts:145` |
-| night on apple face | both | `ink-950` #00041C | `apple-500` #F80000 | 4.83 | text (4.5) | pass | `packages/ui/district/tones.ts:153`, `packages/ui/Badge.tsx:113`, `packages/ui/dropdown.ts:28`, `packages/ui/nav/NavBar.tsx:103` |
+| night on apple face | both | `ink-950` #00041C | `apple-500` #F80000 | 4.83 | text (4.5) | pass | `packages/ui/district/tones.ts:153`, `packages/ui/Badge.tsx:113`, `packages/ui/dropdown.ts:28` |
 | white on brick face | both | `white` #FFFFFF | `orange-800` #884300 | 7.37 | text (4.5) | pass | `packages/ui/district/tones.ts:160`, `packages/ui/dropdown.ts:30` |
 | banner white on brick face | both | `ink-50` #F8F8F8 | `orange-800` #884300 | 6.94 | text (4.5) | pass | `packages/ui/district/tones.ts:160` |
 | night on white face | both | `ink-950` #00041C | `ink-50` #F8F8F8 | 19.12 | text (4.5) | pass | `packages/ui/district/tones.ts:167`, `packages/ui/Badge.tsx:113` |
@@ -275,7 +270,7 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | chart series: brick | both | `orange-700` #A35100 | `ink-950` #00041C | 3.61 | ui (3) | pass | `packages/ui/district/series.ts:10`, `packages/ui/district/series.ts:22` |
 | chart keyline: royal under orange | both | `royal-500` #0058F8 | `orange-500` #FC7C00 | 2.14 | decorative (0) | exempt | `packages/ui/district/series.ts:75`, `packages/ui/charts/NeonLineChart.tsx:129`; the wordmark keyline under a stroke; the stroke against night carries the data |
 | night facade border | both | `ink-800` #25293D | `ink-950` #00041C | 1.41 | decorative (0) | exempt | `packages/ui/DataTable.tsx:30`, `packages/ui/SegmentedControl.web.tsx:13`, `packages/ui/charts/StoryPanel.tsx:8`; container keylines; the selected segment face and cell text identify content |
-| night control keyline | both | `ink-700` #3C3F51 | `ink-950` #00041C | 1.96 | decorative (0) | exempt | `packages/ui/nav/NavBar.tsx:87`, `packages/ui/DataTable.tsx:52`, `packages/ui/cards/neon-field.ts:26`; frame around a control whose glyph or label (white / silver-100 / silver-300) identifies it |
+| night control keyline | both | `ink-700` #3C3F51 | `ink-950` #00041C | 1.96 | decorative (0) | exempt | `packages/ui/DataTable.tsx:52`, `packages/ui/cards/neon-field.ts:26`; frame around a control whose glyph or label (white / silver-100 / silver-300) identifies it |
 | outline knock-out | light | `surface` #F3F4F4 | `surface` #F3F4F4 | 1.00 | decorative (0) | exempt | `packages/ui/text-effects/OutlineText.tsx:63`; fills the glyph face with the surface; the outline stroke carries the text |
 | outline knock-out | dark | `surface` #00041C | `surface` #00041C | 1.00 | decorative (0) | exempt | `packages/ui/text-effects/OutlineText.tsx:63`; fills the glyph face with the surface; the outline stroke carries the text |
 | daylit: signage-black on concrete-50 | both | `signage-black` #000000 | `concrete-50` #F3F4F4 | 19.06 | text (4.5) | pass | token contract |
@@ -311,9 +306,6 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | hlynk: body on night page | both | `hlynk-core-body` #D50000 | `ink-950` #00041C | 3.70 | decorative (0) | exempt | `packages/theme/tokens.ts:188`; the shell is not a control; its edge needs no ratio (measures 3.70 anyway) |
 | hlynk: LED off in the black head | both | `led-off` #5E0000 | `hlynk-core-black` #000000 | 1.48 | decorative (0) | exempt | `packages/theme/tokens.ts:174`; the unlit lens; LED state is never conveyed by the LED alone (a text chip sits in the screen) |
 | hlynk: disabled key glyph | both | `hlynk-core-glyph-disabled` #484C51 | `hlynk-core-black` #000000 | 2.43 | disabled (0) | exempt | `packages/theme/tokens.ts:198`; inactive key |
-| hlynk: key and trackpad focus outline on body | both | `hlynk-core-ink` #FFFFFF | `hlynk-core-body` #D50000 | 5.48 | ui (3) | pass | `packages/ui/hlynk/HLynkKey.tsx:69`, `packages/ui/hlynk/Trackpad.web.tsx:48` |
-| hlynk: trackpad ring, booting or disabled | both | `led-off` #5E0000 | `hlynk-core-black` #000000 | 1.48 | disabled (0) | exempt | `packages/ui/hlynk/TrackpadFace.tsx:41`; inactive trackpad during boot (WCAG 1.4.11 inactive components) |
-| hlynk: reduced-motion LED cue in the black head | both | `led-on` #F80000 | `hlynk-core-black` #000000 | 4.99 | ui (3) | pass | `packages/ui/hlynk/ScannerLed.tsx:96`, `packages/ui/hlynk/ScannerLed.tsx:104`, `packages/ui/hlynk/ScannerLed.tsx:107`; tick row, filled dot and exclamation dot that stand in for the LED rhythm |
 | scene plate headline | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | large-text (3) | pass | token contract; display-sm heading and the display-xl 404 on the plate |
 | scene plate title | both | `ink-50` #F8F8F8 | `ink-800` #25293D | 13.51 | large-text (3) | pass | token contract |
 | scene plate body | both | `silver-200` #ECECED | `ink-800` #25293D | 12.16 | text (4.5) | pass | token contract |
@@ -322,7 +314,6 @@ The test keeps these honest: each forbidden pair below must still measure under 
 | scene plate tab edge | both | `ink-400` #90929C | `ink-800` #25293D | 4.63 | ui (3) | pass | token contract |
 | scene plate selected tab label | both | `ink-950` #00041C | `orange-500` #FC7C00 | 7.76 | text (4.5) | pass | token contract |
 | scene plate selected tab face | both | `orange-500` #FC7C00 | `ink-800` #25293D | 5.48 | ui (3) | pass | token contract |
-| skyline divider keyline | both | `orange-500` #FC7C00 | `ink-950` #00041C | 7.76 | decorative (0) | exempt | `packages/ui/backgrounds/SkylineDivider.tsx:35`; aria-hidden band between sections; the section headings carry the structure |
 | console: signage band headline | both | `signage-white` #FFFFFF | `signage-black` #000000 | 21.00 | text (4.5) | pass | token contract |
 | console: signage band detail | both | `signage-white/85` #D9D9D9 | `signage-black` #000000 | 14.84 | text (4.5) | pass | token contract |
 | disabled label | both | `ink-400` #90929C | `ink-950` #00041C | 6.55 | disabled (0) | exempt | `packages/ui/Button.tsx:48`, `packages/ui/IconButton.tsx:79`, `packages/ui/neon/NeonChevron.tsx:55`, `packages/ui/audio/PlayerShell.tsx:123`; inactive control |

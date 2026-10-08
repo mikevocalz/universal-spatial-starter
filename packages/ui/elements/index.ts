@@ -1,4 +1,4 @@
-// NYC-MON elements: the setback/cornice AccentFrame and the subway-line
+// Kit elements: the setback/cornice AccentFrame and the subway-line
 // Timeline, plus the district tone tables the progress family and the kit's
 // neon variants (Badge, Dialog, ToastCard, notify) share.
 export { AccentFrame, type AccentFrameProps, type AccentFrameHoverEffect, type CornerStyle } from './AccentFrame';

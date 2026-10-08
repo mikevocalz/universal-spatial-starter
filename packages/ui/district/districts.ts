@@ -1,5 +1,5 @@
 /**
- * The four NYC-MON districts. Every component with a `district` prop, every
+ * The four districts (tone presets). Every component with a `district` prop, every
  * story's district control and every background theme reads this list.
  */
 export type District = 'downtown' | 'midtown' | 'harlem' | 'megacity';

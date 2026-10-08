@@ -8,7 +8,7 @@ import { TONE_CLASSES, resolveControlTone, type ControlTone, type District } fro
 type SolitoImageProps = ComponentProps<typeof SolitoImage>;
 
 /**
- * The NYC-MON frame: a heavy keyline around the picture over a solid depth
+ * The kit's frame: a heavy keyline around the picture over a solid depth
  * plate stepped down and right, like a poster pasted on a wall. A night
  * keyline on a steel plate by default; a `district` or `tone` turns the
  * keyline to the tone face and the plate to its darker step. Plate and

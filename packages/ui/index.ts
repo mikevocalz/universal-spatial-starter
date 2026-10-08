@@ -27,8 +27,6 @@ export { SearchBar, type SearchBarProps } from './SearchBar';
 export { DropZone, type DropZoneProps, type DropAsset } from './DropZone';
 export { AuthProviderButton, type AuthProviderButtonProps, type AuthProvider, type AuthIntent } from './AuthProviderButton';
 export { StatusRow, type StatusRowProps, type StatusRowItem, type StatusRowTone } from './StatusRow';
-export { SignagePlate, type SignagePlateProps } from './SignagePlate';
-export { SignageBand, type SignageBandProps } from './SignageBand';
 export { Banner, type BannerProps } from './Banner';
 export { Timestamp, type TimestampProps } from './Timestamp';
 export { Pagination, type PaginationProps } from './Pagination';
@@ -83,25 +81,12 @@ export { PressScale, type PressScaleProps } from './press-scale';
 export { useInstanceStore, useStore } from './use-instance-store';
 export * from './audio';
 
-export { GridFloor, type GridFloorProps } from './backgrounds/GridFloor';
-export { GridScene, type GridSceneProps } from './backgrounds/GridScene';
-export { CitySkyline, GlyphCity } from './backgrounds/CitySkyline';
-export type { CitySkylineProps, GlyphCityProps, GlyphCityVariant } from './backgrounds/CitySkyline.types';
-export { SignRain, type SignRainProps } from './backgrounds/SignRain';
-export { SubwayLines, type SubwayLinesProps } from './backgrounds/SubwayLines';
-export { StreetPulse, type StreetPulseProps } from './backgrounds/StreetPulse';
-export { CityHeightfield, type CityHeightfieldProps } from './backgrounds/CityHeightfield';
-export { CityHeightfieldFlat, type CityHeightfieldFlatProps } from './backgrounds/CityHeightfieldFlat';
 // three.js on WebGPURenderer (WebGPU, WebGL2 on web without it, react-native-webgpu on native). Also '@acme/ui/three'.
 export { HolographicTerrain, type HolographicTerrainProps } from './three/HolographicTerrain';
-export { NeonTide, type NeonTideProps, type NeonTideOrigin } from './three/NeonTide';
 export { ThreeCanvas } from './three/ThreeCanvas';
 export type { ThreeBackend, ThreeCanvasHandle, ThreeCanvasProps, ThreeContext, ThreeFrame, ThreePointer, ThreeScene, ThreeSetup } from './three/types';
-export { RiverTide, type RiverTideProps, type RiverTideOrigin } from './backgrounds/RiverTide';
-export { RainWindow, type RainWindowProps } from './backgrounds/RainWindow';
 export { LazyScene, type LazySceneProps, type LazySceneState } from './backgrounds/LazyScene';
 export { SceneSection, type SceneSectionProps } from './backgrounds/SceneSection';
-export { SkylineDivider, type SkylineDividerProps } from './backgrounds/SkylineDivider';
 export { useInView } from './backgrounds/use-in-view';
 export { useReducedMotion } from './backgrounds/use-reduced-motion';
 export type { InView, InViewOptions } from './backgrounds/use-in-view.types';
@@ -114,10 +99,7 @@ export {
   type District, type Tone, type ControlTone, type ToneClasses, type ToneHex, type DistrictTheme,
 } from './district';
 // ChartTone is exported once, through './charts'.
-export { CityBlocks, type CityBlocksProps } from './backgrounds/CityBlocks';
 export { CircuitButton, type CircuitButtonProps, type CircuitTone, GridCard, type GridCardProps } from './future';
-export { BrandLogo, type BrandLogoProps } from './brand/BrandLogo';
-export { BrandWordmark, type BrandWordmarkProps } from './brand/BrandWordmark';
 
 // GPU surface (WebGPU + TypeGPU, web and native) and the neon primitives the
 // NeonBlade ports build on. Also importable as '@acme/ui/gpu' and '@acme/ui/neon'.
@@ -127,11 +109,8 @@ export { useLayoutSize, type LayoutSize } from './use-layout-size';
 
 // NeonBlade control and card ports (tones, frames, CardSlider).
 export * from './cards';
-// NeonBlade ports: charts, site header/footer, and web/pointer cursors.
+// NeonBlade ports: charts and web/pointer cursors.
 export * from './charts';
-export * from './nav';
 export * from './cursors';
 export type { TextEffectOptions, GlitchIntensity, GlitchSpeed, TextGlowLevel } from './text-effects';
 
-// H-Lynk chrome: shell, scanner head, screen, trackpad, keys.
-export * from './hlynk';

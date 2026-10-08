@@ -7,38 +7,12 @@ in NeonBlade UI by NeuronRush: https://github.com/vprix21/neonblade-ui
 
 Ported so far:
 
-- `backgrounds/GridFloor`, `GridScene`: prop APIs follow NeonBlade's Grid Floor
-  and Grid Scene; both are now drawn as solid street-grid planes.
-- `backgrounds/CitySkyline` (also exported as `GlyphCity`): the port of
-  NeonBlade's Glyph City (`packages/registry/components/glyph-city`), redrawn
-  as solid district skylines. Keeps Glyph City's colour, speed, vehicle and
-  light props.
-- `backgrounds/SignRain`: port of NeonBlade's ASCII Rain (`ascii-rain`).
-- `backgrounds/SubwayLines`: port of NeonBlade's Cyber Circuit (`cyber-circuit`).
-- `backgrounds/StreetPulse`: port of NeonBlade's Datalines with Grid
-  (`datalines-with-grid`).
 - `three/HolographicTerrain`: port of NeonBlade's Holographic Terrain
   (`holographic-terrain`). Same plane geometry, four-sine height, cursor
   gaussian bump raycast onto a horizontal plane, FogExp2 and camera, on
   WebGPURenderer with the height written as a TypeGPU function. Keeps its
-  props; colours default to the NYC-MON theme, and an `accentColor` tints the
+  props; colours default to the kit theme, and an `accentColor` tints the
   lines the cursor lifts.
-- `three/CityHeightfield` (also `backgrounds/CityHeightfield`): a solid
-  city-blocks scene built on the same terrain idea, with NeonBlade's prop
-  names. Its first, flat port stays as `backgrounds/CityHeightfieldFlat`, the
-  fallback.
-- `three/NeonTide`: port of NeonBlade's Neon Tide (`neon-tide`), kept a
-  three.js scene like the original: the same wave surface, lighting (diffuse,
-  fresnel rim, specular), FogExp2, corner shift and tilt, camera and pointer
-  bump, reimplemented on WebGPURenderer with the wave as a TypeGPU function.
-  Keeps its prop names; the default colours come from the NYC-MON theme.
-- `backgrounds/RiverTide`: the first, flat port of Neon Tide, redrawn as the
-  river under a district skyline. Also NeonTide's fallback.
-- `backgrounds/RainWindow`: port of NeonBlade's Pluviophile (`pluviophile`).
-- `backgrounds/CityBlocks`: began as the port of NeonBlade's Hexagons background
-  (`packages/registry/components/hexagons`) and was redrawn as a solid NYC
-  city-block tiling. It keeps Hexagons' `hoverEffect`, `hoverColor` and
-  `overlay` props.
 - `neon/`: the colour presets (cyan, pink, green, white, orange, purple, red,
   yellow), the corner-cut geometry (`ccb-clip-*`), the xs to xl size scale and
   the glow intensity presets follow NeonBlade's corner-cut button.
@@ -86,17 +60,11 @@ Ported so far:
   glitch-text, neon-glow, outline-text and blur-text (mode, colorA, colorB,
   intensity, speed, colors, glowColor, glowIntensity, animate, strokeColor,
   fillColor, strokeWidth, hoverStrokeColor, hoverFillColor).
-- `nav/NavBar`, `nav/SiteFooter`: NeonBlade's navbar and footer (items with
-  dropdown children, position, transparency, navAlign; footer variants
-  minimal, columns, centered, mega, linkGroups, socialLinks, newsletter).
 - `cursors/`: `MouseCursor` covers NeonBlade's fox-cursor, redrawn as an
   animated city mouse that chases the pointer (no fox); `PointerCursor` is
-  a separate NYC-MON arrow; `Crosshair` covers its crosshair (redrawn as a
+  a separate arrow pointer; `Crosshair` covers its crosshair (redrawn as a
   rounded-square reticle). All keep hideNativeCursor, disabled,
   containerRef and glowIntensity.
-- `NeonBlade.stories.tsx` and `neonblade/catalog.ts`: an index of all 41
-  NeonBlade components and their ports, with links to the NeonBlade site.
-
 NeonBlade UI is distributed under the MIT License:
 
 ```
@@ -131,21 +99,6 @@ Port agents: add each newly ported component to the list above.
 (https://github.com/margelo/react-native-graph), MIT License, Copyright (c)
 2026 Marc Rousavy. It is patched (`patches/react-native-graph@1.4.0.patch`) to
 build paths with react-native-skia v3's SkPathBuilder.
-
-## NYC photos (packages/assets/photos)
-
-Ten photos from Wikimedia Commons, bundled as 1200x800 WebP crops (resized, cropped and recompressed; no other changes). Used by the image cards in the card slider. CC0 and public-domain files need no credit; they are listed for provenance.
-
-- `downtown-one-wtc.webp`: "One World Trade Center(Freedom Tower)" by Mkdasher64. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:One_World_Trade_Center(Freedom_Tower).jpg
-- `downtown-nyse.webp`: "New York Stock Exchange Entrance" by Balon Greyjoy. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange_Entrance.jpg
-- `midtown-empire-sunset.webp`: "Empire State Building during sunset" by Michael Discenza. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:Empire_State_Building_during_sunset.jpg
-- `midtown-times-square.webp`: "Sunset at Times Square, New York City (2017)" by Luca Bravo. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:Sunset_at_Times_Square,_New_York_City_(2017).jpg
-- `midtown-chrysler-spire.webp`: "Chrysler Building spire, Manhattan, by Carol Highsmith (LOC highsm.04444)" by Carol M. Highsmith. Public domain (Library of Congress, Carol M. Highsmith Archive). Source: https://commons.wikimedia.org/wiki/File:Chrysler_Building_spire,_Manhattan,_by_Carol_Highsmith_(LOC_highsm.04444).jpg
-- `harlem-apollo.webp`: "Apollo Theater (6279250673)" by Erik Drost. CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/). Source: https://commons.wikimedia.org/wiki/File:Apollo_Theater_(6279250673).jpg
-- `harlem-brownstone-stoops.webp`: "Harlem, New York brownstones" by Paul Lowry. CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Source: https://commons.wikimedia.org/wiki/File:Harlem,_New_York_brownstones.jpg
-- `harlem-lenox-rowhouses.webp`: "Lenox 123 rowhouses jeh" by Jim.henderson. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:Lenox_123_rowhouses_jeh.jpg
-- `megacity-brooklyn-bridge-night.webp`: "Brooklyn Bridge at night" by Kai Pilger. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:Brooklyn_Bridge_at_night.jpg
-- `megacity-bridge-deck.webp`: "Brooklyn Bridge, New York" by Pierre Blaché. CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Source: https://commons.wikimedia.org/wiki/File:Brooklyn_Bridge,_New_York.jpg
 
 ## react-freeze
 

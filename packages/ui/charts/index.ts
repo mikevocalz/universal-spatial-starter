@@ -1,4 +1,4 @@
-// NYC-MON charts: the NeonBlade chart ports. Line and sparkline draw with
+// Kit charts: the NeonBlade chart ports. Line and sparkline draw with
 // react-native-graph on native and a Skia path on web; bars and donut are
 // Skia on every platform.
 export { NeonLineChart, type NeonLineChartProps } from './NeonLineChart';

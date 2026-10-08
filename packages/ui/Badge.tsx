@@ -9,7 +9,7 @@ import { badgeLegacyLook, type LegacyBadgeTone } from './surface-look';
 import { TYPE_SCALE_TV } from './type-scale';
 
 /**
- * The NYC-MON chip, and the only Badge look: a chunky sports-badge chip.
+ * The kit's chip, and the only Badge look: a chunky sports-badge chip.
  * Solid face, night keyline, a depth plate stepped down and right, display
  * type. Ported from NeonBlade UI's Badge (MIT, see THIRD-PARTY-NOTICES.md);
  * NeonBlade's own `variant` (solid/outline/ghost) is `fill` here.
@@ -43,7 +43,7 @@ export type BadgeDot = 'none' | 'solid' | 'pulse' | 'flicker';
 export interface BadgeProps {
   label: string;
   className?: string;
-  /** Kept for callers: both names render the NYC-MON chip. */
+  /** Kept for callers: both names render the kit's chip. */
   variant?: 'default' | 'neon';
   /**
    * Legacy semantic tone, mapped onto the brand: primary follows the

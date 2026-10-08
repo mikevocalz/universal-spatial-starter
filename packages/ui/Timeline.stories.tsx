@@ -4,11 +4,11 @@ import { colorControl, DistrictGrid, districtControl } from './progress/story-ki
 import { View } from './tw';
 
 const LINE: TimelineItemData[] = [
-  { date: 'Mon 9:00', title: 'Bowling Green', description: 'Crew formed at the Charging Bull.' },
-  { date: 'Mon 12:30', title: 'Union Square', description: 'First block claimed.', badge: 'New' },
-  { date: 'Tue 18:00', title: 'Times Sq-42 St', description: 'Holding three blocks in Midtown.', active: true },
-  { date: 'Thu', title: '125 St', description: 'Harlem opens after the next win.' },
-  { title: 'Mega City', description: 'The last stop. Nobody has made it yet.', badge: 'Soon' },
+  { date: 'Mon 9:00', title: 'Kickoff', description: 'Team formed.' },
+  { date: 'Mon 12:30', title: 'First draft', description: 'First milestone reached.', badge: 'New' },
+  { date: 'Tue 18:00', title: 'Review', description: 'Three items in review.', active: true },
+  { date: 'Thu', title: 'Beta', description: 'Opens after the next milestone.' },
+  { title: 'Launch', description: 'The last stop. Nobody has made it yet.', badge: 'Soon' },
 ];
 
 const meta = {

@@ -36,8 +36,12 @@ The root `package.json` declares Node `>=24.15.0 <26`. The baseline ran on 26.8.
 
 `docs/design/CONTRAST.md` and `docs/DESIGN_SYSTEM.md` were restored because the theme contrast test checks them against `packages/theme/contrast.ts`. Both still describe the NYC-MON palette.
 
+## Removed in the IP cleanup
+
+The NYC-MON logo, creature art, NYC photos, H-Lynk chrome, nav header and footer, signage, the city backgrounds and the `nyc-carousel` native module are gone from `packages/ui` and `packages/assets`. The app and web icons are a neutral orbit mark.
+
 ## Still carrying NYC-MON material
 
-- `packages/ui` and `packages/assets` still contain district, H-Lynk and neon components, the NYC-MON logo, creature art and NYC photos. No starter screen imports them. They need their own cleanup PR with an import-graph check.
-- `apps/mobile/assets/images` holds the NYC-MON icon and splash.
+- The `District` type (`downtown | midtown | harlem | megacity`) still drives tone presets across about 170 files in `packages/ui`, so the district names remain as prop values, defaults and story controls. Renaming them is a separate PR.
+- `packages/theme` still exports `hlynk`, `led`, `signage` and `concrete` tokens, and `docs/design/CONTRAST.md` and `docs/DESIGN_SYSTEM.md` still describe the NYC-MON palette.
 - The `@acme/*` package scope stays as it is for now (pack §11 puts the rename in a separate PR).

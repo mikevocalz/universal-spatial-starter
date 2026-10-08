@@ -218,10 +218,7 @@ const USAGE: Pair[] = [
   { id: 'focus ring on offset band', fg: 'focus', bg: ['bg'], role: 'ui', usedAt: ['packages/ui/Button.tsx:23', 'packages/ui/IconButton.tsx:20', 'packages/ui/cards/NeonSwitch.tsx:19', 'packages/ui/cards/NeonCheckbox.tsx:13', 'packages/ui/cards/CardSlider.web.tsx:144'], reason: 'ring-offset-2 ring-offset-bg paints the page colour between the control and the ring' },
   { id: 'focus ring on night control', fg: 'focus', bg: ['ink-950'], role: 'ui', usedAt: ['packages/ui/SearchBar.tsx:26', 'packages/ui/SegmentedControl.web.tsx:16'], reason: 'no offset: the ring touches the night control face' },
   // The site header and footer are the kit NavBar and SiteFooter: night (ink-950) in both themes.
-  { id: 'focus ring on site header', fg: 'focus', bg: NIGHT, role: 'ui', usedAt: ['packages/ui/nav/NavBar.tsx:78', 'packages/ui/nav/NavBar.tsx:81', 'packages/ui/nav/NavBar.tsx:92', 'packages/ui/nav/NavBar.tsx:94'] },
-  { id: 'focus ring on site footer', fg: 'focus', bg: NIGHT, role: 'ui', usedAt: ['packages/ui/nav/SiteFooter.tsx:83'] },
   { id: 'focus ring on page', fg: 'focus', bg: ['bg'], role: 'ui', usedAt: ['packages/ui/dropdown.ts:15'] },
-  { id: 'nav action edge', fg: 'orange-500', bg: NIGHT, role: 'ui', usedAt: ['packages/ui/nav/NavBar.tsx:92', 'packages/ui/nav/NavBar.tsx:99'] },
   { id: 'profile ring active', fg: 'orange-500', bg: NIGHT, role: 'ui', usedAt: [], reason: 'ring-offset-ink-950 puts the night bar between the avatar and the ring' },
   { id: 'profile ring hover', fg: 'silver-400', bg: NIGHT, role: 'ui', usedAt: [] },
   { id: 'unread dot', fg: 'danger', bg: ['surface-raised'], role: 'ui', usedAt: [] },
@@ -273,19 +270,19 @@ const USAGE: Pair[] = [
 
   // -- night facades (palette steps: mode-invariant) -------------------------
   { id: 'title on night', fg: 'ink-50', bg: NIGHT, role: 'text', usedAt: ['packages/ui/Card.tsx:48', 'packages/ui/cards/neon-field.ts:15', 'packages/ui/ToastCard.tsx:37'] },
-  { id: 'white on night', fg: 'white', bg: NIGHT, role: 'text', usedAt: ['packages/ui/charts/StatCard.tsx:54', 'packages/ui/nav/NavBar.tsx:88', 'packages/ui/nav/SiteFooter.tsx:79'] },
+  { id: 'white on night', fg: 'white', bg: NIGHT, role: 'text', usedAt: ['packages/ui/charts/StatCard.tsx:54'] },
   { id: 'table cell on stripe', fg: 'silver-100', bg: ['ink-900'], role: 'text', usedAt: ['packages/ui/DataTable.tsx:44', 'packages/ui/DataTable.tsx:53'] },
-  { id: 'nav link on night', fg: 'silver-200', bg: NIGHT, role: 'text', usedAt: ['packages/ui/nav/NavBar.tsx:82', 'packages/ui/dropdown.ts:16'] },
-  { id: 'nav link on hover', fg: 'silver-200', bg: ['ink-800'], role: 'text', usedAt: ['packages/ui/dropdown.ts:14', 'packages/ui/nav/NavBar.tsx:83'] },
+  { id: 'nav link on night', fg: 'silver-200', bg: NIGHT, role: 'text', usedAt: ['packages/ui/dropdown.ts:16'] },
+  { id: 'nav link on hover', fg: 'silver-200', bg: ['ink-800'], role: 'text', usedAt: ['packages/ui/dropdown.ts:14'] },
   { id: 'body on night', fg: 'silver-300', bg: NIGHT, role: 'text', usedAt: ['packages/ui/Card.tsx:48', 'packages/ui/Dialog.tsx:49', 'packages/ui/TabBar.tsx:36'] },
   { id: 'table head on ink-900', fg: 'silver-300', bg: ['ink-900'], role: 'text', usedAt: ['packages/ui/DataTable.tsx:35', 'packages/ui/DataTable.tsx:38'] },
-  { id: 'caption on night', fg: 'silver-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/DataTable.tsx:47', 'packages/ui/charts/StatCard.tsx:57', 'packages/ui/nav/SiteFooter.tsx:80'] },
+  { id: 'caption on night', fg: 'silver-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/DataTable.tsx:47', 'packages/ui/charts/StatCard.tsx:57'] },
   { id: 'pager text on ink-900', fg: 'silver-400', bg: ['ink-900'], role: 'text', usedAt: ['packages/ui/DataTable.tsx:51'] },
-  { id: 'axis tick on night', fg: 'silver-500', bg: NIGHT, role: 'text', usedAt: ['packages/ui/charts/NeonBarChart.tsx:64', 'packages/ui/charts/NeonLineChart.tsx:78', 'packages/ui/nav/SiteFooter.tsx:88'] },
+  { id: 'axis tick on night', fg: 'silver-500', bg: NIGHT, role: 'text', usedAt: ['packages/ui/charts/NeonBarChart.tsx:64', 'packages/ui/charts/NeonLineChart.tsx:78'] },
   { id: 'placeholder on field well', fg: 'silver-500', bg: NIGHT, role: 'text', usedAt: ['packages/ui/cards/neon-field.ts:16'] },
-  { id: 'orange tone text on night', fg: 'orange-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:123', 'packages/ui/nav/SiteFooter.tsx:93', 'packages/ui/nav/NavBar.tsx:99'] },
-  { id: 'royal tone text on night', fg: 'royal-300', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:131', 'packages/ui/nav/SiteFooter.tsx:94', 'packages/ui/nav/NavBar.tsx:100'] },
-  { id: 'carolina tone text on night', fg: 'carolina-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:138', 'packages/ui/nav/SiteFooter.tsx:95', 'packages/ui/nav/NavBar.tsx:101'] },
+  { id: 'orange tone text on night', fg: 'orange-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:123'] },
+  { id: 'royal tone text on night', fg: 'royal-300', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:131'] },
+  { id: 'carolina tone text on night', fg: 'carolina-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:138'] },
   { id: 'leaf tone text on night', fg: 'leaf-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:145', 'packages/ui/charts/StatCard.tsx:72'] },
   { id: 'apple tone text on night', fg: 'apple-400', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:153', 'packages/ui/Menu.web.tsx:63', 'packages/ui/audio/PlayerShell.tsx:34'] },
   { id: 'brick tone text on night', fg: 'orange-300', bg: NIGHT, role: 'text', usedAt: ['packages/ui/district/tones.ts:160'] },
@@ -318,12 +315,12 @@ const USAGE: Pair[] = [
   { id: 'carolina eyebrow on glass card', fg: 'carolina-500', bg: ['concrete-50', 'ink-950/85'], role: 'text', usedAt: ['packages/ui/future/GridCard.tsx:30', 'packages/ui/future/CircuitButton.tsx:50'], reason: 'measured over a light page, the worst case for the 85% night glass' },
 
   // -- labels on tone faces ---------------------------------------------------
-  { id: 'night on orange face', fg: 'ink-950', bg: ['orange-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:123', 'packages/ui/dropdown.ts:19', 'packages/ui/nav/NavBar.tsx:85', 'packages/ui/nav/NavBar.tsx:185'] },
+  { id: 'night on orange face', fg: 'ink-950', bg: ['orange-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:123', 'packages/ui/dropdown.ts:19'] },
   { id: 'white on royal face', fg: 'white', bg: ['royal-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:131', 'packages/ui/dropdown.ts:25', 'packages/ui/DataTable.tsx:58'] },
   { id: 'banner white on royal face', fg: 'ink-50', bg: ['royal-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:131', 'packages/ui/future/CircuitButton.tsx:48'] },
   { id: 'night on carolina face', fg: 'ink-950', bg: ['carolina-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:138', 'packages/ui/future/CircuitButton.tsx:47'] },
   { id: 'night on leaf face', fg: 'ink-950', bg: ['leaf-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:145'] },
-  { id: 'night on apple face', fg: 'ink-950', bg: ['apple-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:153', 'packages/ui/Badge.tsx:113', 'packages/ui/dropdown.ts:28', 'packages/ui/nav/NavBar.tsx:103'] },
+  { id: 'night on apple face', fg: 'ink-950', bg: ['apple-500'], role: 'text', usedAt: ['packages/ui/district/tones.ts:153', 'packages/ui/Badge.tsx:113', 'packages/ui/dropdown.ts:28'] },
   { id: 'white on brick face', fg: 'white', bg: ['orange-800'], role: 'text', usedAt: ['packages/ui/district/tones.ts:160', 'packages/ui/dropdown.ts:30'] },
   { id: 'banner white on brick face', fg: 'ink-50', bg: ['orange-800'], role: 'text', usedAt: ['packages/ui/district/tones.ts:160'] },
   { id: 'night on white face', fg: 'ink-950', bg: ['ink-50'], role: 'text', usedAt: ['packages/ui/district/tones.ts:167', 'packages/ui/Badge.tsx:113'] },
@@ -359,7 +356,7 @@ const USAGE: Pair[] = [
   { id: 'chart series: brick', fg: 'orange-700', bg: NIGHT, role: 'ui', usedAt: ['packages/ui/district/series.ts:10', 'packages/ui/district/series.ts:22'] },
   { id: 'chart keyline: royal under orange', fg: 'royal-500', bg: ['orange-500'], role: 'decorative', usedAt: ['packages/ui/district/series.ts:75', 'packages/ui/charts/NeonLineChart.tsx:129'], reason: 'the wordmark keyline under a stroke; the stroke against night carries the data' },
   { id: 'night facade border', fg: 'ink-800', bg: NIGHT, role: 'decorative', usedAt: ['packages/ui/DataTable.tsx:30', 'packages/ui/SegmentedControl.web.tsx:13', 'packages/ui/charts/StoryPanel.tsx:8'], reason: 'container keylines; the selected segment face and cell text identify content' },
-  { id: 'night control keyline', fg: 'ink-700', bg: NIGHT, role: 'decorative', usedAt: ['packages/ui/nav/NavBar.tsx:87', 'packages/ui/DataTable.tsx:52', 'packages/ui/cards/neon-field.ts:26'], reason: 'frame around a control whose glyph or label (white / silver-100 / silver-300) identifies it' },
+  { id: 'night control keyline', fg: 'ink-700', bg: NIGHT, role: 'decorative', usedAt: ['packages/ui/DataTable.tsx:52', 'packages/ui/cards/neon-field.ts:26'], reason: 'frame around a control whose glyph or label (white / silver-100 / silver-300) identifies it' },
   { id: 'outline knock-out', fg: 'surface', bg: ['surface'], role: 'decorative', usedAt: ['packages/ui/text-effects/OutlineText.tsx:63'], reason: 'fills the glyph face with the surface; the outline stroke carries the text' },
 
 
@@ -400,9 +397,6 @@ const USAGE: Pair[] = [
   { id: 'hlynk: body on night page', fg: 'hlynk-core-body', bg: NIGHT, role: 'decorative', usedAt: ['packages/theme/tokens.ts:188'], reason: 'the shell is not a control; its edge needs no ratio (measures 3.70 anyway)' },
   { id: 'hlynk: LED off in the black head', fg: 'led-off', bg: ['hlynk-core-black'], role: 'decorative', usedAt: ['packages/theme/tokens.ts:174'], reason: 'the unlit lens; LED state is never conveyed by the LED alone (a text chip sits in the screen)' },
   { id: 'hlynk: disabled key glyph', fg: 'hlynk-core-glyph-disabled', bg: ['hlynk-core-black'], role: 'disabled', usedAt: ['packages/theme/tokens.ts:198'], reason: 'inactive key' },
-  { id: 'hlynk: key and trackpad focus outline on body', fg: 'hlynk-core-ink', bg: ['hlynk-core-body'], role: 'ui', usedAt: ['packages/ui/hlynk/HLynkKey.tsx:69', 'packages/ui/hlynk/Trackpad.web.tsx:48'] },
-  { id: 'hlynk: trackpad ring, booting or disabled', fg: 'led-off', bg: ['hlynk-core-black'], role: 'disabled', usedAt: ['packages/ui/hlynk/TrackpadFace.tsx:41'], reason: 'inactive trackpad during boot (WCAG 1.4.11 inactive components)' },
-  { id: 'hlynk: reduced-motion LED cue in the black head', fg: 'led-on', bg: ['hlynk-core-black'], role: 'ui', usedAt: ['packages/ui/hlynk/ScannerLed.tsx:96', 'packages/ui/hlynk/ScannerLed.tsx:104', 'packages/ui/hlynk/ScannerLed.tsx:107'], reason: 'tick row, filled dot and exclamation dot that stand in for the LED rhythm' },
 
   // -- text on the ink plate over a scene (SolidPanel tone="ink": ink-800 face in both themes)
   { id: 'scene plate headline', fg: 'orange-500', bg: ['ink-800'], role: 'large-text', usedAt: [], reason: 'display-sm heading and the display-xl 404 on the plate' },
@@ -413,7 +407,6 @@ const USAGE: Pair[] = [
   { id: 'scene plate tab edge', fg: 'ink-400', bg: ['ink-800'], role: 'ui', usedAt: [] },
   { id: 'scene plate selected tab label', fg: 'ink-950', bg: ['orange-500'], role: 'text', usedAt: [] },
   { id: 'scene plate selected tab face', fg: 'orange-500', bg: ['ink-800'], role: 'ui', usedAt: [] },
-  { id: 'skyline divider keyline', fg: 'orange-500', bg: ['ink-950'], role: 'decorative', usedAt: ['packages/ui/backgrounds/SkylineDivider.tsx:35'], reason: 'aria-hidden band between sections; the section headings carry the structure' },
 
   // -- admin console (08-handoff §9): signage bands and the page-surface cards -
   { id: 'console: signage band headline', fg: 'signage-white', bg: ['signage-black'], role: 'text', usedAt: [] },

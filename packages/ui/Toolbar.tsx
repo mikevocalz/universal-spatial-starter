@@ -6,7 +6,7 @@ import { resolveControlTone, toneVariants, type ControlTone, type District } fro
 // §9 contextual top bar: presentational, with the leading control (back/menu)
 // and the trailing action row (IconButtons) passed in as slots.
 //
-// NYC-MON: a night bar, the title in the display face, and a two-step cornice
+// Kit look: a night bar, the title in the display face, and a two-step cornice
 // along the bottom edge: a tone face band over its darker plate step, the way
 // a Deco cornice reads from the street.
 const toolbar = tv({

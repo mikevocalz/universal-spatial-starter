@@ -6,7 +6,7 @@ import { NEON_FIELD } from './cards/neon-field';
 import { TONE_CLASSES, resolveControlTone, toneHex } from './district';
 import type { SliderProps } from './Slider.types';
 
-// The NYC-MON slider on web: a real <input type="range"> (keyboard, screen
+// The kit's slider on web: a real <input type="range"> (keyboard, screen
 // reader values and pointer drag come from the browser), drawn as a night
 // well with a heavy ink keyline, a solid tone fill and a white slab thumb
 // keyed in night. The thumb glows in the tone only on keyboard focus.

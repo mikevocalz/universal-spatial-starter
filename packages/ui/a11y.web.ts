@@ -1,5 +1,5 @@
 /**
- * PLATFORM FORK (web): accessibility props for the H-Lynk controls on real
+ * PLATFORM FORK (web): accessibility props for kit controls on real
  * DOM elements. A disabled key stays focusable (`aria-disabled`, never the
  * `disabled` attribute) so keyboard users can discover it (M01 07-a11y.md
  * "Keyboard"). The long-press name is the native tooltip (`title`).

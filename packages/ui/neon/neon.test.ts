@@ -5,7 +5,7 @@ import { mixColor, neonColor, parseColor, withAlpha } from './colors.ts';
 import { cornerCutClipPath, cornerCutPolygon, insetCut } from './corner-cut.ts';
 import { shadeSteps } from './shade.ts';
 
-test('NeonBlade presets map onto NYC-MON tokens', () => {
+test('NeonBlade presets map onto kit tokens', () => {
   assert.equal(neonColor('cyan').base, brand.carolina);
   assert.equal(neonColor('pink').base, brand.apple);
   assert.equal(neonColor('green').base, brand.leaf);

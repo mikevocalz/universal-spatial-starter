@@ -11,7 +11,7 @@ export { steps };
 
 /**
  * Shared Reanimated 4 CSS animation pieces for the progress loaders and the
- * NYC-MON elements. Every loop here is a declarative CSS animation: no shared
+ * kit elements. Every loop here is a declarative CSS animation: no shared
  * values, no per-frame JS. Callers pass `reduced` from useReducedMotion and
  * get `undefined` back, which leaves the element at its static resting state.
  */

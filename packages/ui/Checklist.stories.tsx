@@ -11,9 +11,9 @@ export const AllPassing: Story = {
   render: () => (
     <View className="max-w-xl p-4">
       <Checklist>
-        <CheckRow label="Shared egg ids" result={{ kind: 'pass', count: 0 }} detail="Every egg id is unique." />
-        <CheckRow label="Mon ⇄ egg match" result={{ kind: 'pass', count: 0 }} />
-        <CheckRow label="Orphaned Mons" result={{ kind: 'pass', count: 0 }} />
+        <CheckRow label="Shared item ids" result={{ kind: 'pass', count: 0 }} detail="Every item id is unique." />
+        <CheckRow label="Item ⇄ owner match" result={{ kind: 'pass', count: 0 }} />
+        <CheckRow label="Orphaned items" result={{ kind: 'pass', count: 0 }} />
       </Checklist>
     </View>
   ),
@@ -24,9 +24,9 @@ export const OneFailing: Story = {
   render: () => (
     <View className="max-w-xl p-4">
       <Checklist>
-        <CheckRow label="Shared egg ids" result={{ kind: 'pass', count: 0 }} />
-        <CheckRow label="Mon ⇄ egg match" result={{ kind: 'fail', count: 3 }} detail="3 eggs point at missing Mons." href="/admin/integrity" />
-        <CheckRow label="Stale ready eggs" result={{ kind: 'info', count: 12 }} />
+        <CheckRow label="Shared item ids" result={{ kind: 'pass', count: 0 }} />
+        <CheckRow label="Item ⇄ owner match" result={{ kind: 'fail', count: 3 }} detail="3 items point at missing owners." href="/admin/integrity" />
+        <CheckRow label="Stale pending items" result={{ kind: 'info', count: 12 }} />
       </Checklist>
     </View>
   ),
@@ -37,8 +37,8 @@ export const Unavailable: Story = {
   render: () => (
     <View className="max-w-xl p-4">
       <Checklist>
-        <CheckRow label="Shared egg ids" result={{ kind: 'pending' }} />
-        <CheckRow label="Mon ⇄ egg match" result={{ kind: 'unavailable', reason: 'integrity run in progress' }} />
+        <CheckRow label="Shared item ids" result={{ kind: 'pending' }} />
+        <CheckRow label="Item ⇄ owner match" result={{ kind: 'unavailable', reason: 'integrity run in progress' }} />
       </Checklist>
     </View>
   ),

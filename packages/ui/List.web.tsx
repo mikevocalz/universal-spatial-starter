@@ -10,7 +10,7 @@ import { ROW_BAR } from './surface-look';
 import type { ListProps, ListItemProps } from './List.types';
 
 /**
- * Web list in the NYC-MON look: a night slab with a heavy keyline over a
+ * Web list in the kit look: a night slab with a heavy keyline over a
  * solid depth plate, rows split by keylines. A row takes a tone accent bar
  * on its left edge when hovered, pressed, focused or `selected`. Pull to
  * refresh has no web equivalent, so `onRefresh` is accepted and ignored to

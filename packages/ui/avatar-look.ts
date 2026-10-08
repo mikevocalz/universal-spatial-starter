@@ -20,7 +20,7 @@ export function avatarLook(variant: AvatarVariant | undefined): AvatarLook {
 /**
  * Gradient presets. NeonBlade's tile runs cyan to magenta; NEON_PRESET_TOKENS
  * maps cyan to carolina, purple to royal and pink to apple, so `skyline` runs
- * that same path in the NYC-MON palette, on the 400 steps so night initials
+ * that same path in the kit's palette, on the 400 steps so night initials
  * hold 4.5:1 from end to end (avatar-look.test.ts checks every preset).
  */
 export const AVATAR_GRADIENTS = {

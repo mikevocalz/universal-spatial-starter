@@ -6,7 +6,7 @@ import type { ControlTone, District } from './tones';
 /**
  * CardSlider's public API, shared by every implementation: web
  * (CardSlider.web.tsx) and the native carousels. Port of NeonBlade's
- * card-slider props, with NYC-MON tones and districts.
+ * card-slider props, with kit tones and districts.
  */
 export type CardSliderProgressStyle = 'bar' | 'dots' | 'counter';
 /** Where {@linkcode SliderControls} sits relative to the slide content. */

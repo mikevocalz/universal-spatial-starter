@@ -11,7 +11,7 @@ import type { GlowIntensity } from './neon/glow';
 import { TONE_CLASSES, toneHex, type ControlTone, type District } from './district';
 import { DISABLED_FRAME_TONE, controlLook, frameTone, outerLayout, type ButtonVariant, type ControlLook } from './control-look';
 
-// The NYC-MON button. Solid and outline looks draw a CornerCutFrame inside
+// The kit's button. Solid and outline looks draw a CornerCutFrame inside
 // the pressable, so the root only owns the hit area, focus ring and press
 // sink (web: the face drops into its depth plate; native: PressScale's
 // spring). Ghost has no frame: a tone label and a soft tint on hover.

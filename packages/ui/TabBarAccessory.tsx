@@ -7,7 +7,7 @@ import { CONTROL_TONES, TONE_CLASSES, resolveControlTone, toneVariants, type Con
 // tonight's rehearsal, download progress). Presentational: content comes in
 // as children.
 //
-// NYC-MON: a night slab with a tone keyline along its top edge (`default`),
+// Kit look: a night slab with a tone keyline along its top edge (`default`),
 // or a solid tone face (`accent`). Kit Text does not inherit colour from its
 // parent, so children colour themselves: `text-ink-50` / `text-silver-300` on
 // the slab, `TONE_CLASSES[tone].onFace` on the accent face.

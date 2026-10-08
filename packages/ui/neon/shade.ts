@@ -2,7 +2,7 @@ import { brand } from '@acme/theme';
 import { mixColor, neonFamily, neonToken, parseColor, type NeonColorInput } from './colors.ts';
 
 /**
- * Solid shade steps: the primary building block for NYC-MON surfaces.
+ * Solid shade steps: the primary building block for kit surfaces.
  *
  * The look is solid filled shapes, and depth comes from stacking layers in
  * stepped shades of one colour family, the way a sports badge stacks a face,

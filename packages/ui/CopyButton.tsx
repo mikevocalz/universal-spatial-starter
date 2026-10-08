@@ -8,7 +8,7 @@ import type { ControlTone, District } from './district';
 export interface CopyButtonProps {
   /** The string placed on the clipboard (an id, never a revealed value's neighbour). */
   value: string;
-  /** Spoken label, e.g. "Copy Caller id". */
+  /** Spoken label, e.g. "Copy Member id". */
   label: string;
   /** Colour family. Overrides `district`. */
   tone?: ControlTone;

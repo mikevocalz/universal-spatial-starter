@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { brand } from '@acme/theme';
-import { GridFloor } from './backgrounds/GridFloor';
 import { SceneSection } from './backgrounds/SceneSection';
-import { SignRain } from './backgrounds/SignRain';
-import { SkylineDivider } from './backgrounds/SkylineDivider';
-import { SubwayLines } from './backgrounds/SubwayLines';
 import { Heading, Main, Paragraph, Section } from './html';
 import { SolidPanel } from './neon/SolidPanel';
+import { HolographicTerrain } from './three/HolographicTerrain';
 import { View } from './tw';
 
 const meta = {
@@ -29,44 +26,16 @@ function Plate({ title, line }: { title: string; line: string }) {
   );
 }
 
-/** GridFloor as a page hero: the street grid runs to a skyline; the lead sits on an ink plate. */
-export const GridFloorHero: Story = {
+/** HolographicTerrain as a page hero; the lead sits on an ink plate. */
+export const TerrainHero: Story = {
   args: { scene: () => null, children: null },
   render: () => (
     <SceneSection
       className="min-h-[520px]"
       placeholderColor={brand.night}
-      scene={({ paused }) => <GridFloor district="midtown" skyline horizon={0.42} paused={paused} className="absolute inset-0" />}
+      scene={({ paused }) => <HolographicTerrain paused={paused} className="absolute inset-0" />}
     >
-      <Plate title="Explore" line="Templates and resources from every block." />
-    </SceneSection>
-  ),
-};
-
-/** SubwayLines for wayfinding: the 404 page. */
-export const SubwayLinesWayfinding: Story = {
-  args: { scene: () => null, children: null },
-  render: () => (
-    <SceneSection
-      className="min-h-[520px]"
-      placeholderColor={brand.night}
-      scene={({ paused }) => <SubwayLines district="midtown" opacity={0.55} paused={paused} className="absolute inset-0" />}
-    >
-      <Plate title="Page not found" line="This stop is not on the map." />
-    </SceneSection>
-  ),
-};
-
-/** SignRain, used sparingly: the error page. */
-export const SignRainError: Story = {
-  args: { scene: () => null, children: null },
-  render: () => (
-    <SceneSection
-      className="min-h-[520px]"
-      placeholderColor={brand.night}
-      scene={({ paused }) => <SignRain district="harlem" opacity={60} paused={paused} className="absolute inset-0" />}
-    >
-      <Plate title="Something went wrong" line="Try again in a moment." />
+      <Plate title="Explore" line="Templates and resources in one place." />
     </SceneSection>
   ),
 };
@@ -79,14 +48,14 @@ export const Anchored: Story = {
       id="hero-anchor"
       className="min-h-[520px]"
       placeholderColor={brand.night}
-      scene={({ paused }) => <GridFloor district="midtown" skyline horizon={0.42} paused={paused} className="absolute inset-0" />}
+      scene={({ paused }) => <HolographicTerrain paused={paused} className="absolute inset-0" />}
     >
-      <Plate title="Explore" line="Templates and resources from every block." />
+      <Plate title="Explore" line="Templates and resources in one place." />
     </SceneSection>
   ),
 };
 
-/** A whole page: one strong background up top, skyline dividers between the sections below. */
+/** A whole page: one strong background up top, plain sections below. */
 export const Page: Story = {
   args: { scene: () => null, children: null },
   render: () => (
@@ -94,13 +63,12 @@ export const Page: Story = {
       <SceneSection
         className="min-h-[520px]"
         placeholderColor={brand.night}
-        scene={({ paused }) => <GridFloor district="midtown" skyline horizon={0.42} paused={paused} className="absolute inset-0" />}
+        scene={({ paused }) => <HolographicTerrain paused={paused} className="absolute inset-0" />}
       >
-        <Plate title="Explore" line="Templates and resources from every block." />
+        <Plate title="Explore" line="Templates and resources in one place." />
       </SceneSection>
-      {['Featured', 'Resources'].map((title, i) => (
+      {['Featured', 'Resources'].map((title) => (
         <View key={title}>
-          {i > 0 ? <SkylineDivider seed={i + 3} /> : null}
           <Section className="mx-auto w-full max-w-3xl gap-2 px-4 py-16">
             <Heading level={2} className="my-0 font-display text-2xl text-text">{title}</Heading>
             <Paragraph className="my-0 text-text-muted">Section content on the page surface, legible in both themes.</Paragraph>

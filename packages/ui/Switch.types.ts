@@ -7,7 +7,7 @@ export interface SwitchProps {
   disabled?: boolean;
   className?: string;
   /**
-   * The NYC-MON toggle is the only look: the track fills with the tone and
+   * The kit's toggle is the only look: the track fills with the tone and
    * the night-keyed thumb slides across. `neon` and `default` are both
    * accepted so older callers and stories keep compiling.
    */

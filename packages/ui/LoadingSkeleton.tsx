@@ -10,7 +10,7 @@ import { TONE_CLASSES, resolveControlTone, type ControlTone, type District } fro
 import { litWindow, skylineHeights } from './surface-look';
 
 /**
- * The NYC-MON skeleton: a skyline shimmer. Each placeholder is a night block
+ * The kit's skeleton: a skyline shimmer. Each placeholder is a night block
  * holding a row of solid buildings; on taller blocks a few windows glow in
  * the district light, and a pale band sweeps across like headlights down an
  * avenue. Under reduced motion it is the same skyline, still.

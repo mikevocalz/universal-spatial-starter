@@ -7,7 +7,7 @@ import { TONE_CLASSES, resolveControlTone, type ControlTone, type District } fro
 import { skylineHeights, withoutTextColour } from './surface-look';
 
 /**
- * The NYC-MON empty state: the icon on a solid tone tile with a depth plate,
+ * The kit's empty state: the icon on a solid tone tile with a depth plate,
  * standing on a small night skyline with a tone street line, then a display
  * title. The page behind it can be light or dark, so the text uses theme
  * tokens; the tile sets its own icon colour. `illustration` swaps the tile

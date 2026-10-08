@@ -7,7 +7,7 @@ import { NIGHT_SCHEME, NightScope } from './NightScope';
 import { resolveControlTone, toneVariants } from './district';
 import type { FieldGroupProps, FieldSectionProps } from './FieldGroup.types';
 
-// A grouped settings form drawn as NYC-MON night panels: a solid tone cap
+// A grouped settings form drawn as night panels: a solid tone cap
 // bar (the cornice), a header strip with the title in the display face over
 // an ink keyline, and the fields on the raised night face. The panel scopes
 // the dark theme (NightScope), so kit Text and controls inside stay legible

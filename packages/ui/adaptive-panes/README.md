@@ -60,7 +60,7 @@ Token debt). `../size-class.constants.ts` keeps a separate binary
 `compact|regular` split at 768 dp for one-column vs two-column composition
 inside a screen. The two answer different questions; do not merge them.
 
-Before this port nyc-mon had four bands and called everything from 1200 up
+Before this port the source app had four bands and called everything from 1200 up
 `extraLarge`. The policy for that range is unchanged (`large` and `extraLarge`
 share one row in each table below); only the name at 1200–1599 moved.
 

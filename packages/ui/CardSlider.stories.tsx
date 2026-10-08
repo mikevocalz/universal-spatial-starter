@@ -1,32 +1,44 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { CardSliderImageAspect, CardSliderImageFrame, CardSliderImageItemData } from './cards/card-slider.types';
 import { CardSlider, type CardSliderProps } from './cards/CardSlider';
-import { CITY_PHOTO_ITEMS, CardSliderImageItem } from './cards/slider-items';
+import { CardSliderImageItem } from './cards/slider-items';
 import { DISTRICTS, type District } from './district';
 import { Heading } from './html';
 import { Text } from './Text';
 import { View } from './tw';
 
-// A reading per photo, in NeonBlade's demo shape (a place, a line, a number).
-const READINGS: Record<string, string> = {
-  'downtown-one-wtc': 'Crews 4',
-  'downtown-nyse': 'Held 2 days',
-  'midtown-empire-sunset': 'Sightings 38',
-  'midtown-times-square': 'Busy',
-  'midtown-chrysler-spire': 'Sightings 51',
-  'harlem-apollo': 'Streak 6 days',
-  'harlem-brownstone-stoops': 'Claimed',
-  'harlem-lenox-rowhouses': 'Crews 3',
-  'megacity-brooklyn-bridge-night': 'Wait 3 min',
-  'megacity-bridge-deck': 'Rising',
-};
-const ITEMS: CardSliderImageItemData[] = CITY_PHOTO_ITEMS.map((it) => ({ ...it, meta: READINGS[it.id] }));
+// Drawn sample art, so the kit ships no photos: a ring and a dot on a flat
+// field, 1200x800 like a bundled photo crop.
+const art = (bg: string, ring: string, dot: string, cx: number) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="${bg}"/><circle cx="${cx}" cy="400" r="260" fill="none" stroke="${ring}" stroke-width="48"/><circle cx="${cx + 184}" cy="216" r="44" fill="${dot}"/></svg>`,
+  )}`;
 
-/** Every photo, the given district's first, so each demo opens on its own neighbourhood. */
+// One slide per sample, in NeonBlade's demo shape (a title, a line, a number).
+const SAMPLES: readonly { title: string; subtitle: string; meta: string; colors: [string, string, string] }[] = [
+  { title: 'Orbit', subtitle: 'Sample one', meta: 'Views 4', colors: ['#14120f', '#0047ff', '#f4f1ea'] },
+  { title: 'Ring', subtitle: 'Sample two', meta: 'Saved', colors: ['#1b1712', '#2f6bff', '#f4f1ea'] },
+  { title: 'Halo', subtitle: 'Sample three', meta: 'Views 38', colors: ['#100e0c', '#5a8cff', '#ffd9a8'] },
+  { title: 'Arc', subtitle: 'Sample four', meta: 'Busy', colors: ['#16130f', '#0033b8', '#f4f1ea'] },
+  { title: 'Loop', subtitle: 'Sample five', meta: 'Views 51', colors: ['#0f0d0b', '#7aa2ff', '#ffb27a'] },
+  { title: 'Path', subtitle: 'Sample six', meta: 'Streak 6 days', colors: ['#1a1611', '#0047ff', '#ffe7c2'] },
+  { title: 'Drift', subtitle: 'Sample seven', meta: 'Claimed', colors: ['#12100d', '#3d74ff', '#f4f1ea'] },
+  { title: 'Spin', subtitle: 'Sample eight', meta: 'Wait 3 min', colors: ['#181410', '#1f5cff', '#ffcf99'] },
+];
+const ITEMS: CardSliderImageItemData[] = SAMPLES.map(({ title, subtitle, meta, colors: [bg, ring, dot] }, i) => ({
+  id: `sample-${i + 1}`,
+  image: { source: art(bg, ring, dot, 420 + (i % 3) * 120), alt: `${title}: a ring and a dot on a dark field` },
+  title,
+  subtitle,
+  meta,
+  district: DISTRICTS[i % DISTRICTS.length]!,
+}));
+
+/** Every sample, the given district's first, so each demo opens on its own tone. */
 const from = (d: District) => [...ITEMS.filter((it) => it.district === d), ...ITEMS.filter((it) => it.district !== d)];
 
 /**
- * One image slide per photo. The first `eager` slides load at once (they are
+ * One image slide per sample. The first `eager` slides load at once (they are
  * on screen at first paint); the rest load lazily as they near the viewport.
  */
 const slides = (frame: CardSliderImageFrame, aspect: CardSliderImageAspect = 'classic', eager = 1, items = ITEMS) =>
@@ -39,10 +51,10 @@ const meta = {
   component: CardSlider,
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'CardSlider, the port of NeonBlade card-slider (Card Slider). Slides here are CardSliderImageItem: a bundled NYC photo in a notch, corner-cut or beam frame with a solid title band in the district tone. CardSlider itself takes any children.' } },
+    docs: { description: { component: 'CardSlider, the port of NeonBlade card-slider (Card Slider). Slides here are CardSliderImageItem: drawn sample art in a notch, corner-cut or beam frame with a solid title band in the district tone. CardSlider itself takes any children.' } },
   },
   args: {
-    label: 'City landmarks',
+    label: 'Samples',
     visibleCount: { sm: 1, md: 2, xl: 3 },
     gap: 16,
     showButtons: true,
@@ -102,7 +114,7 @@ function Demo({ title, children }: { title: string; children: React.ReactNode })
 }
 
 /**
- * NeonBlade's four demos, NYC-MON style: single card with side buttons;
+ * NeonBlade's four demos: single card with side buttons;
  * responsive 1 to 3 with dots, bottom buttons and frame corners; two up with
  * the counter, hover buttons and plus corners; autoplay with scan lines.
  */
@@ -111,13 +123,13 @@ export const NeonBladeDemos: Story = {
   render: () => (
     <View className="min-h-screen gap-12 bg-ink-950 px-4 py-8 md:px-10">
       <Demo title="One card, bar progress, side buttons">
-        <CardSlider label="Landmarks, Downtown first" district="downtown" visibleCount={1} progressStyle="bar" buttonPosition="sides">
+        <CardSlider label="Samples, royal tone first" district="downtown" visibleCount={1} progressStyle="bar" buttonPosition="sides">
           {slides('cornerCut', 'wide', 1, from('downtown'))}
         </CardSlider>
       </Demo>
       <Demo title="One, two, then three across, dots, bottom buttons, frame corners">
         <CardSlider
-          label="Landmarks, Midtown first"
+          label="Samples, orange tone first"
           district="midtown"
           visibleCount={{ sm: 1, md: 2, lg: 3 }}
           progressStyle="dots"
@@ -130,7 +142,7 @@ export const NeonBladeDemos: Story = {
       </Demo>
       <Demo title="Two across (one on phones), counter, buttons on hover, plus corners">
         <CardSlider
-          label="Landmarks, Harlem first"
+          label="Samples, brick tone first"
           district="harlem"
           visibleCount={{ sm: 1, md: 2 }}
           progressStyle="counter"
@@ -146,7 +158,7 @@ export const NeonBladeDemos: Story = {
       <Demo title="Autoplay with a pause control, scan lines">
         <Text className="text-silver-400">Holds while hovered or focused. Starts paused when reduced motion is on.</Text>
         <CardSlider
-          label="Landmarks, Mega City first"
+          label="Samples, carolina tone first"
           district="megacity"
           visibleCount={{ sm: 1, md: 2 }}
           autoPlay
@@ -166,17 +178,17 @@ export const NeonBladeDemos: Story = {
 export const ProgressStyles: Story = {
   render: () => (
     <View className="min-h-screen gap-12 bg-ink-950 px-4 py-8 md:px-10">
-      <CardSlider label="Landmarks, Downtown first" district="downtown" visibleCount={{ sm: 1, md: 2 }} progressStyle="bar" buttonPosition="bottom">{slides('cornerCut', 'classic', 2, from('downtown'))}</CardSlider>
-      <CardSlider label="Landmarks, Harlem first" district="harlem" visibleCount={{ sm: 1, md: 3 }} progressStyle="dots" buttonPosition="bottom" loop>{slides('notch', 'tall', 3, from('harlem'))}</CardSlider>
-      <CardSlider label="Landmarks, Mega City first" district="megacity" visibleCount={{ sm: 1, md: 2 }} progressStyle="counter" buttonPosition="bottom">{slides('beam', 'classic', 2, from('megacity'))}</CardSlider>
+      <CardSlider label="Samples, royal tone first" district="downtown" visibleCount={{ sm: 1, md: 2 }} progressStyle="bar" buttonPosition="bottom">{slides('cornerCut', 'classic', 2, from('downtown'))}</CardSlider>
+      <CardSlider label="Samples, brick tone first" district="harlem" visibleCount={{ sm: 1, md: 3 }} progressStyle="dots" buttonPosition="bottom" loop>{slides('notch', 'tall', 3, from('harlem'))}</CardSlider>
+      <CardSlider label="Samples, carolina tone first" district="megacity" visibleCount={{ sm: 1, md: 2 }} progressStyle="counter" buttonPosition="bottom">{slides('beam', 'classic', 2, from('megacity'))}</CardSlider>
     </View>
   ),
 };
 
 const onboardingPanels = [
-  ['Meet the city', 'Explore one block at a time and find what is waiting nearby.'],
-  ['Choose your path', 'Each neighbourhood has its own places, people and stories.'],
-  ['Start calling', 'You are ready to begin your first NYC-MON journey.'],
+  ['Welcome', 'Explore one screen at a time and find what is waiting.'],
+  ['Choose your path', 'Each section has its own places, people and stories.'],
+  ['Get started', 'You are ready to begin.'],
 ] as const;
 
 /** Welcome-style panels keep dots and arrows below the slide content. */

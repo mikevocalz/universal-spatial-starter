@@ -15,7 +15,7 @@ const PULSE = {
 };
 
 /**
- * NeonBlade's NeonGlow, NYC-MON style. The letters are solid first: the face
+ * NeonBlade's NeonGlow, in the kit style. The letters are solid first: the face
  * colour over a stack of solid drop layers (each extra colour steps down and
  * right, the way jersey lettering stacks orange on royal on night). The glow
  * is an accent on its own layer behind the face, and `animate` pulses only

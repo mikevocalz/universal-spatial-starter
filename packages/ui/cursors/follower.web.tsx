@@ -20,7 +20,7 @@ export function useFinePointer(): boolean {
 }
 
 const INTERACTIVE = 'a,button,input,select,textarea,summary,[role="button"],[role="link"],[tabindex]:not([tabindex="-1"])';
-const SCOPE_ATTR = 'data-nyc-cursor';
+const SCOPE_ATTR = 'data-kit-cursor';
 
 let sheet: CSSStyleSheet | null = null;
 let sheetUsers = 0;

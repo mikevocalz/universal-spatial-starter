@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants';
-import { hiddenA11y } from './hlynk/a11y';
+import { hiddenA11y } from './a11y';
 import { Text, View } from './tw';
 import { TYPE_SCALE_TV } from './type-scale';
 

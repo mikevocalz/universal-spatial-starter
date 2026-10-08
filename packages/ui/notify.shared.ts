@@ -13,7 +13,7 @@ export interface NotifyOptions {
   /** Adds an explicit close control. On by default for error and loading. */
   dismissible?: boolean;
   /**
-   * The card's look. `neon` is the NYC-MON storefront card; the status
+   * The card's look. `neon` is the kit's storefront card; the status
    * (info, success...) still comes from the method you call. Default `default`.
    */
   variant?: 'default' | 'neon';

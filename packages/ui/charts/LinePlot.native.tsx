@@ -18,11 +18,11 @@ const SPLINE = new Set(['smooth', 'monotone', 'basis', undefined]);
 const SPRING = { mass: 1, stiffness: 900, damping: 50 } as const;
 
 /**
- * The NYC-MON selection dot for react-native-graph: a solid disc on a
+ * The kit's selection dot for react-native-graph: a solid disc on a
  * keyline ring over a thin rule, the same mark the web plot draws.
  * Everything runs on the UI thread from the graph's shared values.
  */
-function NycSelectionDot({ isActive, color, circleX, circleY }: SelectionDotProps) {
+function KitSelectionDot({ isActive, color, circleX, circleY }: SelectionDotProps) {
     const keyline = keylineFor(color);
     const radius = useSharedValue(0);
     useAnimatedReaction(
@@ -113,7 +113,7 @@ function GraphPlot({
               enablePanGesture={selectable && interactive}
               enableIndicator={indicator && interactive}
               indicatorPulsating={indicator && interactive && !reduced}
-              SelectionDot={interactive ? NycSelectionDot : null}
+              SelectionDot={interactive ? KitSelectionDot : null}
               onPointSelected={interactive ? (p) => onSelect?.(p.date.getTime()) : undefined}
               onGestureEnd={interactive ? () => onSelect?.(null) : undefined}
               style={{ flex: 1 }}

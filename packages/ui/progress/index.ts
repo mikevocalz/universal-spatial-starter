@@ -1,4 +1,4 @@
-// NYC-MON progress: skyline bar, window loader, subway arrows, token ring and
+// Kit progress: skyline bar, window loader, subway arrows, token ring and
 // the rooftop fan. Every one is a role="progressbar" with a value mode and an
 // indeterminate mode, a `district` prop, and Reanimated 4 CSS animations that
 // stop under reduced motion.

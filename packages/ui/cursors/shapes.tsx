@@ -20,7 +20,7 @@ export interface CursorArrowProps {
 }
 
 /**
- * The NYC-MON pointer: a solid orange arrow on a thick royal outline with a
+ * The kit's pointer: a solid orange arrow on a thick royal outline with a
  * night drop under it and a lit bevel, the wordmark's build at cursor size.
  * Skia (CanvasKit on web), so native callers can use it too, e.g. at the end
  * of a controller ray.
@@ -90,7 +90,7 @@ function Layer({ spin, seconds, children }: { spin: typeof SPIN | null; seconds:
 }
 
 /**
- * The NYC-MON reticle: a rounded square of four corner brackets on a royal
+ * The kit's reticle: a rounded square of four corner brackets on a royal
  * keyline, a counter-rotating diamond and a solid centre dot. Built from
  * plain views, so it draws the same on web and native with no canvas; spins
  * with Reanimated CSS animations unless `animated` is false.

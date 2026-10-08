@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 import { Badge } from './Badge';
-import { controlA11y } from './hlynk/a11y';
+import { controlA11y } from './a11y';
 import { Text } from './Text';
 import { Pressable, View } from './tw';
 import type { LegacyBadgeTone } from './surface-look';

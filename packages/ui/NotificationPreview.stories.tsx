@@ -6,12 +6,11 @@ const meta = {
   title: 'UI/NotificationPreview',
   component: NotificationPreview,
   args: {
-    appName: 'NYC-MON',
-    // The one notification the Caller ever gets per egg (M23, m23.notification.*).
-    title: 'Your egg is ready to hatch',
-    body: "Open NYC-MON whenever you're ready.",
+    appName: 'Starter',
+    title: 'Your export is ready',
+    body: "Open the app whenever you're ready.",
     time: 'now',
-    accessibilityLabel: 'Example notification from NYC-MON: Your egg is ready to hatch.',
+    accessibilityLabel: 'Example notification from Starter: Your export is ready.',
   },
 } satisfies Meta<typeof NotificationPreview>;
 export default meta;
@@ -30,7 +29,7 @@ export const Default: Story = {
 export const LongBody: Story = {
   args: {
     body:
-      "Open NYC-MON whenever you're ready. Your egg keeps warm until you get there — no hurry, it waits for you either way.",
+      "Open the app whenever you're ready. Your export stays available until you get there — no hurry, it waits for you either way.",
   },
   render: (args) => (
     <View className="p-4">

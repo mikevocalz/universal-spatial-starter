@@ -25,7 +25,7 @@ import { districtTone, type ChartTone, type District } from './district';
 import type { ReactNode } from 'react';
 
 /**
- * The NYC-MON table. `surface="night"` (default) is NeonBlade's NeonTable as
+ * The kit's table. `surface="night"` (default) is NeonBlade's NeonTable as
  * a scoreboard: a solid tone title bar on a darker plate, a night body,
  * cornice corner brackets, and a tone bar that slides along the hovered row.
  * `surface="page"` is the ops console's daylit face (04-components.md G1): a
@@ -146,7 +146,7 @@ export type ColumnDef<T extends RowData, TValue = unknown> =
   TanStackColumnDef<typeof features, T, TValue>;
 
 declare module '@tanstack/react-table' {
-  // Column metadata the NYC-MON table reads (04-components.md G2): which
+  // Column metadata the kit's table reads (04-components.md G2): which
   // columns drop first at narrow pane widths and which run right-aligned.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TFeatures, TData extends RowData, TValue> {
@@ -218,7 +218,7 @@ export interface DataTableProps<T extends RowData> {
   sortable?: boolean;
   /** 'night' (default) is the scoreboard facade; 'page' is the daylit console face. */
   surface?: 'night' | 'page';
-  /** Kept for callers: both names render the NYC-MON scoreboard table. */
+  /** Kept for callers: both names render the kit's scoreboard table. */
   variant?: 'default' | 'neon';
   /** Heading bar above the table (night surface only). */
   title?: string;

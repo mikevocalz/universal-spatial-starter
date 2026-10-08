@@ -2,7 +2,7 @@ import { palette } from '@acme/theme';
 import { resolveAccent, resolveControlTone, toneInput, type ControlTone, type District } from './district/index.ts';
 
 /**
- * The NYC-MON look a Button or IconButton renders, resolved from the public
+ * The kit's look a Button or IconButton renders, resolved from the public
  * `variant` prop. Every name a caller can pass lands on one of three looks:
  * - solid: the corner-cut tone face over its depth plate (the default);
  * - outline: the corner-cut frame with a night face and a tone border;

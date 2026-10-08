@@ -32,7 +32,7 @@ const meta: Meta = { title: 'UI/DataTable' };
 export default meta;
 type Story = StoryObj;
 
-/** No props beyond data and columns: the Midtown scoreboard. */
+/** No props beyond data and columns. */
 export const Sortable: Story = {
   render: () => (
     <View className="max-w-content-detail p-4">
@@ -41,31 +41,31 @@ export const Sortable: Story = {
   ),
 };
 
-type Legend = { legend: string; borough: string; type: string; catches: number; rarity: number };
+type Project = { project: string; region: string; type: string; visits: number; priority: number };
 
-const LEGENDS: Legend[] = [
-  { legend: 'Bodega Cat', borough: 'Brooklyn', type: 'Street', catches: 1240, rarity: 2 },
-  { legend: 'Express Wraith', borough: 'Manhattan', type: 'Subway', catches: 860, rarity: 3 },
-  { legend: 'Water Tower Owl', borough: 'Queens', type: 'Rooftop', catches: 512, rarity: 3 },
-  { legend: 'Stoop Sphinx', borough: 'Manhattan', type: 'Street', catches: 431, rarity: 4 },
-  { legend: 'Harbor Kraken', borough: 'Staten Is.', type: 'Harbor', catches: 98, rarity: 5 },
-  { legend: 'Pigeon Prime', borough: 'Bronx', type: 'Park', catches: 2210, rarity: 1 },
-  { legend: 'Hydrant Imp', borough: 'Queens', type: 'Street', catches: 1730, rarity: 1 },
-  { legend: 'Deco Gargoyle', borough: 'Manhattan', type: 'Rooftop', catches: 204, rarity: 4 },
+const PROJECTS: Project[] = [
+  { project: 'Orbit Lab', region: 'North', type: 'Web', visits: 1240, priority: 2 },
+  { project: 'Atlas', region: 'East', type: 'Native', visits: 860, priority: 3 },
+  { project: 'Beacon', region: 'West', type: 'Hybrid', visits: 512, priority: 3 },
+  { project: 'Comet', region: 'East', type: 'Web', visits: 431, priority: 4 },
+  { project: 'Drift', region: 'South', type: 'Spatial', visits: 98, priority: 5 },
+  { project: 'Ember', region: 'North', type: 'Game', visits: 2210, priority: 1 },
+  { project: 'Fjord', region: 'West', type: 'Web', visits: 1730, priority: 1 },
+  { project: 'Gale', region: 'East', type: 'Hybrid', visits: 204, priority: 4 },
 ];
 
-const LEGEND_COLUMNS: ColumnDef<Legend, unknown>[] = [
-  { accessorKey: 'legend', header: 'Legend' },
-  { accessorKey: 'borough', header: 'Borough' },
+const PROJECT_COLUMNS: ColumnDef<Project, unknown>[] = [
+  { accessorKey: 'project', header: 'Project' },
+  { accessorKey: 'region', header: 'Region' },
   { accessorKey: 'type', header: 'Type' },
-  { accessorKey: 'catches', header: 'Catches' },
-  { accessorKey: 'rarity', header: 'Rarity', cell: ({ getValue }) => '★'.repeat(Number(getValue())) },
+  { accessorKey: 'visits', header: 'Visits' },
+  { accessorKey: 'priority', header: 'Priority', cell: ({ getValue }) => '★'.repeat(Number(getValue())) },
 ];
 
 /** Every option, plus a district showcase. Hover a row; sort a column; page through. */
-export const Neon: StoryObj<typeof DataTable<Legend>> = {
+export const Neon: StoryObj<typeof DataTable<Project>> = {
   args: {
-    title: 'Legends board',
+    title: 'Projects board',
     district: 'midtown',
     striped: true,
     compact: false,
@@ -81,16 +81,16 @@ export const Neon: StoryObj<typeof DataTable<Legend>> = {
   render: (args) => (
     <View className="min-h-screen gap-8 bg-ink-950 p-4 md:p-8">
       <View className="max-w-content-detail">
-        <DataTable {...args} data={LEGENDS} columns={LEGEND_COLUMNS} />
+        <DataTable {...args} data={PROJECTS} columns={PROJECT_COLUMNS} />
       </View>
       <View className="max-w-content-detail gap-6 md:flex-row">
-        <DataTable color="royal" title="Loading" data={LEGENDS} columns={LEGEND_COLUMNS.slice(0, 3)} loading loadingRows={3} className="md:flex-1" />
-        <DataTable color="apple" title="Harbor sightings" data={[]} columns={LEGEND_COLUMNS.slice(0, 3)} emptyText="No sightings on the water yet" className="md:flex-1" />
+        <DataTable color="royal" title="Loading" data={PROJECTS} columns={PROJECT_COLUMNS.slice(0, 3)} loading loadingRows={3} className="md:flex-1" />
+        <DataTable color="apple" title="Archived projects" data={[]} columns={PROJECT_COLUMNS.slice(0, 3)} emptyText="No archived projects yet" className="md:flex-1" />
       </View>
       <View className="max-w-content-detail gap-6 md:flex-row md:flex-wrap">
         {DISTRICTS.map((d) => (
           <View key={d} className="md:w-[calc(50%-12px)]">
-            <DataTable district={d} title={DISTRICT_NAME[d]} data={LEGENDS.slice(0, 3)} columns={LEGEND_COLUMNS.slice(0, 2)} compact />
+            <DataTable district={d} title={DISTRICT_NAME[d]} data={PROJECTS.slice(0, 3)} columns={PROJECT_COLUMNS.slice(0, 2)} compact />
           </View>
         ))}
       </View>
@@ -100,20 +100,20 @@ export const Neon: StoryObj<typeof DataTable<Legend>> = {
 
 // ---- G1/G2: page surface, server mode, layouts, links, selection -----------
 
-type Caller = { callerId: string; email: string; consent: string; joined: string; mons: number };
+type Member = { memberId: string; email: string; consent: string; joined: string; items: number };
 
-const CALLERS: Caller[] = [
-  { callerId: 'usr_01JX4K2', email: 'd•••@g•••.com', consent: 'Pending', joined: '12 Mar 2026', mons: 3 },
-  { callerId: 'usr_01JX9Q7', email: 'm•••@o•••.net', consent: 'Approved', joined: '28 Feb 2026', mons: 1 },
-  { callerId: 'usr_01JY2B4', email: 'p•••@m•••.org', consent: 'Not required', joined: '02 Feb 2026', mons: 5 },
+const MEMBERS: Member[] = [
+  { memberId: 'usr_01JX4K2', email: 'd•••@g•••.com', consent: 'Pending', joined: '12 Mar 2026', items: 3 },
+  { memberId: 'usr_01JX9Q7', email: 'm•••@o•••.net', consent: 'Approved', joined: '28 Feb 2026', items: 1 },
+  { memberId: 'usr_01JY2B4', email: 'p•••@m•••.org', consent: 'Not required', joined: '02 Feb 2026', items: 5 },
 ];
 
-const CALLER_COLUMNS: ColumnDef<Caller, unknown>[] = [
-  { accessorKey: 'callerId', header: 'Caller', meta: { priority: 1 } },
+const MEMBER_COLUMNS: ColumnDef<Member, unknown>[] = [
+  { accessorKey: 'memberId', header: 'Member', meta: { priority: 1 } },
   { accessorKey: 'email', header: 'Email', meta: { priority: 1 } },
   { accessorKey: 'consent', header: 'Consent', meta: { priority: 2 } },
   { accessorKey: 'joined', header: 'Joined', meta: { priority: 3 } },
-  { accessorKey: 'mons', header: 'Mons', meta: { priority: 4, align: 'end' } },
+  { accessorKey: 'items', header: 'Items', meta: { priority: 4, align: 'end' } },
 ];
 
 /** The daylit console face: raised surface, themed type, royal accents. */
@@ -122,10 +122,10 @@ export const PageSurface: Story = {
     <View className="max-w-3xl p-4">
       <DataTable
         surface="page"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
       />
     </View>
   ),
@@ -137,10 +137,10 @@ export const PageSurfaceNight: Story = {
     <View className="scheme-dark max-w-3xl bg-ink-950 p-4">
       <DataTable
         surface="page"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
       />
     </View>
   ),
@@ -148,18 +148,18 @@ export const PageSurfaceNight: Story = {
 
 const ServerSortDemo = () => {
   const [sort, setSort] = React.useState<SortState>({ columnId: 'joined', direction: 'desc' });
-  const rows = [...CALLERS].sort((a, b) => {
+  const rows = [...MEMBERS].sort((a, b) => {
     if (!sort) return 0;
-    const k = sort.columnId as keyof Caller;
+    const k = sort.columnId as keyof Member;
     return (sort.direction === 'asc' ? 1 : -1) * String(a[k]).localeCompare(String(b[k]));
   });
   return (
     <View className="max-w-3xl p-4">
       <DataTable
         surface="page"
-        caption="Callers"
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
         mode={{ kind: 'server', sort, onSortChange: setSort, rows }}
       />
     </View>
@@ -178,10 +178,10 @@ export const PriorityColumns: Story = {
       <DataTable
         surface="page"
         layout="columns"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
       />
     </View>
   ),
@@ -194,10 +194,10 @@ export const RecordRows: Story = {
       <DataTable
         surface="page"
         layout="records"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
       />
     </View>
   ),
@@ -209,11 +209,11 @@ export const RowLinks: Story = {
     <View className="max-w-3xl p-4">
       <DataTable
         surface="page"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
-        getRowHref={(r) => `/admin/callers/${r.callerId}`}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
+        getRowHref={(r) => `/admin/members/${r.memberId}`}
         selectedRowId="usr_01JX9Q7"
       />
     </View>
@@ -226,10 +226,10 @@ const SelectionDemo = () => {
     <View className="max-w-3xl p-4">
       <DataTable
         surface="page"
-        caption="Callers"
-        data={CALLERS}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
+        caption="Members"
+        data={MEMBERS}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
         selection={{ selectedIds: ids, onSelectedIdsChange: setIds }}
       />
     </View>
@@ -247,19 +247,19 @@ export const EmptyAndError: Story = {
     <View className="max-w-3xl gap-6 p-4">
       <DataTable
         surface="page"
-        caption="Callers"
+        caption="Members"
         data={[]}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
-        emptyState={<Text className="p-4 text-text-muted">No Caller matches that search.</Text>}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
+        emptyState={<Text className="p-4 text-text-muted">No Member matches that search.</Text>}
       />
       <DataTable
         surface="page"
-        caption="Callers"
+        caption="Members"
         data={[]}
-        columns={CALLER_COLUMNS}
-        getRowId={(r) => r.callerId}
-        errorState={<Text className="p-4 text-danger">Couldn&rsquo;t load Callers. Try again.</Text>}
+        columns={MEMBER_COLUMNS}
+        getRowId={(r) => r.memberId}
+        errorState={<Text className="p-4 text-danger">Couldn&rsquo;t load members. Try again.</Text>}
       />
     </View>
   ),
@@ -269,7 +269,7 @@ export const EmptyAndError: Story = {
 export const Loading: Story = {
   render: () => (
     <View className="max-w-3xl p-4">
-      <DataTable surface="page" caption="Callers" columns={CALLER_COLUMNS} loading loadingRows={4} />
+      <DataTable surface="page" caption="Members" columns={MEMBER_COLUMNS} loading loadingRows={4} />
     </View>
   ),
 };

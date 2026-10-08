@@ -3,7 +3,7 @@ import { NIGHT_SCHEME } from './NightScope';
 import { toneVariants, type ControlTone, type ToneClasses } from './district';
 
 /**
- * The NYC-MON drop well, shared by the web and native DropZone forks: a
+ * The kit's drop well, shared by the web and native DropZone forks: a
  * night well behind a dashed tone border. Hover (web) firms the border up
  * to solid; a drag over the zone (`active`) makes it solid, lifts the
  * well's floor to ink-900 and adds the tone's accent glow. The glyph tile is

@@ -75,7 +75,7 @@ export interface ToastCardProps extends VariantProps<typeof neonCard> {
   color?: NeonColorInput | Tone;
 }
 
-/** The NYC-MON storefront card; `appearance` is accepted for older callers and ignored. */
+/** The kit's storefront card; `appearance` is accepted for older callers and ignored. */
 export function ToastCard(props: ToastCardProps) {
   return <NeonToastCard {...props} />;
 }

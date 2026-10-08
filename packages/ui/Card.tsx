@@ -17,7 +17,7 @@ import { useReducedMotion } from './backgrounds/use-reduced-motion';
 import { resolveControlTone, toneHex, toneInput, toneVariants, type ControlTone, type District } from './district';
 
 /*
-  The NYC-MON card. With no variant it is the corner-cut facade: a night face
+  The kit's card. With no variant it is the corner-cut facade: a night face
   in a heavy district-tone ring over a solid depth plate, glow off, so any
   content a screen drops in stays the loudest thing. notch is a solid tone
   face with notches bitten out; beam is the night face whose ring carries a

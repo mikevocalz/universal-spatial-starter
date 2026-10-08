@@ -82,7 +82,7 @@ export const Navigation: Story = {
     <View className="w-64 p-4">
       <List>
         <ListItem href="/admin/overview">Overview</ListItem>
-        <ListItem href="/admin/callers" current>Callers</ListItem>
+        <ListItem href="/admin/members" current>Members</ListItem>
         <ListItem href="/admin/consent">Consent queue</ListItem>
         <ListItem href="/admin/audit">Audit log</ListItem>
       </List>

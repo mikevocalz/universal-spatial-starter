@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
 
-export const Indeterminate: Story = { args: { indeterminate: true, subLabel: undefined, centerLabel: 'NYC' } };
+export const Indeterminate: Story = { args: { indeterminate: true, subLabel: undefined, centerLabel: 'GO' } };
 
 export const Districts: Story = {
   render: () => (
@@ -36,7 +36,7 @@ export const Districts: Story = {
         <View className="flex-row flex-wrap items-center gap-5">
           <CircularProgress district={district} size="sm" value={30} />
           <CircularProgress district={district} size="md" value={72} subLabel="done" />
-          <CircularProgress district={district} size="lg" indeterminate centerLabel="NYC" />
+          <CircularProgress district={district} size="lg" indeterminate centerLabel="GO" />
         </View>
       )}
     </DistrictGrid>

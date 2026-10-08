@@ -27,9 +27,9 @@ export const PageSurface: Story = {
   render: (args) => (
     <View className="min-h-[420px] justify-center bg-ink-950 p-6 md:p-10">
       <SolidPanel {...args} className="max-w-xl gap-3 px-6 py-6">
-        <Heading level={2} className="my-0 font-display text-2xl text-text">Every block has a legend.</Heading>
+        <Heading level={2} className="my-0 font-display text-2xl text-text">Every panel has a story.</Heading>
         <Paragraph className="my-0 text-base text-text-muted">
-          Mons live in New York, on the same blocks as you.
+          Panels sit on the page surface in both themes.
         </Paragraph>
       </SolidPanel>
     </View>

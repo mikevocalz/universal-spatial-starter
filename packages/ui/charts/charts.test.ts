@@ -6,7 +6,6 @@ import {
   curvePath, linePoints, nearestIndex, niceTicks, polar, resolveSeries, segmentAt, smoothPath,
 } from './chart-model.ts';
 import { keylineFor, seriesColor, seriesShades } from './district-tones.ts';
-import { skylineProfile } from '../nav/skyline-profile.ts';
 
 const DATA = [
   { name: 'Jan', visits: 120, calls: '40' },
@@ -131,17 +130,6 @@ test('district tones lead with the district hero and honour explicit colours', (
   assert.equal(seriesShades(0, 'midtown').side, palette.orange[700]);
   assert.equal(keylineFor(brand.orange), brand.royal);
   assert.equal(keylineFor(brand.royal), palette.royal[950]);
-});
-
-test('skyline profiles are deterministic per district and fill the width', () => {
-  const a = skylineProfile('downtown', 24);
-  assert.deepEqual(a, skylineProfile('downtown', 24));
-  assert.equal(a.length, 24);
-  assert.notDeepEqual(a.map((b) => b.height), skylineProfile('harlem', 24).map((b) => b.height));
-  for (const b of a) assert.ok(b.height > 0 && b.height <= 1);
-  // Harlem rows sit low; downtown towers rise higher on average.
-  const avg = (d: Parameters<typeof skylineProfile>[0]) => skylineProfile(d, 40).reduce((s, b) => s + b.height, 0) / 40;
-  assert.ok(avg('downtown') > avg('harlem'));
 });
 
 test('curve types: linear joins points, steps hold values, smooth kinds use the spline', () => {

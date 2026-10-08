@@ -117,7 +117,7 @@ export const Clearable: Story = {
       <View className="max-w-content-form gap-5 bg-bg p-4">
         <TextField
           surface="daylit"
-          label="Caller name"
+          label="Display name"
           hint="Up to 16 characters."
           value={value}
           onChangeText={setValue}
