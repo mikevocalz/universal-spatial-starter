@@ -2,12 +2,31 @@
 
 import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
+import { riveContract, riveFiles } from '@acme/assets/rive';
+import { RivePanel } from '@acme/spatial';
+import { SegmentedControl } from '@acme/ui';
 import { Pressable, Text, View } from '@acme/ui/tw';
-import { BAND, pulsePhase, remainingMs } from '../game/pulse-catch';
-import { usePulseStore } from '../state';
+import { BAND, pulsePhase, remainingMs, type PulseAction, type PulseStatus } from '../game/pulse-catch';
+import { useGameModeStore, usePulseStore, type GameInterface } from '../state';
 import { ActionButton, Panel, ScreenFrame } from './parts';
 
-const STAGE = 280;
+const INTERFACES = [
+  { value: 'mixed', label: 'Mixed' },
+  { value: 'rive', label: 'Full Rive' },
+] as const satisfies readonly { value: GameInterface; label: string }[];
+
+const PRIMARY_LABEL: Record<PulseStatus, string> = { ready: 'Start', running: 'Pause', paused: 'Resume', over: 'Play again' };
+const STAGE_LABEL: Record<PulseStatus, string> = { ready: 'Ready', running: 'Ring swelling toward the band', paused: 'Paused', over: 'Over' };
+
+/** What the single primary control does in each status. The art never decides this. */
+function primaryAction(status: PulseStatus): PulseAction {
+  return status === 'running' ? { type: 'pause' } : status === 'paused' ? { type: 'resume' } : { type: 'start' };
+}
+
+function pressPrimary() {
+  const { game, dispatch } = usePulseStore.getState();
+  dispatch(primaryAction(game.status));
+}
 
 /** Drives the game clock with requestAnimationFrame while a session runs. */
 function usePulseClock(running: boolean) {
@@ -35,7 +54,11 @@ function usePauseInBackground() {
   }, [dispatch]);
 }
 
-/** Space catches on a keyboard, P pauses and resumes. Web only; native uses the on-screen controls. */
+/**
+ * Space catches, P pauses and resumes, Enter runs the primary action when nothing
+ * else has focus. Web only; native uses the on-screen controls. Works the same in
+ * both interfaces, so the Full Rive button never needs its own keyboard path.
+ */
 function useKeyboardControls() {
   const dispatch = usePulseStore((s) => s.dispatch);
   useEffect(() => {
@@ -47,6 +70,8 @@ function useKeyboardControls() {
         dispatch({ type: 'catch' });
       } else if (e.code === 'KeyP') {
         dispatch({ type: status === 'paused' ? 'resume' : 'pause' });
+      } else if (e.code === 'Enter' && e.target === document.body) {
+        pressPrimary();
       }
     };
     window.addEventListener('keydown', onKey);
@@ -57,26 +82,44 @@ function useKeyboardControls() {
 export function GameScreen() {
   const game = usePulseStore((s) => s.game);
   const dispatch = usePulseStore((s) => s.dispatch);
+  const ui = useGameModeStore((s) => s.ui);
+  const setUi = useGameModeStore((s) => s.setUi);
   usePulseClock(game.status === 'running');
   useKeyboardControls();
   usePauseInBackground();
 
-  // ponytail: the ring re-renders through React each frame; move it to a Reanimated shared value once the Rive stage replaces it.
-  const ring = Math.max(8, pulsePhase(game.elapsedMs) * STAGE);
   const seconds = Math.ceil(remainingMs(game) / 1000);
+  const primary = PRIMARY_LABEL[game.status];
+  const scoreLine = `${game.score} caught, ${game.misses} missed, ${seconds} seconds left`;
 
   return (
     <ScreenFrame title="Game Workspace" purpose="Catch the ring while it crosses the blue band. Thirty seconds, one catch per pulse.">
       <View className="gap-4 lg:flex-row lg:items-start">
         <Panel label="Controls" className="lg:w-64">
-          {game.status === 'running' ? (
-            <ActionButton tone="quiet" label="Pause" onPress={() => dispatch({ type: 'pause' })} />
-          ) : game.status === 'paused' ? (
-            <ActionButton label="Resume" onPress={() => dispatch({ type: 'resume' })} />
+          <SegmentedControl tone="royal" aria-label="Interface" options={INTERFACES} value={ui} onChange={setUi} />
+          {ui === 'mixed' ? (
+            <ActionButton tone={game.status === 'running' ? 'quiet' : 'solid'} label={primary} onPress={pressPrimary} />
           ) : (
-            <ActionButton label={game.status === 'over' ? 'Play again' : 'Start'} onPress={() => dispatch({ type: 'start' })} />
+            // The artwork is the pointer target: its press trigger reaches pressPrimary. Screen readers
+            // get the same action through the activate accessibility action, keyboards through Enter and P.
+            <View
+              accessible
+              role="button"
+              aria-label={primary}
+              accessibilityActions={[{ name: 'activate' }]}
+              onAccessibilityAction={(e) => e.nativeEvent.actionName === 'activate' && pressPrimary()}
+            >
+              <RivePanel
+                source={riveFiles.gameControls}
+                contract={riveContract.gameControls}
+                values={{ status: game.status }}
+                triggers={{ press: pressPrimary }}
+                label={primary}
+                aspectRatio={240 / 64}
+              />
+            </View>
           )}
-          <Text className="text-sm leading-6 text-silver-400">Tap the stage or press Space to catch. P pauses.</Text>
+          <Text className="text-sm leading-6 text-silver-400">Tap the stage or press Space to catch. P pauses, Enter starts.</Text>
         </Panel>
 
         <Pressable
@@ -84,26 +127,41 @@ export function GameScreen() {
           aria-label="Catch the pulse"
           disabled={game.status !== 'running'}
           onPress={() => dispatch({ type: 'catch' })}
-          className="flex-1 items-center justify-center rounded-2xl border border-ink-800 bg-ink-900 py-8"
+          className="flex-1 items-center justify-center rounded-2xl border border-ink-800 bg-ink-900 p-4"
         >
-          <View className="items-center justify-center" style={{ width: STAGE, height: STAGE }}>
-            <View
-              className="absolute rounded-full border-8 border-royal-500/40"
-              style={{ width: STAGE * ((BAND.from + BAND.to) / 2), height: STAGE * ((BAND.from + BAND.to) / 2) }}
+          <View className="w-full max-w-[400px]">
+            <RivePanel
+              source={riveFiles.pulseCatch}
+              contract={riveContract.pulseCatch}
+              values={{
+                phase: game.status === 'ready' ? 0 : pulsePhase(game.elapsedMs),
+                bandFrom: BAND.from,
+                bandTo: BAND.to,
+                status: game.status,
+                score: game.score,
+              }}
+              label={game.status === 'over' ? `${game.score} caught` : STAGE_LABEL[game.status]}
+              aspectRatio={1}
             />
-            <View className="absolute rounded-full border-2 border-silver-100" style={{ width: ring, height: ring }} />
-            {game.status !== 'running' ? (
-              <Text className="font-display text-2xl text-silver-50">
-                {game.status === 'over' ? `${game.score} caught` : game.status === 'paused' ? 'Paused' : 'Ready'}
-              </Text>
-            ) : null}
           </View>
         </Pressable>
 
-        <Panel label="Score" className="flex-row justify-between lg:w-56 lg:flex-col">
-          <Text aria-live="polite" className="font-display text-4xl text-silver-50">{game.score}</Text>
-          <Text className="text-base text-silver-300">{game.misses} missed</Text>
-          <Text className="text-base text-silver-300">{seconds}s left</Text>
+        <Panel label="Score" className="lg:w-56">
+          {ui === 'mixed' ? (
+            <View className="flex-row justify-between lg:flex-col">
+              <Text aria-live="polite" className="font-display text-4xl text-silver-50">{game.score}</Text>
+              <Text className="text-base text-silver-300">{game.misses} missed</Text>
+              <Text className="text-base text-silver-300">{seconds}s left</Text>
+            </View>
+          ) : (
+            <RivePanel
+              source={riveFiles.gameHud}
+              contract={riveContract.gameHud}
+              values={{ score: game.score, misses: game.misses, secondsLeft: seconds }}
+              label={scoreLine}
+              aspectRatio={240 / 200}
+            />
+          )}
         </Panel>
       </View>
     </ScreenFrame>

@@ -58,6 +58,7 @@ const nextConfig: NextConfig = {
     '@acme/ui',
     '@acme/app',
     '@acme/camera',
+    '@acme/assets',
     '@expo/html-elements',
     'expo-paste-input',
     'expo-drag-drop-content-view',

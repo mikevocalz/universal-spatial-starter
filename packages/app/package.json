@@ -16,6 +16,7 @@
     "test": "node --test '**/*.test.ts'"
   },
   "dependencies": {
+    "@acme/assets": "workspace:*",
     "@acme/camera": "workspace:*",
     "@acme/spatial": "workspace:*",
     "@acme/theme": "workspace:*",

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { initialPulseState, reducePulse, type PulseAction, type PulseState } from './game/pulse-catch';
+import { initialPulseState, reducePulse, type PulseAction, type PulseState } from './game/pulse-catch.ts';
 
 /** /native: StandardWorkspace selection, search and inspector. */
 export const useWorkspaceStore = create<{
@@ -41,6 +41,18 @@ export const useSignalStore = create<{
 export const usePulseStore = create<{ game: PulseState; dispatch: (action: PulseAction) => void }>((set) => ({
   game: initialPulseState,
   dispatch: (action) => set((s) => ({ game: reducePulse(s.game, action) })),
+}));
+
+export type GameInterface = 'mixed' | 'rive';
+
+/**
+ * /game: which interface draws the controls and HUD. Mixed uses native controls
+ * and a native HUD; Full Rive swaps both for artboards. Kept apart from
+ * usePulseStore so switching can never touch the game state.
+ */
+export const useGameModeStore = create<{ ui: GameInterface; setUi: (ui: GameInterface) => void }>((set) => ({
+  ui: 'mixed',
+  setUi: (ui) => set({ ui }),
 }));
 
 /** /immersive: whether the Orbit Lab stage is mounted. Closed on first render, so SSR never touches the renderer. */

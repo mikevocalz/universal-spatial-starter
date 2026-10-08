@@ -897,6 +897,9 @@ importers:
 
   packages/app:
     dependencies:
+      '@acme/assets':
+        specifier: workspace:*
+        version: link:../assets
       '@acme/camera':
         specifier: workspace:*
         version: link:../camera
