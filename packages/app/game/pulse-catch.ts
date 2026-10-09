@@ -11,8 +11,6 @@ export const SESSION_MS = 30_000;
 export const PERIOD_MS = 1_600;
 /** Band of the pulse phase (0 = centre, 1 = edge) that counts as a catch. */
 export const BAND = { from: 0.68, to: 0.86 } as const;
-/** Longest frame the clock accepts, so a backgrounded app can't skip the session. */
-export const MAX_STEP_MS = 100;
 
 export type PulseStatus = 'ready' | 'running' | 'paused' | 'over';
 
@@ -52,7 +50,10 @@ export function reducePulse(state: PulseState, action: PulseAction): PulseState 
       return state.status === 'paused' ? { ...state, status: 'running' } : state;
     case 'tick': {
       if (state.status !== 'running') return state;
-      const elapsedMs = Math.min(SESSION_MS, state.elapsedMs + Math.min(Math.max(action.dtMs, 0), MAX_STEP_MS));
+      // Count the full active interval — clamping dtMs would stretch the
+      // session at low frame rates. Background gaps are the caller's job:
+      // it dispatches 'pause' from the AppState/visibility listener.
+      const elapsedMs = Math.min(SESSION_MS, state.elapsedMs + Math.max(action.dtMs, 0));
       return { ...state, elapsedMs, status: elapsedMs >= SESSION_MS ? 'over' : 'running' };
     }
     case 'catch': {

@@ -34,10 +34,15 @@ test('pause freezes the clock and blocks catches', () => {
   assert.equal(s.score, 1);
 });
 
-test('the session ends at SESSION_MS and a huge frame cannot skip it', () => {
-  let s = reducePulse(reducePulse(initialPulseState, { type: 'start' }), { type: 'tick', dtMs: 60_000 });
-  assert.equal(s.elapsedMs, 100);
-  s = run(s, SESSION_MS);
+test('the session ends at SESSION_MS even when a frame overshoots it', () => {
+  const s = reducePulse(reducePulse(initialPulseState, { type: 'start' }), { type: 'tick', dtMs: 60_000 });
+  assert.equal(s.elapsedMs, SESSION_MS);
   assert.equal(s.status, 'over');
   assert.equal(reducePulse(s, { type: 'catch' }), s);
+});
+
+test('slow frames count their full elapsed time instead of stretching the session', () => {
+  let s = reducePulse(initialPulseState, { type: 'start' });
+  for (let i = 0; i < SESSION_MS / 200; i++) s = reducePulse(s, { type: 'tick', dtMs: 200 });
+  assert.equal(s.status, 'over');
 });
