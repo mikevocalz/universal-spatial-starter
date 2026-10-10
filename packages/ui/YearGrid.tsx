@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useInstanceStore, useStore } from './use-instance-store';
 import { tv } from 'tailwind-variants';
 import { TONE_CLASSES } from './district';
 import { Pressable, Text, View } from './tw';
@@ -58,7 +58,9 @@ export function YearGrid({ value, onChange, minYear, maxYear, step, onStepChange
   // A chosen decade is not a chosen year: it is remembered internally so no
   // `value` exists (and no screen-level Continue unlocks) until a year tile
   // is pressed.
-  const [pickedDecade, setPickedDecade] = useState<number | null>(null);
+  const store = useInstanceStore(() => ({ pickedDecade: null as number | null }));
+  const pickedDecade = useStore(store, (state) => state.pickedDecade);
+  const setPickedDecade = (pickedDecade: number | null) => store.setState({ pickedDecade });
   const firstDecade = Math.floor(minYear / 10) * 10;
   const lastDecade = Math.floor(maxYear / 10) * 10;
   const selectedDecade = value === null ? null : Math.floor(value / 10) * 10;

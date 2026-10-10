@@ -23,6 +23,8 @@ export {
   Moon,
   ShieldCheck,
   Layers,
+  Gamepad2,
+  ScanLine,
   ArrowRight,
   Heart,
   Eye,

@@ -52,6 +52,20 @@ const config: StorybookConfig = {
     const typegpu =
       typeof typegpuModule.default === 'function' ? typegpuModule.default : typegpuModule.default.default;
     viteConfig.plugins = [
+      {
+        name: 'react-native-web-asset-registry',
+        enforce: 'pre',
+        resolveId(source) {
+          return source.includes('react-native/src/private/assets/AssetRegistry')
+            ? resolve(here, '../node_modules/react-native-web/dist/modules/AssetRegistry/index.js')
+            : null;
+        },
+        load(id) {
+          return id.includes('react-native/src/private/assets/AssetRegistry.js')
+            ? `export * from ${JSON.stringify(resolve(here, '../node_modules/react-native-web/dist/modules/AssetRegistry/index.js'))};`
+            : null;
+        },
+      },
       ...(viteConfig.plugins ?? []),
       typegpu(),
       react(),
@@ -92,6 +106,10 @@ const config: StorybookConfig = {
         },
         { find: /^@legendapp\/motion$/, replacement: legendMotionEsm },
         {
+          find: /^react-native\/(?:Libraries\/Image|src\/private\/assets)\/AssetRegistry(?:\.js)?$/,
+          replacement: resolve(here, '../node_modules/react-native-web/dist/modules/AssetRegistry/index.js'),
+        },
+        {
           find: /^react-native$/,
           replacement: resolve(here, '../node_modules/react-native-web/dist/index.js'),
         },
@@ -109,6 +127,7 @@ const config: StorybookConfig = {
     viteConfig.server = { ...(viteConfig.server ?? {}), hmr: false };
     viteConfig.optimizeDeps = {
       ...(viteConfig.optimizeDeps ?? {}),
+      exclude: [...(viteConfig.optimizeDeps?.exclude ?? []), 'react-native'],
       // @expo/html-elements has a .tsx entry Vite refuses to optimize, so its
       // import chain into react-native-web/dist is served raw. Every CJS dep
       // that chain touches must be pre-bundled explicitly (exact subpaths) or
@@ -132,6 +151,7 @@ const config: StorybookConfig = {
           'memoize-one',
           'nullthrows',
           'fbjs/lib/invariant',
+          'fbjs/lib/warning',
           'inline-style-prefixer/lib/createPrefixer',
           'inline-style-prefixer/lib/plugins/crossFade',
           'inline-style-prefixer/lib/plugins/imageSet',

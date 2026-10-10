@@ -34,3 +34,9 @@ scripts/out/
 # Rive CLI build output; tooling/build-rive.mjs copies the .riv out
 packages/assets/rive-src/*/build/
 apps/web/public/rive/rive.wasm
+
+# Local Expo module compilation output
+apps/mobile/modules/**/android/build/
+
+# Machine-specific device and tooling discovery
+.codex/project-environment.json

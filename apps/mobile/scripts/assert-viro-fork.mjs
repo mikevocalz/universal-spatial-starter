@@ -105,12 +105,12 @@ Resolved version:
   ${pkg.version ?? 'unknown'}
 
 The pnpm-workspace.yaml catalog pins @reactvision/react-viro to
-github:mikevocalz/viro at a commit on main. Something resolved a different
+the vendored SDK-58 fork tarball. Something resolved a different
 copy (an override, a stale install, or the public npm package), and that copy
 lacks the capabilities below. The public package is NOT accepted for Expo
 SDK 58 native/headset builds.
 
-Restore the catalog pin and its matching allowBuilds entry, then:
+Restore the vendored catalog pin, then:
 
   pnpm install
 

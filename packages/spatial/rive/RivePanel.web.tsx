@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Alignment,
   Fit,
@@ -11,6 +11,7 @@ import {
   useViewModelInstance,
   type ViewModelInstance,
 } from '@rive-app/react-webgl2';
+import { useInstanceStore, useStore } from '@acme/ui';
 import type { RivePanelContract, RivePanelProps, RivePanelStatus, RivePropertyKind } from './RivePanel.types';
 import { RivePanelFrame } from './RivePanelFrame';
 
@@ -44,7 +45,9 @@ function propertyOf(instance: ViewModelInstance, name: string, kind: RivePropert
  * that instance whenever they change; the canvas is created once per `source`.
  */
 export function RivePanel<C extends RivePanelContract>({ source, contract, values, triggers, label, aspectRatio, className }: RivePanelProps<C>) {
-  const [failure, setFailure] = useState<string | null>(null);
+  const statusStore = useInstanceStore(() => ({ failure: null as string | null }));
+  const failure = useStore(statusStore, (state) => state.failure);
+  const setFailure = useCallback((failure: string | null) => statusStore.setState({ failure }), [statusStore]);
   const src = String(source);
   const { rive, RiveComponent } = useRive({
     src,

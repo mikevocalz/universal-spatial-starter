@@ -63,10 +63,11 @@ export function ForkSpatialLayout({
       {panel ? (
         <SpatialWindow
           label="spatial-tools"
-          windowWidth={420}
-          windowHeight={560}
+          windowWidth={400}
+          windowHeight={600}
           fallback="inline"
-          priority={1}
+          priority={10}
+          anchor={{ parent: 'end', child: 'start' }}
         >
           {panel}
         </SpatialWindow>

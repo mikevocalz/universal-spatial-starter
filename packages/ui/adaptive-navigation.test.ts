@@ -1,151 +1,54 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { FoldLayout } from './adaptive-panes/fold-layout.ts';
-import { resolveAdaptiveNavigationPlacement } from './adaptive-navigation.ts';
+import { resolveAdaptiveNavigationPlacement, type ResolveAdaptiveNavigationPlacementInput } from './adaptive-navigation.ts';
 
-const tabletop: FoldLayout = {
-  orientation: 'horizontal',
-  state: 'halfOpened',
-  posture: 'tabletop',
-  separating: true,
-  x: 0,
-  y: 400,
-  width: 900,
-  height: 0,
+const base: ResolveAdaptiveNavigationPlacementInput = {
+  platform: 'android', sizeClass: 'compact', heightDp: 800, folds: [], isRTL: false,
 };
+const resolve = (patch: Partial<ResolveAdaptiveNavigationPlacementInput>) =>
+  resolveAdaptiveNavigationPlacement({ ...base, ...patch });
 
-test('Android compact windows use bottom navigation', () => {
-  assert.deepEqual(
-    resolveAdaptiveNavigationPlacement({
-      platform: 'android',
-      sizeClass: 'compact',
-      heightDp: 800,
-      folds: [],
-      isRTL: false,
-    }),
-    {
-      kind: 'bottom-compact',
-      position: 'bottom',
-      rail: false,
-      expanded: false,
-      hardwareWidth: 0,
-    },
-  );
+test('ordinary native phones keep bottom tabs in portrait and wide landscape', () => {
+  for (const platform of ['ios', 'android'] as const) {
+    for (const sizeClass of ['compact', 'medium', 'expanded', 'large'] as const) {
+      assert.equal(resolve({ platform, sizeClass, isTablet: false, heightDp: 420 }).position, 'bottom');
+    }
+  }
 });
 
-test('Android tabletop posture keeps navigation on the bottom even at expanded width', () => {
-  const placement = resolveAdaptiveNavigationPlacement({
-    platform: 'android',
-    sizeClass: 'expanded',
-    heightDp: 800,
-    folds: [tabletop],
-    isRTL: false,
-  });
-  assert.equal(placement.kind, 'bottom-medium');
-  assert.equal(placement.position, 'bottom');
+test('folded, unfolded and tabletop foldables retain a physical right rail including RTL', () => {
+  for (const platform of ['ios', 'android'] as const) {
+    for (const sizeClass of ['compact', 'medium', 'expanded', 'large'] as const) {
+      for (const isRTL of [false, true]) {
+        assert.equal(resolve({ platform, sizeClass, isFoldable: true, isTablet: false, isRTL, heightDp: 420 }).position, 'right');
+      }
+    }
+  }
+  assert.equal(resolve({ folds: [{ orientation: 'horizontal', state: 'halfOpened', posture: 'tabletop', separating: true, x: 0, y: 400, width: 900, height: 0 }] }).position, 'right');
 });
 
-test('Android regular foldables and tablets use logical-start rail', () => {
-  assert.equal(
-    resolveAdaptiveNavigationPlacement({
-      platform: 'android',
-      sizeClass: 'expanded',
-      heightDp: 800,
-      folds: [],
-      isRTL: false,
-    }).position,
-    'left',
-  );
-  assert.equal(
-    resolveAdaptiveNavigationPlacement({
-      platform: 'android',
-      sizeClass: 'expanded',
-      heightDp: 800,
-      folds: [],
-      isRTL: true,
-    }).position,
-    'right',
-  );
+test('tablets and headsets retain rails in narrow windows', () => {
+  assert.equal(resolve({ isTablet: true }).position, 'right');
+  assert.equal(resolve({ isHeadset: true }).position, 'right');
 });
 
-test('Android extra-large desktop windows get an expanded wide rail', () => {
-  const placement = resolveAdaptiveNavigationPlacement({
-    platform: 'android',
-    sizeClass: 'extraLarge',
-    heightDp: 900,
-    folds: [],
-    isRTL: false,
-  });
-  assert.equal(placement.kind, 'rail-expanded');
-  assert.equal(placement.expanded, true);
+test('Duo hardware column width is consumed on the right once', () => {
+  const result = resolve({ platform: 'ios', hardwareEdge: { edge: 'right', width: 84 }, isRTL: true });
+  assert.equal(result.kind, 'apple-hardware-rail');
+  assert.equal(result.hardwareWidth, 84);
+  assert.equal(result.expanded, false);
+  const leftColumn = resolve({ platform: 'ios', hardwareEdge: { edge: 'left', width: 84 } });
+  assert.equal(leftColumn.position, 'right');
+  assert.equal(leftColumn.hardwareWidth, 0);
 });
 
-test('Apple hardware column is physical and does not mirror in RTL', () => {
-  const placement = resolveAdaptiveNavigationPlacement({
-    platform: 'ios',
-    sizeClass: 'compact',
-    heightDp: 800,
-    folds: [],
-    hardwareEdge: { edge: 'left', width: 84 },
-    isRTL: true,
-  });
-  assert.equal(placement.position, 'left');
-  assert.equal(placement.kind, 'apple-hardware-rail');
-  assert.equal(placement.hardwareWidth, 84);
-});
-
-test('ordinary iPad-width Apple windows use a logical leading sidebar', () => {
-  assert.equal(
-    resolveAdaptiveNavigationPlacement({
-      platform: 'ios',
-      sizeClass: 'expanded',
-      heightDp: 800,
-      folds: [],
-      isRTL: false,
-    }).position,
-    'left',
-  );
-  assert.equal(
-    resolveAdaptiveNavigationPlacement({
-      platform: 'ios',
-      sizeClass: 'expanded',
-      heightDp: 800,
-      folds: [],
-      isRTL: true,
-    }).position,
-    'right',
-  );
-});
-
-test('any tabletop hinge wins even on a multi-hinge device', () => {
-  const vertical: FoldLayout = {
-    ...tabletop,
-    orientation: 'vertical',
-    posture: 'book',
-    x: 300,
-    y: 0,
-    width: 20,
-    height: 900,
-  };
-  const placement = resolveAdaptiveNavigationPlacement({
-    platform: 'android',
-    sizeClass: 'large',
-    heightDp: 800,
-    folds: [vertical, tabletop],
-    isRTL: false,
-  });
-  assert.equal(placement.position, 'bottom');
-});
-
-
-test('Android compact-height landscape stays on bottom navigation at wide width', () => {
-  const placement = resolveAdaptiveNavigationPlacement({
-    platform: 'android',
-    sizeClass: 'expanded',
-    heightDp: 420,
-    folds: [],
-    isRTL: false,
-  });
-  assert.equal(placement.kind, 'bottom-medium');
-  assert.equal(placement.position, 'bottom');
+test('web never gets a rail: header navigation wide, header plus tabs at phone widths', () => {
+  for (const isFoldable of [false, true]) {
+    for (const sizeClass of ['compact', 'medium', 'expanded', 'large', 'extraLarge'] as const) {
+      const result = resolve({ platform: 'other', sizeClass, isFoldable });
+      assert.equal(result.rail, false);
+      assert.equal(result.position, sizeClass === 'compact' ? 'bottom' : 'top');
+      assert.equal(result.kind, sizeClass === 'compact' ? 'bottom-compact' : 'header-only');
+    }
+  }
 });

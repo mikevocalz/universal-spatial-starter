@@ -6,10 +6,13 @@ packages:
 # Keep these overrides aligned with the SDK 58 template instead of forcing
 # upstream "latest" versions that Expo has not validated together.
 overrides:
-  lightningcss: 1.30.1
+  lightningcss: 1.33.0
   react: 19.3.0
   react-dom: 19.3.0
   "@expo/dom-webview": 58.0.2
+  # @expo/router-server (inside @expo/cli) resolves metro-runtime for itself;
+  # unify it with the catalog pin instead of letting a second copy drift in.
+  "@expo/metro-runtime": 58.0.14
 
 # @reactvision/react-viro is vendored at vendor/reactvision-react-viro-3.0.2-moyo.1.tgz:
 # an npm pack of the mikevocalz/viro fork pinned at commit 5393d00744f4. The
@@ -21,9 +24,12 @@ overrides:
 # Known, accepted peer warnings (pnpm 12.8.1 ignored the packageExtensions that
 # used to sit here: removing them left the resolved graph unchanged, so they
 # were dropped on 2026-10-04).
-# - @rive-app/react-native@0.5.2 (npm latest) declares
+# - @rive-app/react-native@0.5.4 (npm latest) declares
 #   react-native-nitro-modules <0.37. This starter intentionally stays on
 #   Nitro 0.37.x (also npm latest).
+# - expo-modules-core@58.0.15 declares react-native-worklets ^0.7-0.10. This
+#   starter intentionally stays on worklets 0.13.x (npm latest, and what
+#   reanimated 4.7 / skia 3.3 / webgpu 0.13 peer on).
 
 allowBuilds:
   # false: the vendored tarball ships the fork's committed dist/; there is no
@@ -40,7 +46,7 @@ allowBuilds:
 # selected Expo 58 family to install immediately.
 minimumReleaseAgeExclude:
   - '@shopify/*'
-  # Skia v3 and its Graphite binary packages (3.0.2 published 2026-10-03).
+  # Skia v3 and its Graphite binary packages (3.3.0 published 2026-10-08).
   - react-native-skia
   - 'react-native-skia-*'
   - 'canvaskit-wasm'
@@ -54,81 +60,86 @@ minimumReleaseAgeExclude:
   - babel-preset-expo
   - eslint-config-expo
   - eslint-plugin-expo@1.2.1
-  # Taken fresh on purpose (published <24h before the 2026-10-04 upgrade).
-  - lucide-react@1.51.0
-  - lucide-react-native@1.51.0
+  # Taken fresh on purpose (published <24h before the 2026-10-10 upgrade).
+  - lucide-react@1.54.0
+  - lucide-react-native@1.54.0
+  - "@tanstack/react-virtual@3.14.14"
+  - "@tanstack/virtual-core@3.18.0"
+  - "@types/node@26.6.5"
+  - react-native-screens@4.29.0
 
 # One version per dependency, declared once. Package manifests consume catalog:.
 catalog:
   # Expo SDK 58 stable / React Native 0.88 lane
   react: 19.3.0
   react-dom: 19.3.0
-  react-native: 0.88.0-rc.3
-  react-native-web: 0.21.3
-  expo: 58.0.3
+  react-native: 0.88.0-rc.4
+  react-native-web: 0.21.4
+  expo: 58.0.7
   "@expo/env": 2.5.1
-  "@expo/metro-runtime": 58.0.11
-  expo-asset: 58.0.11
-  expo-constants: 58.0.9
+  "@expo/metro-runtime": 58.0.14
+  expo-asset: 58.0.13
+  expo-constants: 58.0.10
   "@expo/dom-webview": 58.0.2
-  expo-font: 58.0.6
-  expo-image: 58.0.11
+  expo-font: 58.0.7
+  expo-image: 58.0.13
   expo-glass-effect: 58.0.3
   expo-symbols: 58.0.4
   "@expo/material-symbols": 0.1.1
-  expo-linking: 58.0.10
-  expo-router: 58.0.13
-  expo-splash-screen: 58.0.5
+  expo-linking: 58.0.11
+  expo-router: 58.0.17
+  expo-splash-screen: 58.0.7
   expo-status-bar: 58.0.3
   expo-system-ui: 58.0.5
   expo-build-properties: 58.0.10
   # apps/mobile/babel.config.js names this preset, so the app must declare it;
   # the Gradle JS bundle step resolves it from the app, not through expo.
-  babel-preset-expo: 58.0.9
+  babel-preset-expo: 58.0.12
   react-native-audio-api: audio-api-nightly
-  react-native-keyboard-controller: 1.22.4
+  react-native-keyboard-controller: 1.22.6
   react-native-nitro-modules: 0.37.1
-  react-native-gesture-handler: ~3.2.1
-  react-native-reanimated: 4.7.0
-  react-native-safe-area-context: ~5.9.1
-  react-native-screens: ~4.28.0
+  react-native-gesture-handler: ~3.3.0
+  react-native-reanimated: 4.7.1
+  react-native-safe-area-context: ~5.10.1
+  react-native-screens: ~4.29.0
   react-native-worklets: 0.13.0
   # Required (non-optional) peer of react-native-worklets; declared so pnpm
   # does not auto-install npm `latest` (0.87.x) against RN 0.88.
-  "@react-native/metro-config": 0.88.0-rc.3
+  "@react-native/metro-config": 0.88.0-rc.4
   "@react-navigation/native": 7.5.0
   solito: 5.0.0
-  lucide-react: 1.51.0
-  lucide-react-native: 1.51.0
+  lucide-react: 1.54.0
+  lucide-react-native: 1.54.0
   react-native-svg: 15.15.5
   react-native-pulsar: 1.7.0
   "@expo/html-elements": 58.0.3
-  "@expo/ui": 58.0.12
+  "@expo/ui": 58.0.15
   expo-paste-input: 0.2.2
   expo-drag-drop-content-view: 0.9.2
 
   # universal GPU graphics
   # Skia v3 (Graphite by default; Android minSdk 26+). One package under two
   # names: react-native-graph imports @shopify/react-native-skia, our code
-  # imports react-native-skia, and both resolve to the same 3.0.2 install.
-  react-native-skia: 3.0.2
-  "@shopify/react-native-skia": npm:react-native-skia@3.0.2
+  # imports react-native-skia, and both resolve to the same 3.3.0 install.
+  # canvaskit-wasm is pinned to skia 3.3.0's own dependency, not npm latest.
+  react-native-skia: 3.3.0
+  "@shopify/react-native-skia": npm:react-native-skia@3.3.0
   react-native-graph: 1.4.0
   canvaskit-wasm: 0.41.0
-  react-native-webgpu: 0.10.4
-  typegpu: 0.12.6
+  react-native-webgpu: 0.13.0
+  typegpu: 0.12.7
   # three.js on its WebGPU renderer (WebGL2 backend as the web fallback),
   # with TypeGPU functions bridged into TSL by @typegpu/three.
   three: 0.186.1
   "@typegpu/three": 0.12.1
-  "@typegpu/gl": 0.12.5
+  "@typegpu/gl": 0.12.6
 
   # spatial / XR / Rive
   "@reactvision/react-viro": file:vendor/reactvision-react-viro-3.0.2-moyo.1.tgz
   "@reactvision/viro-web-renderer": 1.0.1
   "@metavr/layout-compat": 1.0.0
   "@metavr/layout-window-compat": 1.0.0
-  "@rive-app/react-native": 0.5.2
+  "@rive-app/react-native": 0.5.4
   "@rive-app/react-webgl2": 4.36.0
 
   # Camera Lab (packages/camera). VisionCamera v5 is the Nitro rewrite; its
@@ -143,8 +154,8 @@ catalog:
   react-native-fast-tflite: 3.0.1
 
   # web
-  "@next/env": 16.3.8
-  next: 16.3.8
+  "@next/env": 16.4.0
+  next: 16.4.0
   nextjs-toploader: 3.9.17
 
   # cinematic web motion — Kinetrell is the one abstraction over GSAP,
@@ -157,7 +168,7 @@ catalog:
   lenis: 1.3.26
 
   # styling
-  uniwind: 1.12.1
+  uniwind: 1.12.2
   tailwindcss: 4.3.3
   "@tailwindcss/postcss": 4.3.3
   react-native-css: 3.0.7
@@ -165,10 +176,10 @@ catalog:
   tailwind-variants: 3.3.1
 
   # state / data
-  "@tanstack/react-virtual": 3.14.13
+  "@tanstack/react-virtual": 3.14.14
   "@tanstack/react-form": 1.33.5
-  "@tanstack/react-pacer": 0.24.0
-  "@tanstack/react-table": 9.2.4
+  "@tanstack/react-pacer": 0.24.1
+  "@tanstack/react-table": 9.2.8
   "@legendapp/list": 3.6.0
   "@legendapp/motion": 2.5.3
   zustand: 5.0.15
@@ -176,31 +187,30 @@ catalog:
   storybook: 10.6.1
   "@storybook/react-vite": 10.6.1
   "@storybook/addon-a11y": 10.6.1
-  "@vitejs/plugin-react": ^6.1.1
-  vite: ^8.3.2
+  "@vitejs/plugin-react": ^6.1.2
+  vite: ^8.3.4
   vite-plugin-react-native-web: ^3.2.0
   sonner: 2.0.8
   sonner-native: 0.27.0
 
   # tooling
+  # typescript stays on the newest 6.x: npm has 7.0.2 but typescript-eslint
+  # 8.71 caps its peer at <6.1.0. eslint stays on the newest 9.x: eslint-
+  # plugin-import/-react/-react-hooks/-jsx-a11y all cap their peer at ^9.
   typescript: ~6.0.3
   "@types/react": ~19.3.0
-  "@types/node": ^26.6.4
+  "@types/node": ^26.6.5
   "@types/react-dom": ^19.3.0
   "@webgpu/types": 0.1.74
   "@types/three": 0.186.0
-  unplugin-typegpu: 0.12.4
+  unplugin-typegpu: 0.12.5
   eslint: ^9.39.5
   eslint-config-expo: ~58.0.4
-  eslint-config-next: 16.3.8
+  eslint-config-next: 16.4.0
   "@eslint/eslintrc": ^3.3.7
   babel-plugin-react-compiler: 1.0.0
   turbo: 2.11.7
 
 patchedDependencies:
   react-native-graph@1.4.0: patches/react-native-graph@1.4.0.patch
-  react-native-skia@3.0.2: patches/react-native-skia@3.0.2.patch
-  # Backports uniwind PR #706: the web resolver no longer cycles through
-  # InputAccessoryView, which left `expo start --web` blank. Remove once
-  # uniwind releases #706 (uni-stack/uniwind#704).
-  uniwind@1.12.1: patches/uniwind@1.12.1.patch
+  react-native-skia@3.3.0: patches/react-native-skia@3.3.0.patch

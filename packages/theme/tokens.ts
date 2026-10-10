@@ -369,11 +369,31 @@ export const widthClassMinDp = {
 /** Navigation chrome sizes the shells share. */
 export const navChrome = {
   /**
+   * Material 3's NARROW navigation-rail variant
+   * (`NavigationRailCollapsedTokens.NarrowContainerWidth`; its standard
+   * collapsed width is 96, and Material 2's rail was 72). The narrow variant
+   * keeps icon-over-label items legible without spending sidebar width.
+   */
+  rail: '80px',
+  /**
    * Material 3 expanded navigation rail (labels beside icons) on extra-large
    * windows. Material allows 220-360 dp; 240 fits the longest tab label.
    * https://m3.material.io/components/navigation-rail/specs
    */
   railExpanded: '240px',
+  /**
+   * The raised signature-action slab, rounded SQUARE — between Material's 56
+   * standard FAB and 96 large FAB, and above the 44 minimum target.
+   */
+  raised: '64px',
+  /** How far the raised slab breaks the bar's top edge. */
+  raise: '16px',
+  /**
+   * The selected-item indicator, SQUARE (aspect-ratio 1) in both the bar and
+   * the rail, hugging the 24dp glyph — Material's active indicator, sized to
+   * sit inside the 80 rail with room either side.
+   */
+  indicator: '40px',
 } as const;
 
 /** §8.2 content-width scale — width scales by adding columns, not stretching. */

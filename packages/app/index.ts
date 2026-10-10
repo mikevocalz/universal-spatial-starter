@@ -1,5 +1,6 @@
 // @acme/app: the five shared screens. Route files in apps/mobile and apps/web only render these.
 export { ShowcaseScreen } from './screens/ShowcaseScreen';
+export { SHOWCASE_DEMOS, type ShowcaseDemo } from './screens/showcase-demos';
 export { NativeScreen } from './screens/NativeScreen';
 export { HybridScreen } from './screens/HybridScreen';
 export { GameScreen } from './screens/GameScreen';

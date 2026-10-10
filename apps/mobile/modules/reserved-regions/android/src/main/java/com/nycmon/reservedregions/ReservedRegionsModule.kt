@@ -1,6 +1,12 @@
 package com.nycmon.reservedregions
 
 import android.app.Activity
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorManager
+import android.os.Build
+import androidx.window.WindowSdkExtensions
+import androidx.window.layout.SupportedPosture
 import androidx.window.layout.WindowInfoTracker
 import com.facebook.react.bridge.LifecycleEventListener
 import io.github.expo.modules.v2.Event
@@ -95,6 +101,21 @@ class ReservedRegionsModule : Module() {
       .windowLayoutInfo(activity)
       .first()
       .toReservedRegionRecords(activity)
+  }
+
+  @JS
+  fun deviceCapabilities(): DeviceCapabilitiesRecord {
+    val context = reactContextOrNull ?: error("React context is unavailable")
+    val sensors = context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
+    val hasHinge = Build.VERSION.SDK_INT >= 30 && sensors?.getDefaultSensor(Sensor.TYPE_HINGE_ANGLE) != null
+    val supportsTabletop = if (WindowSdkExtensions.getInstance().extensionVersion >= 6) {
+      WindowInfoTracker.getOrCreate(context).supportedPostures.contains(SupportedPosture.TABLETOP)
+    } else false
+    return DeviceCapabilitiesRecord(
+      isFoldable = hasHinge || supportsTabletop,
+      isTablet = context.resources.configuration.smallestScreenWidthDp >= 600,
+      isHeadset = context.packageManager.hasSystemFeature("android.hardware.vr.headtracking"),
+    )
   }
 
   private fun startObserving() {

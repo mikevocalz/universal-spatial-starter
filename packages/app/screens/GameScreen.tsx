@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
 import { riveContract, riveFiles } from '@acme/assets/rive';
 import { RivePanel } from '@acme/spatial';
-import { SegmentedControl } from '@acme/ui';
+import { SegmentedControl, useLayoutSize } from '@acme/ui';
 import { Pressable, Text, View } from '@acme/ui/tw';
 import { BAND, pulsePhase, remainingMs, type PulseAction, type PulseStatus } from '../game/pulse-catch';
 import { useGameModeStore, usePulseStore, type GameInterface } from '../state';
@@ -80,6 +80,8 @@ function useKeyboardControls() {
 }
 
 export function GameScreen() {
+  const { size, onLayout } = useLayoutSize();
+  const split = size.width >= 832;
   const game = usePulseStore((s) => s.game);
   const dispatch = usePulseStore((s) => s.dispatch);
   const ui = useGameModeStore((s) => s.ui);
@@ -94,8 +96,9 @@ export function GameScreen() {
 
   return (
     <ScreenFrame title="Game Workspace" purpose="Catch the ring while it crosses the blue band. Thirty seconds, one catch per pulse.">
-      <View className="gap-4 lg:flex-row lg:items-start">
-        <Panel label="Controls" className="lg:w-64">
+      <View onLayout={onLayout} className="gap-4" style={{ flexDirection: split ? 'row' : 'column', alignItems: split ? 'flex-start' : 'stretch' }}>
+        <View style={{ width: split ? 224 : '100%' }}>
+        <Panel label="Controls">
           <SegmentedControl tone="royal" aria-label="Interface" options={INTERFACES} value={ui} onChange={setUi} />
           {ui === 'mixed' ? (
             <ActionButton tone={game.status === 'running' ? 'quiet' : 'solid'} label={primary} onPress={pressPrimary} />
@@ -122,12 +125,15 @@ export function GameScreen() {
           <Text className="text-sm leading-6 text-silver-400">Tap the stage or press Space to catch. P pauses, Enter starts.</Text>
         </Panel>
 
+        </View>
+        <View style={{ width: split ? size.width - 496 : '100%' }} className="items-center">
         <Pressable
           role="button"
           aria-label="Catch the pulse"
           disabled={game.status !== 'running'}
           onPress={() => dispatch({ type: 'catch' })}
-          className="flex-1 items-center justify-center rounded-2xl border border-ink-800 bg-ink-900 p-4"
+          style={{ aspectRatio: 1 }}
+          className="w-full max-w-[400px] items-center justify-center border border-ink-700 bg-ink-900/90 p-5 shadow-raised active:border-royal-500"
         >
           <View className="w-full max-w-[400px]">
             <RivePanel
@@ -146,12 +152,25 @@ export function GameScreen() {
           </View>
         </Pressable>
 
-        <Panel label="Score" className="lg:w-56">
+        </View>
+        <View style={{ width: split ? 240 : '100%' }}>
+        <Panel label="Score">
           {ui === 'mixed' ? (
-            <View className="flex-row justify-between lg:flex-col">
-              <Text aria-live="polite" className="font-display text-4xl text-silver-50">{game.score}</Text>
-              <Text className="text-base text-silver-300">{game.misses} missed</Text>
-              <Text className="text-base text-silver-300">{seconds}s left</Text>
+            <View className="gap-3">
+              <View className="border-l-2 border-royal-400 bg-ink-950 p-4">
+                <Text className="text-xs uppercase tracking-[0.14em] text-silver-500">Caught</Text>
+                <Text aria-live="polite" className="mt-1 font-display text-5xl text-silver-50">{game.score}</Text>
+              </View>
+              <View className="flex-row gap-3">
+                <View className="flex-1 border border-ink-700 bg-ink-950 p-3">
+                  <Text className="text-xs uppercase text-silver-500">Missed</Text>
+                  <Text className="mt-1 font-display text-2xl text-silver-200">{game.misses}</Text>
+                </View>
+                <View className="flex-1 border border-ink-700 bg-ink-950 p-3">
+                  <Text className="text-xs uppercase text-silver-500">Time</Text>
+                  <Text className="mt-1 font-display text-2xl text-carolina-300">{seconds}s</Text>
+                </View>
+              </View>
             </View>
           ) : (
             <RivePanel
@@ -163,6 +182,7 @@ export function GameScreen() {
             />
           )}
         </Panel>
+        </View>
       </View>
     </ScreenFrame>
   );

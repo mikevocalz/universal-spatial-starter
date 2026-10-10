@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Fit, RiveView, useRiveFile, useViewModelInstance, type RiveError, type ViewModelInstance } from '@rive-app/react-native';
+import { useInstanceStore, useStore } from '@acme/ui';
 import type { RivePanelContract, RivePanelProps, RivePanelStatus, RivePropertyKind } from './RivePanel.types';
 import { RivePanelFrame } from './RivePanelFrame';
 
@@ -30,7 +31,9 @@ function handleFor(instance: ViewModelInstance, name: string, kind: Exclude<Rive
  * property handles disposed on unmount.
  */
 export function RivePanel<C extends RivePanelContract>({ source, contract, values, triggers, label, aspectRatio, className }: RivePanelProps<C>) {
-  const [failure, setFailure] = useState<string | null>(null);
+  const statusStore = useInstanceStore(() => ({ failure: null as string | null }));
+  const failure = useStore(statusStore, (state) => state.failure);
+  const setFailure = useCallback((failure: string | null) => statusStore.setState({ failure }), [statusStore]);
   const { riveFile, error: fileError } = useRiveFile(typeof source === 'number' ? source : { uri: source });
   const { instance, error: instanceError } = useViewModelInstance(riveFile, { async: true, viewModelName: contract.viewModel });
 
@@ -49,7 +52,7 @@ export function RivePanel<C extends RivePanelContract>({ source, contract, value
     return () => {
       live = false;
     };
-  }, [instance, contract]);
+  }, [instance, contract, setFailure]);
 
   const handles = useRef(new Map<string, Setter>());
   const written = useRef(new Map<string, Writable>());
@@ -95,7 +98,7 @@ export function RivePanel<C extends RivePanelContract>({ source, contract, value
       removers.push(() => property.dispose?.());
     }
     return () => removers.forEach((remove) => remove());
-  }, [instance, contract]);
+  }, [instance, contract, setFailure]);
 
   const loadError = fileError ?? instanceError;
   const status: RivePanelStatus = failure

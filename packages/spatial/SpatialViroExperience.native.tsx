@@ -1,9 +1,10 @@
 'use client';
 
 import type { ComponentType } from 'react';
-import { View } from '@acme/ui/tw';
+import { Text, View } from '@acme/ui/tw';
 import { isMetaHorizonXR, isPico, Viro3DSceneNavigator, ViroXRSceneNavigator } from './viro';
 import { OrbitLabScene } from './OrbitLabScene';
+import { isViroAvailable } from './viro-availability';
 
 type HeadsetNavigatorProps = {
   initialScene?: { scene: ComponentType<any> };
@@ -27,6 +28,14 @@ const HeadsetNavigator =
  * get the flat preview.
  */
 export function SpatialViroExperience({ onExit }: { onExit?: () => void } = {}) {
+  if (!isViroAvailable()) {
+    return (
+      <View className="flex-1 items-center justify-center gap-3 p-6">
+        <Text role="heading" className="text-lg text-silver-50">Native 3D preview unavailable</Text>
+        <Text className="text-center text-silver-300">This build does not include the Viro native renderer. Use a Viro-enabled device build or the web preview.</Text>
+      </View>
+    );
+  }
   if (isMetaHorizonXR && !isPico) {
     return (
       <HeadsetNavigator

@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useInstanceStore, useStore } from '@acme/ui';
+import { isViroAvailable } from './viro-availability';
 import { palette } from '@acme/theme';
 import { ViroAmbientLight, ViroAnimations, ViroBox, ViroDirectionalLight, ViroMaterials, ViroNode, ViroScene } from './viro';
 
@@ -13,19 +15,31 @@ import { ViroAmbientLight, ViroAnimations, ViroBox, ViroDirectionalLight, ViroMa
 
 const MATERIALS = ['orbitCobalt', 'orbitMineral', 'orbitInk'] as const;
 
-ViroMaterials.createMaterials({
-  orbitCobalt: { diffuseColor: palette.royal[500], lightingModel: 'Lambert' },
-  orbitMineral: { diffuseColor: palette.silver[100], lightingModel: 'Lambert' },
-  orbitInk: { diffuseColor: palette.ink[700], lightingModel: 'Lambert' },
-  spatialDark: { diffuseColor: palette.ink[950], lightingModel: 'Constant' },
-});
-
-ViroAnimations.registerAnimations({
-  orbitLabSpin: { properties: { rotateY: '+=360' }, duration: 12000, easing: 'Linear' },
-});
+let registered = false;
+function registerOrbitResources() {
+  if (registered) return;
+  ViroMaterials.createMaterials({
+    orbitCobalt: { diffuseColor: palette.royal[500], lightingModel: 'Lambert' },
+    orbitMineral: { diffuseColor: palette.silver[100], lightingModel: 'Lambert' },
+    orbitInk: { diffuseColor: palette.ink[700], lightingModel: 'Lambert' },
+    spatialDark: { diffuseColor: palette.ink[950], lightingModel: 'Constant' },
+  });
+  ViroAnimations.registerAnimations({
+    orbitLabSpin: { properties: { rotateY: '+=360' }, duration: 12000, easing: 'Linear' },
+  });
+  registered = true;
+}
 
 export function OrbitLabScene() {
-  const [material, setMaterial] = useState(0);
+  const store = useInstanceStore(() => ({ material: 0, ready: false }));
+  const material = useStore(store, (state) => state.material);
+  const ready = useStore(store, (state) => state.ready);
+  useEffect(() => {
+    if (!isViroAvailable()) return;
+    registerOrbitResources();
+    store.setState({ ready: true });
+  }, [store]);
+  if (!ready) return <></>;
 
   return (
     <ViroScene>
@@ -37,7 +51,7 @@ export function OrbitLabScene() {
           position={[0.8, 0, 0]}
           scale={[0.35, 0.35, 0.35]}
           materials={[MATERIALS[material]!]}
-          onClick={() => setMaterial((m) => (m + 1) % MATERIALS.length)}
+          onClick={() => store.setState((state) => ({ material: (state.material + 1) % MATERIALS.length }))}
         />
       </ViroNode>
     </ViroScene>

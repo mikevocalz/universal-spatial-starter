@@ -63,6 +63,20 @@ export { DataTable, type DataTableProps, type ColumnDef, type DataTableMode, typ
 export { useAppForm, withForm, useFieldContext, useFormContext, useFormStore } from './form';
 
 export { SafeArea, type SafeAreaProps } from './SafeArea';
+// Native phones use bottom tabs; native foldables, tablets and headsets use
+// physical right rails. Web uses header navigation with phone-width tabs.
+// The heavier pane host stays behind the '@acme/ui/adaptive-panes' subpath.
+export * from './adaptive-navigation';
+export { useAdaptiveNavigationPlacement } from './use-adaptive-navigation-placement';
+export {
+  useReservedRegions,
+  type FoldOcclusionType,
+  type FoldOrientation,
+  type FoldState,
+  type ReservedRegion,
+} from './reserved-regions';
+export { useWindowSizeClass, windowSizeClassForWidth } from './adaptive-panes/use-window-size-class';
+export type { WindowSizeClass } from './adaptive-panes/constants';
 export { KeyboardAwareScroll, type KeyboardAwareScrollProps } from './keyboard-aware';
 export { SegmentedControl, type SegmentedControlProps, type SegmentedOption } from './SegmentedControl';
 export { FieldGroup, type FieldGroupProps, type FieldSectionProps } from './FieldGroup';
@@ -113,4 +127,6 @@ export * from './cards';
 export * from './charts';
 export * from './cursors';
 export type { TextEffectOptions, GlitchIntensity, GlitchSpeed, TextGlowLevel } from './text-effects';
+export { useSafeInsets } from './use-safe-insets';
 
+export { EditorialCard } from './EditorialCard';

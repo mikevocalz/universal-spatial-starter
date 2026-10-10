@@ -146,8 +146,7 @@ has no angle field and nothing should synthesize one.
 4. **Postures.** `halfOpened` + horizontal is `tabletop`; `halfOpened` +
    vertical is `book`. The panes do not turn tabletop into a top/bottom split by
    themselves, because which content belongs above the crease is a decision
-   for each screen. Tabletop does move Android navigation to the bottom bar
-   (Navigation rail, below).
+   for each screen. Tabletop keeps the physical right navigation rail.
 5. **Inspector.** It stays an overlay from the logical trailing edge (right in
    LTR, left in RTL), matching expo-router's `SplitView.Inspector`. On a
    separating vertical fold its width is capped to the trailing physical panel,
@@ -173,16 +172,13 @@ part to check on a device.
 the live hook `useAdaptiveNavigationPlacement()` decide where primary navigation
 goes:
 
-- **Android** (Material 3 Adaptive): compact → bottom bar; tabletop posture or a
-  window under 480 dp tall → bottom bar; otherwise a rail on the logical
-  leading edge; `extraLarge` → expanded rail (`placement.expanded`).
-- **iOS**: a hardware edge column (inset of 64 dp or more, iPhone Duo) wins and
-  stays on its PHYSICAL edge; compact → bottom; wider → leading sidebar.
-- **Other**: compact → bottom, otherwise a collapsed rail.
-
-`apps/mobile/app/(drawer)/(tabs)/_layout.tsx` uses it for `tabBarPosition`.
-`AppTabBar` still draws its 80 dp rail at every width; the expanded rail needs
-the `railExpanded` token first.
+- Ordinary native phones use bottom tabs, including landscape.
+- Every native foldable (including the closed cover and tabletop), tablet and headset uses a physical RIGHT rail, including RTL. Window width must not reclassify known hardware as a phone.
+- The Android module exposes stable hinge/supported-posture capability; iOS includes inactive division regions. Once a fold is observed the hook retains that device identity.
+- Duo's right hardware column supplies the rail width. Consume that inset once, and vertically center the navigation group.
+- Web never shows a rail. Wide browsers use header navigation; phone-width browsers add bottom tabs and a header menu. Browser window segments do not activate the native rail policy.
+- `packages/app/screens/AppShell.tsx` owns the persistent brand header and navigation.
+- The starter's Native Workspace measures its available content: 40/60 columns at 600dp and above, a 30% right inspector overlay, one full-width pane below that. Inspector visibility never changes column geometry. This is a screen recipe, not a forced policy for every adaptive-pane consumer.
 
 ## Back behaviour (Android)
 

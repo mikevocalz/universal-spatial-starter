@@ -7,6 +7,7 @@ import type { FoldLayout } from './adaptive-panes/fold-layout.ts';
 
 /** Which navigation chrome a window gets. */
 export type AdaptiveNavigationKind =
+  | 'header-only'
   | 'bottom-compact'
   | 'bottom-medium'
   | 'rail-collapsed'
@@ -26,8 +27,8 @@ export interface HardwareEdgeColumn {
  */
 export interface AdaptiveNavigationPlacement {
   kind: AdaptiveNavigationKind;
-  /** Where the navigation sits. `left`/`right` already account for RTL. */
-  position: 'bottom' | 'left' | 'right';
+  /** Where the navigation sits. Rails use the physical right edge, including RTL. */
+  position: 'top' | 'bottom' | 'left' | 'right';
   /** True for any side placement (rail, sidebar, hardware column). */
   rail: boolean;
   /** True when the rail should show labels beside icons (extra-large). */
@@ -45,105 +46,39 @@ export interface ResolveAdaptiveNavigationPlacementInput {
   folds: readonly FoldLayout[];
   hardwareEdge?: HardwareEdgeColumn | null;
   isRTL: boolean;
-}
-
-function logicalStart(isRTL: boolean): 'left' | 'right' {
-  return isRTL ? 'right' : 'left';
+  /** Stable capabilities; folding/resizing must not turn these off. */
+  isFoldable?: boolean;
+  isTablet?: boolean;
+  isHeadset?: boolean;
 }
 
 /**
- * Primary shell navigation policy.
- *
- * Android follows Material 3 Adaptive navigation semantics:
- * - compact -> short bottom navigation
- * - tabletop or compact height (<480dp) -> short medium bottom navigation
- * - otherwise -> start-edge wide rail
- * - extra-large -> expanded wide rail
- *
- * Apple is deliberately different:
- * - a reserved hardware column (iPhone Duo style) wins and remains PHYSICAL, not logical
- * - ordinary compact iPhone -> bottom
- * - regular-width iPad/tablet -> leading sidebar
- *
- * Fold posture comes from the Expo Modules 2 WindowManager bridge. Multiple
- * folds are accepted so a trifold is not collapsed to "hinge #1".
+ * Navigation follows device family, not fold posture or current window width.
+ * Foldables (including closed covers), tablets and headsets keep a physical
+ * right rail. Ordinary phones keep bottom tabs, even in landscape. Web uses
+ * header links/menu and adds bottom tabs only at phone widths. Web never gets a rail.
  */
 export function resolveAdaptiveNavigationPlacement({
-  platform,
-  sizeClass,
-  heightDp,
-  folds,
-  hardwareEdge,
-  isRTL,
+  platform, sizeClass, folds, hardwareEdge, isFoldable, isTablet, isHeadset,
 }: ResolveAdaptiveNavigationPlacementInput): AdaptiveNavigationPlacement {
-  const tabletop = folds.some((fold) => fold.posture === 'tabletop');
-
-  if (platform === 'ios') {
-    if (hardwareEdge && hardwareEdge.width > 0) {
-      return {
-        kind: 'apple-hardware-rail',
-        position: hardwareEdge.edge,
-        rail: true,
-        expanded: false,
-        hardwareWidth: hardwareEdge.width,
-      };
-    }
-
-    if (sizeClass === 'compact') {
-      return {
-        kind: 'bottom-compact',
-        position: 'bottom',
-        rail: false,
-        expanded: false,
-        hardwareWidth: 0,
-      };
-    }
-
-    return {
-      kind: 'apple-sidebar',
-      position: logicalStart(isRTL),
-      rail: true,
-      expanded: sizeClass === 'extraLarge',
-      hardwareWidth: 0,
-    };
+  if (platform === 'other') {
+    const compact = sizeClass === 'compact';
+    return { kind: compact ? 'bottom-compact' : 'header-only', position: compact ? 'bottom' : 'top', rail: false, expanded: false, hardwareWidth: 0 };
   }
-
-  if (platform === 'android') {
-    if (sizeClass === 'compact') {
-      return {
-        kind: 'bottom-compact',
-        position: 'bottom',
-        rail: false,
-        expanded: false,
-        hardwareWidth: 0,
-      };
-    }
-
-    if (tabletop || heightDp < 480) {
-      return {
-        kind: 'bottom-medium',
-        position: 'bottom',
-        rail: false,
-        expanded: false,
-        hardwareWidth: 0,
-      };
-    }
-
-    const expanded = sizeClass === 'extraLarge';
-    return {
-      kind: expanded ? 'rail-expanded' : 'rail-collapsed',
-      position: logicalStart(isRTL),
-      rail: true,
-      expanded,
-      hardwareWidth: 0,
-    };
-  }
-
+  const foldable = isFoldable || folds.length > 0 || Boolean(hardwareEdge?.width);
+  const hardwareWidth = platform === 'ios' && hardwareEdge?.edge === 'right'
+    ? hardwareEdge.width : 0;
+  const identifiedNativePhone = isTablet === false && !foldable && !isHeadset;
+  const rail = !identifiedNativePhone && (
+    foldable || isTablet || isHeadset || sizeClass !== 'compact'
+  );
+  const expanded = rail && !hardwareWidth && sizeClass === 'extraLarge';
   return {
-    kind: sizeClass === 'compact' ? 'bottom-compact' : 'rail-collapsed',
-    position: sizeClass === 'compact' ? 'bottom' : logicalStart(isRTL),
-    rail: sizeClass !== 'compact',
-    expanded: false,
-    hardwareWidth: 0,
+    kind: !rail ? 'bottom-compact' : hardwareWidth ? 'apple-hardware-rail'
+      : expanded ? 'rail-expanded' : 'rail-collapsed',
+    position: rail ? 'right' : 'bottom',
+    rail,
+    expanded,
+    hardwareWidth,
   };
 }

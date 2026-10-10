@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { SolitoImage } from 'solito/image';
 import { useInstanceStore, useStore } from './use-instance-store';
 import { tv } from 'tailwind-variants';
+import { useSafeInsets } from './use-safe-insets';
 import { Modal } from './Modal';
 import { View, Text, Pressable } from './tw';
 import { ChevronLeft, ChevronRight, X } from './icons';
@@ -21,8 +22,8 @@ const box = tv({
     tile:
       'h-11 w-11 items-center justify-center border-2 border-ink-700 bg-ink-900 transition-colors duration-fast hover:border-ink-400 ' +
       'active:opacity-80 motion-reduce:transition-none',
-    close: 'absolute right-4 top-4 z-20',
-    side: 'absolute bottom-0 top-0 z-10 w-16 justify-center',
+    close: 'absolute z-20',
+    side: 'absolute z-10 w-16 justify-center',
     disabled: 'opacity-30',
     footer: 'absolute inset-x-0 bottom-6 items-center gap-3',
     pips: 'flex-row justify-center gap-1.5',
@@ -43,6 +44,7 @@ export interface LightboxProps {
 }
 
 export function Lightbox({ images, initialIndex = 0, open, onClose, district, tone }: LightboxProps) {
+  const insets = useSafeInsets();
   const store = useInstanceStore<{ index: number }>(() => ({ index: initialIndex }));
   const index = useStore(store, (s) => s.index);
   const setIndex = (updater: (i: number) => number) =>
@@ -80,12 +82,12 @@ export function Lightbox({ images, initialIndex = 0, open, onClose, district, to
   return (
     <Modal transparent visible={open} animationType="fade" onRequestClose={onClose}>
       <View className={s.scrim()}>
-        <Pressable onPress={onClose} accessibilityLabel="Close image" role="button" className={`${s.close()} ${tile}`}>
+        <Pressable style={{ top: insets.top + 16, right: insets.right + 16 }} onPress={onClose} accessibilityLabel="Close image" role="button" className={`${s.close()} ${tile}`}>
           <X size={20} className="text-ink-50" />
         </Pressable>
 
         {hasMultiple ? (
-          <View pointerEvents="box-none" className={`${s.side()} left-0 pl-4`}>
+          <View pointerEvents="box-none" style={{ left: insets.left, top: insets.top + 80, bottom: insets.bottom + 80 }} className={`${s.side()} pl-4`}>
             <Pressable
               onPress={() => setIndex((i) => Math.max(0, i - 1))}
               disabled={index === 0}
@@ -101,7 +103,7 @@ export function Lightbox({ images, initialIndex = 0, open, onClose, district, to
         <SolitoImage src={current} alt="" fill unoptimized contentFit="contain" sizes="100vw" />
 
         {hasMultiple ? (
-          <View pointerEvents="box-none" className={`${s.side()} right-0 items-end pr-4`}>
+          <View pointerEvents="box-none" style={{ right: insets.right, top: insets.top + 80, bottom: insets.bottom + 80 }} className={`${s.side()} items-end pr-4`}>
             <Pressable
               onPress={() => setIndex((i) => Math.min(images.length - 1, i + 1))}
               disabled={index === images.length - 1}
